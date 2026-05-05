@@ -19,12 +19,15 @@ from excel_parser import ler_excel
 
 # === ROFE_VISUAL_PATCH ===
 from styles import aplicar_visual, header, secao
+import auth
+auth.gate_login()  # bloqueia execução se não logado
+_u = auth.usuario_logado()
 aplicar_visual()
 header(
     titulo='Importacao de Comissao RCA',
     subtitulo='Lancamento no contas a pagar (rotina 749)',
-    icone='💰',  # 💰
-    usuario='admin',
+    icone='\U0001f4b0',
+    usuario=_u['email'] if _u else None,
 )
 # === FIM_ROFE_VISUAL_PATCH ===
 

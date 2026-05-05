@@ -14,8 +14,11 @@ from oracle_db import OracleConnection
 
 # === ROFE_VISUAL_PATCH ===
 from styles import aplicar_visual, header
+import auth
+auth.gate_login()  # bloqueia execução se não logado
+_u = auth.usuario_logado()
 aplicar_visual()
-header(titulo='Cadastro PIX', icone='💳')  # 💳
+header(titulo='Cadastro PIX', icone='\U0001f4b3', usuario=_u['email'] if _u else None)
 # === FIM_ROFE_VISUAL_PATCH ===
 
 
