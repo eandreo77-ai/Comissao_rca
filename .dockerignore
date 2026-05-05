@@ -1,0 +1,29 @@
+# Não copiar para a imagem — economiza camadas e evita vazar segredos
+.git/
+.gitignore
+.env
+.env.*
+!.env.example
+
+__pycache__/
+*.pyc
+*.pyo
+venv/
+.venv/
+
+# SQLite local (PIX ficará no MariaDB no servidor)
+app/data/*.db
+
+# Docs e logs
+*.md
+*.log
+tracer*.log
+
+# IDE
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Saídas locais
+data/mariadb/

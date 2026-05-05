@@ -1,9 +1,23 @@
-fastapi==0.115.0
-uvicorn==0.30.0
-python-multipart==0.0.9
+# Comissao RCA — dependências (servidor Linux + dev local)
+# Versões pinadas para reprodutibilidade.
+
+# UI
+streamlit==1.40.1
+
+# Excel + dataframes
 openpyxl==3.1.5
+pandas==2.2.3
+
+# Oracle (thick mode obrigatório p/ Oracle 11g)
 oracledb==2.4.1
-pydantic==2.9.0
-jinja2==3.1.4
-streamlit
-pandas
+
+# MariaDB (driver oficial via mariadb-connector-c)
+# Em alternativa, se o pacote 'mariadb' der trabalho de compilar,
+# trocar por 'PyMySQL==1.1.1' (puro Python, mais lento mas zero deps de SO).
+mariadb==1.1.10
+
+# Auth (login MariaDB)
+bcrypt==4.2.0
+
+# Carregamento de .env em dev local (no Docker o env vem do compose)
+python-dotenv==1.0.1

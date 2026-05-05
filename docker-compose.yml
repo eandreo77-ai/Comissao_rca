@@ -1,0 +1,60 @@
+# =============================================================================
+# Comissao RCA — orquestração local (Ubuntu 192.168.20.164)
+# Sobe app Streamlit + MariaDB. Acesso externo via Nginx do host (não pelo compose).
+# =============================================================================
+services:
+
+  mariadb:
+    image: mariadb:11.4
+    container_name: comissao_mariadb
+    restart: unless-stopped
+    environment:
+      MARIADB_ROOT_PASSWORD: ${MARIADB_ROOT_PASSWORD}
+      MARIADB_DATABASE:      ${MARIADB_DATABASE}
+      MARIADB_USER:          ${MARIADB_USER}
+      MARIADB_PASSWORD:      ${MARIADB_PASSWORD}
+      TZ:                    America/Sao_Paulo
+    volumes:
+      - ./data/mariadb:/var/lib/mysql
+      # Scripts em /docker-entrypoint-initdb.d são executados na 1ª inicialização
+      - ./migrations:/docker-entrypoint-initdb.d:ro
+    ports:
+      # Só expõe no localhost — outros computadores da rede não acessam direto
+      - "127.0.0.1:3306:3306"
+    healthcheck:
+      test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 30s
+    networks:
+      - comissao_net
+
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: comissao_app
+    restart: unless-stopped
+    env_file: .env
+    environment:
+      # Reforça que conexão MariaDB use o nome do serviço Docker
+      MARIADB_HOST: mariadb
+    ports:
+      # Só expõe no localhost — Nginx do host faz o reverse proxy para fora
+      - "127.0.0.1:8501:8501"
+    depends_on:
+      mariadb:
+        condition: service_healthy
+    networks:
+      - comissao_net
+    # Logs em formato compatível com journalctl/docker logs
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "5"
+
+networks:
+  comissao_net:
+    driver: bridge

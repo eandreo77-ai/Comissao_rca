@@ -30,3 +30,6 @@ tracer*.log
 # OS
 Thumbs.db
 .DS_Store
+# Backups locais
+*.bak
+
