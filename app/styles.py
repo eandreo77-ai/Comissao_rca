@@ -385,12 +385,8 @@ def header(
 ) -> None:
     """Renderiza o header navy + título da página + subtítulo.
 
-    Args:
-        titulo:     Título grande da página (ex: "Importação de Comissão RCA")
-        subtitulo:  Texto cinza menor abaixo do título
-        usuario:    Username logado (renderizado no canto direito do header)
-        icone:      Emoji ou ícone que aparece ao lado do título
-        nome_modulo: Nome do módulo no header (default "Comissão RCA")
+    Importante: HTML em UMA linha pra evitar que o markdown parser do Streamlit
+    interprete quebras de linha como parágrafo (e exponha </div> como texto).
     """
     user_html = ""
     if usuario:
@@ -399,27 +395,34 @@ def header(
             f'<a class="rofe-logout" href="?logout=1">Sair</a>'
         )
 
-    header_html = f"""
-    <div class="rofe-header">
-        <div class="rofe-header-left">
-            <span class="rofe-logo">ROFE</span>
-            <span class="rofe-divider">|</span>
-            <span class="rofe-app-name">{nome_modulo}</span>
-        </div>
-        <div class="rofe-header-right">
-            {user_html}
-        </div>
-    </div>
-
-    <div class="rofe-page-title">
-        <span class="rofe-icon">{icone}</span>
-        <h1>{titulo}</h1>
-    </div>
-    """
-    if subtitulo:
-        header_html += f'<p class="rofe-page-subtitle">{subtitulo}</p>'
-
+    # ── Bloco 1: header navy (numa linha só) ────────────────────────────────
+    header_html = (
+        f'<div class="rofe-header">'
+        f'<div class="rofe-header-left">'
+        f'<span class="rofe-logo">ROFE</span>'
+        f'<span class="rofe-divider">|</span>'
+        f'<span class="rofe-app-name">{nome_modulo}</span>'
+        f'</div>'
+        f'<div class="rofe-header-right">{user_html}</div>'
+        f'</div>'
+    )
     st.markdown(header_html, unsafe_allow_html=True)
+
+    # ── Bloco 2: título da página (chamada separada) ────────────────────────
+    page_title_html = (
+        f'<div class="rofe-page-title">'
+        f'<span class="rofe-icon">{icone}</span>'
+        f'<h1>{titulo}</h1>'
+        f'</div>'
+    )
+    st.markdown(page_title_html, unsafe_allow_html=True)
+
+    # ── Bloco 3: subtítulo, se houver ───────────────────────────────────────
+    if subtitulo:
+        st.markdown(
+            f'<p class="rofe-page-subtitle">{subtitulo}</p>',
+            unsafe_allow_html=True,
+        )
 
 
 @contextmanager
