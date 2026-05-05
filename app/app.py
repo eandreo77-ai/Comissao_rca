@@ -496,16 +496,16 @@ def _dialog_confirmacao():
 # ─────────────────────────────────────────────
 # Sidebar
 # ─────────────────────────────────────────────
-st.sidebar.markdown("""
-<div style="padding:4px 0 8px 0;">
-    <div style="font-size:20px;font-weight:900;color:#f8fafc;letter-spacing:3px;">
-        ROFE <span style="color:#ef4444;">|</span>
-    </div>
-    <div style="font-size:11px;color:#94a3b8;letter-spacing:1.5px;margin-top:2px;">
-        COMISSÃO RCA
-    </div>
-</div>
-""", unsafe_allow_html=True)
+# # REMOVED_BY_BANNER_PATCH: st.sidebar.markdown("""
+# # REMOVED_BY_BANNER_PATCH: <div style="padding:4px 0 8px 0;">
+# # REMOVED_BY_BANNER_PATCH:     <div style="font-size:20px;font-weight:900;color:#f8fafc;letter-spacing:3px;">
+# # REMOVED_BY_BANNER_PATCH:         ROFE <span style="color:#ef4444;">|</span>
+# # REMOVED_BY_BANNER_PATCH:     </div>
+# # REMOVED_BY_BANNER_PATCH:     <div style="font-size:11px;color:#94a3b8;letter-spacing:1.5px;margin-top:2px;">
+# # REMOVED_BY_BANNER_PATCH:         COMISSÃO RCA
+# # REMOVED_BY_BANNER_PATCH:     </div>
+# # REMOVED_BY_BANNER_PATCH: </div>
+# # REMOVED_BY_BANNER_PATCH: """, unsafe_allow_html=True)
 
 _slot_teste = st.sidebar.empty()
 if st.sidebar.button("🔌 Testar Conexão", use_container_width=True):
@@ -553,12 +553,12 @@ except ValueError:
 # ─────────────────────────────────────────────
 # Header
 # ─────────────────────────────────────────────
-st.markdown("""
-<div class="erp-header">
-    <div class="erp-title">ROFE <span>|</span></div>
-    <div class="erp-sub">Importação de Comissões RCA — Rotina 749</div>
-</div>
-""", unsafe_allow_html=True)
+# # REMOVED_BY_BANNER_PATCH: st.markdown("""
+# # REMOVED_BY_BANNER_PATCH: <div class="erp-header">
+# # REMOVED_BY_BANNER_PATCH:     <div class="erp-title">ROFE <span>|</span></div>
+# # REMOVED_BY_BANNER_PATCH:     <div class="erp-sub">Importação de Comissões RCA — Rotina 749</div>
+# # REMOVED_BY_BANNER_PATCH: </div>
+# # REMOVED_BY_BANNER_PATCH: """, unsafe_allow_html=True)
 
 # ─────────────────────────────────────────────
 # Cards de resumo

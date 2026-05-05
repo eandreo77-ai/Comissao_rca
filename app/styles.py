@@ -48,8 +48,15 @@ def _build_css() -> str:
     """Retorna o CSS completo, com cores interpoladas."""
     c = _CORES
     return f"""
-    /* ── Fonte Inter via Google Fonts ─────────────────────────────────────── */
+    /* ── Fonte Inter via Google Fonts (com fallback pra system fonts) ────── */
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+    /* Force fonte stack moderna em TUDO, com fallback robusto pra
+       quando Google Fonts estiver bloqueado/lento. */
+    *, *::before, *::after {
+        font-family: 'Inter', 'Segoe UI', -apple-system, BlinkMacSystemFont,
+                     'Helvetica Neue', Arial, sans-serif !important;
+    }
 
     :root {{
         --rofe-navy:        {c["navy"]};
@@ -291,6 +298,51 @@ def _build_css() -> str:
         color: var(--rofe-text) !important;
         font-size: 20px !important;
         font-weight: 600 !important;
+    }}
+
+    /* ── Classes legacy do app.py original (.metric-card, .metric-val) ─── */
+    /* Reproduzidas em LIGHT pra alinhar com o tema novo */
+    .metric-card {{
+        background: var(--rofe-card-bg);
+        border: 1px solid var(--rofe-border);
+        border-radius: 8px;
+        padding: 16px 20px;
+        box-shadow: 0 1px 2px rgba(0,0,0,0.03);
+        margin-bottom: 8px;
+    }}
+    .metric-card b {{
+        display: block;
+        text-transform: uppercase;
+        font-size: 11px;
+        font-weight: 500;
+        color: var(--rofe-text-muted);
+        letter-spacing: 0.5px;
+        margin-bottom: 6px;
+    }}
+    .metric-val {{
+        font-size: 22px;
+        font-weight: 600;
+        color: var(--rofe-text);
+        line-height: 1.2;
+    }}
+    .metric-val.azul     {{ color: var(--rofe-blue); }}
+    .metric-val.verde    {{ color: var(--rofe-green); }}
+    .metric-val.vermelho {{ color: var(--rofe-red); }}
+    .metric-val.amarelo  {{ color: var(--rofe-yellow); }}
+
+    /* Esconde a banner ANTIGA .erp-header (caso ainda esteja sendo
+       chamada). O header novo vem do componente header() do styles.py. */
+    .erp-header, .erp-banner, .erp-title, .erp-sub {{
+        display: none !important;
+    }}
+
+    /* Sidebar do Streamlit em tema claro */
+    section[data-testid="stSidebar"] {{
+        background: #f9fafb !important;
+        border-right: 1px solid var(--rofe-border);
+    }}
+    section[data-testid="stSidebar"] * {{
+        color: var(--rofe-text) !important;
     }}
     """
 

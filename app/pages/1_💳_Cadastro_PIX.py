@@ -165,12 +165,12 @@ def buscar_bloqueios(codigos: tuple[int, ...]) -> tuple[dict[int, str], str | No
 # ─────────────────────────────────────────────
 # Header
 # ─────────────────────────────────────────────
-st.markdown("""
-<div class="erp-header">
-    <div class="erp-title">ROFE <span>|</span></div>
-    <div class="erp-sub">Cadastro de Chaves PIX dos RCAs</div>
-</div>
-""", unsafe_allow_html=True)
+# # REMOVED_BY_BANNER_PATCH: st.markdown("""
+# # REMOVED_BY_BANNER_PATCH: <div class="erp-header">
+# # REMOVED_BY_BANNER_PATCH:     <div class="erp-title">ROFE <span>|</span></div>
+# # REMOVED_BY_BANNER_PATCH:     <div class="erp-sub">Cadastro de Chaves PIX dos RCAs</div>
+# # REMOVED_BY_BANNER_PATCH: </div>
+# # REMOVED_BY_BANNER_PATCH: """, unsafe_allow_html=True)
 
 # Garante schema
 pix_db.init_db()
