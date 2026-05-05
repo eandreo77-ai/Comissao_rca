@@ -11,3 +11,9 @@ env/
 .DS_Store
 Thumbs.db
 backup_*.zip
+
+# Banco local com dados sensíveis (chaves PIX)
+app/data/
+*.db
+*.sqlite
+*.sqlite3
