@@ -4,7 +4,7 @@
 # Instant Client: NÃO embutido (montado via volume do host /opt/oracle/instantclient_21_21)
 # MariaDB:        NÃO embutido (usa MariaDB do host via network_mode: host)
 # =============================================================================
-FROM python:3.12-slim AS base
+FROM python:3.12-slim-bookworm AS base
 
 ENV PYTHONDONTWRITEBYTECODE=1 \
     PYTHONUNBUFFERED=1 \
