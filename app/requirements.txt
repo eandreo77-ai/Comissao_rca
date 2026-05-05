@@ -8,6 +8,9 @@ streamlit==1.40.1
 openpyxl==3.1.5
 pandas==2.2.3
 
+# Validação dos dados da planilha (usado em app/models.py)
+pydantic==2.9.0
+
 # Oracle (thick mode obrigatório p/ Oracle 11g)
 oracledb==2.4.1
 
