@@ -218,7 +218,7 @@ def gerar_modelo_excel() -> bytes:
 # ─────────────────────────────────────────────
 # Página
 # ─────────────────────────────────────────────
-st.set_page_config(page_title="ROFE | Comissão RCA", page_icon="💰", layout="wide")
+# REMOVED_BY_VISUAL_PATCH: st.set_page_config(page_title="ROFE | Comissão RCA", page_icon="💰", layout="wide")
 
 st.markdown("""
 <style>

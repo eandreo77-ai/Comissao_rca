@@ -103,7 +103,7 @@ def buscar_bloqueios(codigos: tuple[int, ...]) -> tuple[dict[int, str], str | No
     return res, erro_msg
 
 
-st.set_page_config(page_title="Cadastro PIX | ROFE", page_icon="💳", layout="wide")
+# REMOVED_BY_VISUAL_PATCH: st.set_page_config(page_title="Cadastro PIX | ROFE", page_icon="💳", layout="wide")
 
 # Reaproveita o CSS principal — versão enxuta (sidebar dark + cards)
 st.markdown("""
