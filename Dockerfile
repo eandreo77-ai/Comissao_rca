@@ -49,6 +49,14 @@ ENV STREAMLIT_SERVER_HEADLESS=true \
     STREAMLIT_SERVER_ENABLE_XSRF_PROTECTION=true \
     STREAMLIT_BROWSER_GATHER_USAGE_STATS=false
 
+# ── Tema (força LIGHT — não respeita preferência dark do navegador) ─────────
+# Usa env vars porque o config.toml pode não ser detectado (depende do CWD).
+ENV STREAMLIT_THEME_BASE=light \
+    STREAMLIT_THEME_PRIMARY_COLOR="#2563eb" \
+    STREAMLIT_THEME_BACKGROUND_COLOR="#f3f4f6" \
+    STREAMLIT_THEME_SECONDARY_BACKGROUND_COLOR="#ffffff" \
+    STREAMLIT_THEME_TEXT_COLOR="#111827"
+
 EXPOSE 8502
 
 # Healthcheck — Streamlit expõe /_stcore/health
