@@ -53,10 +53,10 @@ def _build_css() -> str:
 
     /* Force fonte stack moderna em TUDO, com fallback robusto pra
        quando Google Fonts estiver bloqueado/lento. */
-    *, *::before, *::after {
+    *, *::before, *::after {{
         font-family: 'Inter', 'Segoe UI', -apple-system, BlinkMacSystemFont,
                      'Helvetica Neue', Arial, sans-serif !important;
-    }
+    }}
 
     :root {{
         --rofe-navy:        {c["navy"]};
