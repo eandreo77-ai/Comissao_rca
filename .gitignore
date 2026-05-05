@@ -1,16 +1,27 @@
-﻿# Python
+# Python
 __pycache__/
 *.pyc
+*.pyo
 venv/
-.env
+.venv/
 *.egg-info/
+
+# Secrets / config local
+.env
+.env.local
+.streamlit/secrets.toml
+
+# Banco SQLite local de PIX (dado dinâmico, não vai pro git)
+app/data/pix.db
+app/data/*.db
 
 # Excel temporários
 ~$*.xlsx
 *.tmp.xlsx
 
-# Streamlit
-.streamlit/secrets.toml
+# Logs e tracers (debug, não versionar)
+*.log
+tracer*.log
 
 # IDE
 .vscode/
@@ -19,10 +30,3 @@ venv/
 # OS
 Thumbs.db
 .DS_Store
-
-# Backup local Django/SQLite (vai ser removido)
-backend/db.sqlite3
-backend/venv/
-backend/media/
-frontend/node_modules/
-frontend/dist/

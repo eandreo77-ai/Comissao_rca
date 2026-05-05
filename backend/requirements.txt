@@ -1,5 +1,0 @@
-django>=4.2,<5.0
-djangorestframework>=3.14
-django-cors-headers>=4.3
-openpyxl>=3.1
-cx-Oracle>=8.3
