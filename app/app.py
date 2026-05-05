@@ -17,6 +17,17 @@ from config import ORACLE_CONFIG, CODCONTA_PADRAO, CODFILIAL_PADRAO, TIPOSERVICO
 from oracle_db import OracleConnection, GravadorPCLANC, testar_conexao
 from excel_parser import ler_excel
 
+# === ROFE_VISUAL_PATCH ===
+from styles import aplicar_visual, header, secao
+aplicar_visual()
+header(
+    titulo='Importacao de Comissao RCA',
+    subtitulo='Lancamento no contas a pagar (rotina 749)',
+    icone='💰',  # 💰
+    usuario='admin',
+)
+# === FIM_ROFE_VISUAL_PATCH ===
+
 
 # ─────────────────────────────────────────────
 # Helpers

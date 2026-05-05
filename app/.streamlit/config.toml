@@ -1,0 +1,28 @@
+# =============================================================================
+# Tema do Streamlit — Padrão visual ROFE (alinha com rofe.app/contabilidade/)
+# =============================================================================
+
+[theme]
+# Cor primária dos botões/links (azul Tailwind blue-600)
+primaryColor = "#2563eb"
+
+# Background da página (cinza muito claro, igual ao contabilidade)
+backgroundColor = "#f3f4f6"
+
+# Background dos cards/containers (branco)
+secondaryBackgroundColor = "#ffffff"
+
+# Texto principal
+textColor = "#111827"
+
+# Fonte (sans-serif)
+font = "sans serif"
+
+[server]
+# Comportamento atrás do nginx
+headless = true
+enableCORS = false
+enableXsrfProtection = true
+
+[browser]
+gatherUsageStats = false

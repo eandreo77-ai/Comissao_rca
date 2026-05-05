@@ -12,6 +12,12 @@ import pix_db
 from pix_db import RegistroPix, TIPOS_VALIDOS
 from oracle_db import OracleConnection
 
+# === ROFE_VISUAL_PATCH ===
+from styles import aplicar_visual, header
+aplicar_visual()
+header(titulo='Cadastro PIX', icone='💳')  # 💳
+# === FIM_ROFE_VISUAL_PATCH ===
+
 
 @st.cache_data(ttl=300, show_spinner=False)
 def buscar_rcas_ativos() -> tuple[dict[int, str], str | None]:
