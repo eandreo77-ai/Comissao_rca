@@ -282,7 +282,7 @@ with tab_pend:
         buscar_bloqueios.clear()
         st.rerun()
 
-    st.markdown('</div>', unsafe_allow_html=True)
+    # # REMOVED_BY_ORPHAN_DIV_PATCH: st.markdown('</div>', unsafe_allow_html=True)
 
 
 # ─────────────────────────────────────────────
@@ -373,7 +373,7 @@ with tab_lista:
                 st.success(f"CODRCA {cod_del} removido.")
                 st.rerun()
 
-    st.markdown('</div>', unsafe_allow_html=True)
+    # # REMOVED_BY_ORPHAN_DIV_PATCH: st.markdown('</div>', unsafe_allow_html=True)
 
 
 # ─────────────────────────────────────────────
@@ -435,7 +435,7 @@ with tab_novo:
             st.session_state.pop("pix_form_conflito", None)
             st.rerun()
 
-    st.markdown('</div>', unsafe_allow_html=True)
+    # # REMOVED_BY_ORPHAN_DIV_PATCH: st.markdown('</div>', unsafe_allow_html=True)
 
 
 # ─────────────────────────────────────────────
@@ -606,4 +606,4 @@ with tab_import:
             st.session_state.pop("pix_import_result", None)
             st.rerun()
 
-    st.markdown('</div>', unsafe_allow_html=True)
+    # # REMOVED_BY_ORPHAN_DIV_PATCH: st.markdown('</div>', unsafe_allow_html=True)

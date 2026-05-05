@@ -704,7 +704,7 @@ with st.container():
                 hide_index=True,
             )
 
-    st.markdown('</div>', unsafe_allow_html=True)
+    # # REMOVED_BY_ORPHAN_DIV_PATCH: st.markdown('</div>', unsafe_allow_html=True)
 
 # ─────────────────────────────────────────────
 # Gravar
@@ -889,4 +889,4 @@ with st.container():
                 st.session_state.historico = []
                 st.rerun()
 
-    st.markdown('</div>', unsafe_allow_html=True)
+    # # REMOVED_BY_ORPHAN_DIV_PATCH: st.markdown('</div>', unsafe_allow_html=True)
