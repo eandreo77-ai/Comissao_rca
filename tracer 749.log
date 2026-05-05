@@ -1,0 +1,1821 @@
+**** start log for [stopped] TESTE@BDTESTE *************************
+Time: 16:00:16 Attach      [0]          installed                      session #
+    Log started for TESTE@BDTESTE [process id 6872,147156]
+Time: 16:20:24 Shutdown    [0]          Shutdown                       session #
+    Log stopped [shutdown] for TESTE@BDTESTE [process id 6872,147156]
+**** end log for [stopped] TESTE@BDTESTE *************************
+
+**** start log for [stopped] ROFE@PROD *************************
+Time: 16:00:16 Attach      [0]          installed                      session #
+    Log started for ROFE@PROD [process id 13692,12190]
+Time: 16:20:24 Shutdown    [0]          Shutdown                       session #
+    Log stopped [shutdown] for ROFE@PROD [process id 13692,12190]
+**** end log for [stopped] ROFE@PROD *************************
+
+**** start log for [stopped] WinThor - Sistema de Gestão Empresarial *************************
+Time: 16:00:16 Attach      [0]          installed                      session #
+    Log started for WinThor - Sistema de Gestão Empresarial [process id 15104,26342]
+Time: 16:20:24 Shutdown    [0]          Shutdown                       session #
+    Log stopped [shutdown] for WinThor - Sistema de Gestão Empresarial [process id 15104,26342]
+**** end log for [stopped] WinThor - Sistema de Gestão Empresarial *************************
+
+**** start log for [stopped] WinThor - Sistema de Gestão Empresarial *************************
+Time: 16:00:16 Attach      [0]          installed                      session #
+    Log started for WinThor - Sistema de Gestão Empresarial [process id 28108,147040]
+Time: 16:00:40 Execute     [144689660]  OCIStmtExecute                 session #1
+    prepared sql statement not found
+Time: 16:01:10 Execute     [144689660]  OCIStmtExecute                 session #1
+    prepared sql statement not found
+Time: 16:01:40 Execute     [144689660]  OCIStmtExecute                 session #1
+    prepared sql statement not found
+Time: 16:02:10 Execute     [144689660]  OCIStmtExecute                 session #1
+    prepared sql statement not found
+Time: 16:02:40 Execute     [144689660]  OCIStmtExecute                 session #1
+    prepared sql statement not found
+Time: 16:03:10 Execute     [144689660]  OCIStmtExecute                 session #1
+    prepared sql statement not found
+Time: 16:03:40 Execute     [144689660]  OCIStmtExecute                 session #1
+    prepared sql statement not found
+Time: 16:04:10 Execute     [144689660]  OCIStmtExecute                 session #1
+    prepared sql statement not found
+Time: 16:04:40 Execute     [144689660]  OCIStmtExecute                 session #1
+    prepared sql statement not found
+Time: 16:05:10 Execute     [144689660]  OCIStmtExecute                 session #1
+    prepared sql statement not found
+Time: 16:05:13 Execute     [144688624]  OCIStmtExecute                 session #1
+    SELECT 'A' FROM DUAL
+Time: 16:05:13 Error       [0]          OCIErrorGet                    session #
+    ORA-28002: the password will expire within 3 days
+Time: 16:05:13 Bind (in)   [167920980]  bind function                  session #
+    Null
+Time: 16:05:13 Bind (in)   [167920980]  bind function                  session #
+    Null
+Time: 16:05:13 Bind (in)   [167920980]  bind function                  session #
+    Null
+Time: 16:05:13 Bind (in)   [167920980]  bind function                  session #
+    Null
+Time: 16:05:13 Bind (in)   [167920980]  bind function                  session #
+    Null
+Time: 16:05:13 Bind (in)   [167920980]  bind function                  session #
+    Null
+Time: 16:05:13 Bind (in)   [167920980]  bind function                  session #
+    Null
+Time: 16:05:13 Bind (in)   [167920980]  bind function                  session #
+    Null
+Time: 16:05:13 Execute     [167920980]  OCIStmtExecute                 session #3
+    declare  cursor NlsParamsCursor is    SELECT * FROM nls_session_parameters;begin  SELECT Nvl(Lengthb(Chr(16777216)), Nvl(Lengthb(Chr(65536)), Nvl(Lengthb(Chr(256)), 1))), Nvl(Lengthb(Chr(1)), 1)    INTO :MaxCharLength, :MinCharLength FROM dual;  for NlsRecord in NlsParamsCursor loop    if NlsRecord.parameter = 'NLS_DATE_LANGUAGE' then      :NlsDateLanguage := NlsRecord.value;    elsif NlsRecord.parameter = 'NLS_DATE_FORMAT' then      :NlsDateFormat := NlsRecord.value;    elsif NlsRecord.parameter = 'NLS_NUMERIC_CHARACTERS' then      :NlsNumericCharacters := NlsRecord.value;    elsif NlsRecord.parameter = 'NLS_TIMESTAMP_FORMAT' then      :NlsTimeStampFormat := NlsRecord.value;    elsif NlsRecord.parameter = 'NLS_TIMESTAMP_TZ_FORMAT' then      :NlsTimeStampTZFormat := NlsRecord.value;    end if;  end loop;  SELECT NLS_CHARSET_ID('WE8ISO8859P1') INTO :CharsetId FROM DUAL;end;
+Time: 16:05:13 Bind (out)  [167920980]  bind function                  session #
+    1
+Time: 16:05:13 Bind (out)  [167920980]  bind function                  session #
+    1
+Time: 16:05:13 Bind (out)  [167920980]  bind function                  session #
+    'AMERICAN'
+Time: 16:05:13 Bind (out)  [167920980]  bind function                  session #
+    'DD-MON-RR'
+Time: 16:05:13 Bind (out)  [167920980]  bind function                  session #
+    '.,'
+Time: 16:05:13 Bind (out)  [167920980]  bind function                  session #
+    'DD-MON-RR HH.MI.SSXFF AM'
+Time: 16:05:13 Bind (out)  [167920980]  bind function                  session #
+    'DD-MON-RR HH.MI.SSXFF AM TZR'
+Time: 16:05:13 Bind (out)  [167920980]  bind function                  session #
+    31
+Time: 16:05:13 Execute     [167920980]  OCIStmtExecute                 session #3
+    ALTER SESSION SET NLS_DATE_FORMAT='DD/MM/YYYY'
+Time: 16:05:13 Execute     [167920980]  OCIStmtExecute                 session #3
+    ALTER SESSION SET NLS_NUMERIC_CHARACTERS='.,'
+Time: 16:05:13 Execute     [167920980]  OCIStmtExecute                 session #3
+    SELECT CODFILIAL
+      FROM PCEMPR
+     WHERE MATRICULA=0
+Time: 16:05:13 Execute     [167920980]  OCIStmtExecute                 session #3
+    SELECT FILIALPADRAO
+      FROM PCCONSUM
+Time: 16:05:13 Execute     [167920980]  OCIStmtExecute                 session #1
+    SELECT 'A' FROM DUAL
+Time: 16:05:13 Execute     [144812504]  OCIStmtExecute                 session #3
+    SELECT MAX(DATA_LOG) FROM PCLOGJOB WHERE TIPO_LOG = 'PI'
+Time: 16:05:13 Execute     [167920980]  OCIStmtExecute                 session #1
+    SELECT COUNT(O.OBJECT_NAME) FROM ALL_OBJECTS O WHERE O.OWNER = SYS_CONTEXT('USERENV', 'CURRENT_SCHEMA') AND O.OBJECT_NAME = 'FNC_QTMANIFABERTA'
+Time: 16:05:13 Execute     [167920980]  OCIStmtExecute                 session #1
+    SELECT UPPER(STATUS) FROM ALL_OBJECTS WHERE OWNER = SYS_CONTEXT('USERENV', 'CURRENT_SCHEMA') AND OBJECT_NAME = 'FNC_QTMANIFABERTA'
+Time: 16:05:13 Execute     [144707332]  OCIStmtExecute                 session #3
+    SELECT TRUNC(SYSDATE) FROM DUAL
+Time: 16:05:13 Execute     [167920980]  OCIStmtExecute                 session #1
+    SELECT FNC_QTMANIFABERTA(2245) FROM DUAL
+Time: 16:05:13 Bind (in)   [144690696]  bind function                  session #
+    '99'
+Time: 16:05:13 Bind (in)   [144690696]  bind function                  session #
+    1899.12.01 00:00:00
+Time: 16:05:13 Bind (in)   [144690696]  bind function                  session #
+    1899.12.01 00:00:00
+Time: 16:05:13 Bind (in)   [144690696]  bind function                  session #
+    '1'
+Time: 16:05:13 Bind (in)   [144690696]  bind function                  session #
+    'EPRMANUT'
+Time: 16:05:13 Execute     [144690696]  OCIStmtExecute                 session #1
+    SELECT ROWID ID, CODREGISTRO, CODREGISTROPAI, CODFILIAL, DATA, REGISTRO,
+           DADOSID, TIPOCAMPO, CAMPO, VALOR_TEXTO, VALOR_DATA, VALOR_NUM
+    FROM   PCDADOSGENERICOS
+    WHERE  CODFILIAL = :CODFILIAL
+    AND    DATA BETWEEN :DATA1 AND :DATA2
+    AND    REGISTRO = :REGISTRO
+    AND    DADOSID = :DADOSID
+    ORDER BY REGISTRO, DATA, CODREGISTROPAI, CODREGISTRO
+Time: 16:05:13 Bind (out)  [144690696]  bind function                  session #
+    '99'
+Time: 16:05:13 Bind (out)  [144690696]  bind function                  session #
+    1899.12.01 00:00:00
+Time: 16:05:13 Bind (out)  [144690696]  bind function                  session #
+    1899.12.01 00:00:00
+Time: 16:05:13 Bind (out)  [144690696]  bind function                  session #
+    '1'
+Time: 16:05:13 Bind (out)  [144690696]  bind function                  session #
+    'EPRMANUT'
+Time: 16:05:13 Execute     [167920980]  OCIStmtExecute                 session #3
+    SELECT MAX(DATA) FROM PCDIASUTEIS WHERE DATA < TRUNC(SYSDATE) AND UPPER(CODFILIAL) = '1' AND DIAFINANCEIRO = 'S'
+Time: 16:05:13 Bind (in)   [167920980]  bind function                  session #
+    98
+Time: 16:05:13 Execute     [167920980]  OCIStmtExecute                 session #3
+    SELECT MAX(TRUNC(DATA)) DATA_ATUALIZACAO_MAIS_RECENTE, TRUNC(SYSDATE - :NUM_DIAS_UTEIS_ANTES_HOJE) ULTIMO_DIA_UTIL_ANTES_HOJE
+    FROM PCLOGFINANC
+    WHERE CODROTINA in (504,820)
+Time: 16:05:13 Bind (out)  [167920980]  bind function                  session #
+    98
+Time: 16:05:13 Execute     [167920980]  OCIStmtExecute                 session #3
+    SELECT CODFILIAL
+      FROM PCEMPR
+     WHERE MATRICULA=2245
+Time: 16:05:13 Bind (in)   [167920980]  bind function                  session #
+    '1'
+Time: 16:05:13 Execute     [167920980]  OCIStmtExecute                 session #3
+    SELECT COUNT(DATA) FROM PCDIASUTEIS
+    WHERE DATA = TRUNC(SYSDATE)        
+    AND UPPER(CODFILIAL) = UPPER(:CODFILIAL)
+Time: 16:05:13 Bind (out)  [167920980]  bind function                  session #
+    '1'
+Time: 16:05:13 Execute     [167920980]  OCIStmtExecute                 session #3
+    SELECT DTPROXATU
+    ,TRUNC(SYSDATE) HOJE
+    ,NUMDIASATU
+    ,TRUNC(DTPROXFECHAMES) DTPROXFECHAMES
+    ,EMPRESA
+    ,DTPROCESSAMENTO
+    FROM PCCONSUM
+Time: 16:05:13 Execute     [167920980]  OCIStmtExecute                 session #3
+    SELECT MAX(DATA) FROM PCDIASUTEIS WHERE DATA < TRUNC(SYSDATE) AND UPPER(CODFILIAL) = '1' AND DIAFINANCEIRO = 'S'
+Time: 16:05:13 Execute     [167920980]  OCIStmtExecute                 session #1
+    SELECT MAX(DATA) DTFINANC FROM PCFINANC
+Time: 16:05:14 Execute     [167920980]  OCIStmtExecute                 session #3
+    SELECT MAX(DATA) FROM PCDIASUTEIS WHERE DATA < TRUNC(SYSDATE) AND UPPER(CODFILIAL) = '1' AND DIAVENDAS = 'S'
+Time: 16:05:14 Execute     [167920980]  OCIStmtExecute                 session #1
+    SELECT MAX(DATA) FROM PCHISTEST WHERE DATA BETWEEN TRUNC(SYSDATE -90) AND TRUNC(SYSDATE)
+Time: 16:05:14 Execute     [167920980]  OCIStmtExecute                 session #1
+    SELECT COUNT(O.OBJECT_NAME) FROM ALL_OBJECTS O WHERE O.OWNER = SYS_CONTEXT('USERENV', 'CURRENT_SCHEMA') AND O.OBJECT_NAME = 'FNC_QTMANIFABERTA'
+Time: 16:05:14 Execute     [167920980]  OCIStmtExecute                 session #1
+    SELECT UPPER(STATUS) FROM ALL_OBJECTS WHERE OWNER = SYS_CONTEXT('USERENV', 'CURRENT_SCHEMA') AND OBJECT_NAME = 'FNC_QTMANIFABERTA'
+Time: 16:05:14 Execute     [167920980]  OCIStmtExecute                 session #1
+    SELECT FNC_QTMANIFABERTA(2245) FROM DUAL
+Time: 16:05:14 Execute     [167920980]  OCIStmtExecute                 session #3
+    SELECT ACESSO FROM PCCONTRO WHERE CODROTINA = 336 AND CODUSUARIO = 2245
+Time: 16:05:14 Execute     [167920980]  OCIStmtExecute                 session #3
+    SELECT COUNT(PCPEDC.POSICAO)                                        FROM PCPEDC                                                      WHERE ((PCPEDC.POSICAO = 'P') OR(PCPEDC.POSICAO = 'B'))         AND PCPEDC.DATA BETWEEN TRUNC(SYSDATE) - 90 AND TRUNC(SYSDATE)
+Time: 16:05:14 Execute     [167920980]  OCIStmtExecute                 session #3
+    SELECT PCEMPR.USUARIOBD, COUNT(PCEMPR.USUARIOBD), UPPER(NVL(PCEMPR.SEXO, 'M'))
+      FROM PCAGENDA, PCEMPR
+     WHERE PCEMPR.MATRICULA = PCAGENDA.CODOPERADORA
+       AND PCAGENDA.DATA < TRUNC(SYSDATE)
+       AND PCAGENDA.DTFECHAMENTO IS NULL
+       AND PCEMPR.MATRICULA = 2245
+     GROUP BY PCEMPR.USUARIOBD, PCEMPR.SEXO
+     ORDER BY PCEMPR.USUARIOBD
+Time: 16:05:14 Execute     [167920980]  OCIStmtExecute                 session #3
+    SELECT PCEMPR.USUARIOBD, COUNT(PCEMPR.USUARIOBD), UPPER(NVL(PCEMPR.SEXO, 'M')), PCPARAMFILIAL.VALOR MINUTOS 
+       FROM PCAGENDA, PCEMPR, PCPARAMFILIAL
+      WHERE PCEMPR.MATRICULA = PCAGENDA.CODOPERADORA
+        AND PCAGENDA.DATA >= TRUNC(SYSDATE)
+        AND ((PCAGENDA.HORA - SYSDATE) * 24 * 60) BETWEEN 0 AND TO_NUMBER(PCPARAMFILIAL.VALOR)
+        AND PCAGENDA.DTFECHAMENTO IS NULL
+        AND PCEMPR.MATRICULA = 2245
+        AND PCPARAMFILIAL.CODFILIAL = '99'
+        AND PCPARAMFILIAL.NOME = 'TEMPOVERIFAGENDACRM'
+      GROUP BY PCEMPR.USUARIOBD, PCEMPR.SEXO, PCPARAMFILIAL.VALOR
+      ORDER BY PCEMPR.USUARIOBD
+Time: 16:05:14 Execute     [167920980]  OCIStmtExecute                 session #3
+    SELECT NVL(PERLIMVENDAPF,100) PERLIMVENDAPF
+    FROM PCCONSUM
+Time: 16:05:14 Execute     [167920980]  OCIStmtExecute                 session #3
+    SELECT CODFILIAL
+      FROM PCEMPR
+     WHERE MATRICULA=2245
+Time: 16:05:14 Execute     [167920980]  OCIStmtExecute                 session #3
+    SELECT PERVENDAPF FROM PCFILIAL WHERE CODIGO='1'
+Time: 16:05:14 Execute     [167920980]  OCIStmtExecute                 session #3
+    SELECT NOMEROTINA, TRUNC(DTULTUTILIZACAO) DTULTUTILIZACAO, TRUNC(SYSDATE) DATAATUAL
+    FROM PCROTINA
+    WHERE CODIGO = 153
+Time: 16:05:14 Execute     [167920980]  OCIStmtExecute                 session #3
+    SELECT 1                                                            FROM PCCONSUM                                                    WHERE EXISTS(SELECT PCEMPR.CODSETOR                                              FROM PCEMPR                                                      WHERE PCEMPR.CODSETOR = PCCONSUM.CODSETORDIRETORIA                  AND PCEMPR.MATRICULA = 2245)
+Time: 16:05:14 Execute     [167920980]  OCIStmtExecute                 session #3
+    SELECT VALUE FROM V$NLS_PARAMETERS WHERE PARAMETER = 'NLS_CHARACTERSET'
+Time: 16:05:14 Bind (in)   [167920980]  bind function                  session #
+    'G'
+Time: 16:05:14 Execute     [167920980]  OCIStmtExecute                 session #3
+    SELECT O.OBJECT_NAME                                             
+         , O.STATUS                                                  
+         , O.STATUS                                                  
+      FROM ALL_OBJECTS O                                             
+         , ALL_TRIGGERS T                                            
+     WHERE O.OBJECT_NAME = T.TRIGGER_NAME                            
+       AND O.OBJECT_TYPE = 'TRIGGER'                               
+       AND O.OBJECT_NAME = :NOME_DA_TRIGGER                          
+       AND O.STATUS = 'VALID'                                      
+       AND T.STATUS = 'ENABLED'                                    
+       AND O.OWNER = SYS_CONTEXT('USERENV', 'CURRENT_SCHEMA')    
+       AND T.OWNER = O.OWNER
+Time: 16:05:14 Bind (out)  [167920980]  bind function                  session #
+    'G'
+Time: 16:05:14 Bind (in)   [167920980]  bind function                  session #
+    'G'
+Time: 16:05:14 Execute     [167920980]  OCIStmtExecute                 session #3
+    SELECT O.OBJECT_NAME                                             
+         , O.STATUS                                                  
+         , O.STATUS                                                  
+      FROM ALL_OBJECTS O                                             
+         , ALL_TRIGGERS T                                            
+     WHERE O.OBJECT_NAME = T.TRIGGER_NAME                            
+       AND O.OBJECT_TYPE = 'TRIGGER'                               
+       AND O.OBJECT_NAME = :NOME_DA_TRIGGER                          
+       AND O.STATUS = 'VALID'                                      
+       AND T.STATUS = 'ENABLED'                                    
+       AND O.OWNER = SYS_CONTEXT('USERENV', 'CURRENT_SCHEMA')    
+       AND T.OWNER = O.OWNER
+Time: 16:05:14 Bind (out)  [167920980]  bind function                  session #
+    'G'
+Time: 16:05:14 Bind (in)   [167920980]  bind function                  session #
+    'T'
+Time: 16:05:14 Execute     [167920980]  OCIStmtExecute                 session #3
+    SELECT O.OBJECT_NAME                                             
+         , O.STATUS                                                  
+         , O.STATUS                                                  
+      FROM ALL_OBJECTS O                                             
+         , ALL_TRIGGERS T                                            
+     WHERE O.OBJECT_NAME = T.TRIGGER_NAME                            
+       AND O.OBJECT_TYPE = 'TRIGGER'                               
+       AND O.OBJECT_NAME = :NOME_DA_TRIGGER                          
+       AND O.STATUS = 'VALID'                                      
+       AND T.STATUS = 'ENABLED'                                    
+       AND O.OWNER = SYS_CONTEXT('USERENV', 'CURRENT_SCHEMA')    
+       AND T.OWNER = O.OWNER
+Time: 16:05:14 Bind (out)  [167920980]  bind function                  session #
+    'T'
+Time: 16:05:14 Bind (in)   [167920980]  bind function                  session #
+    'T'
+Time: 16:05:14 Execute     [167920980]  OCIStmtExecute                 session #3
+    SELECT O.OBJECT_NAME                                             
+         , O.STATUS                                                  
+         , O.STATUS                                                  
+      FROM ALL_OBJECTS O                                             
+         , ALL_TRIGGERS T                                            
+     WHERE O.OBJECT_NAME = T.TRIGGER_NAME                            
+       AND O.OBJECT_TYPE = 'TRIGGER'                               
+       AND O.OBJECT_NAME = :NOME_DA_TRIGGER                          
+       AND O.STATUS = 'VALID'                                      
+       AND T.STATUS = 'ENABLED'                                    
+       AND O.OWNER = SYS_CONTEXT('USERENV', 'CURRENT_SCHEMA')    
+       AND T.OWNER = O.OWNER
+Time: 16:05:14 Bind (out)  [167920980]  bind function                  session #
+    'T'
+Time: 16:05:14 Bind (in)   [167920980]  bind function                  session #
+    'T'
+Time: 16:05:14 Execute     [167920980]  OCIStmtExecute                 session #3
+    SELECT O.OBJECT_NAME                                             
+         , O.STATUS                                                  
+         , O.STATUS                                                  
+      FROM ALL_OBJECTS O                                             
+         , ALL_TRIGGERS T                                            
+     WHERE O.OBJECT_NAME = T.TRIGGER_NAME                            
+       AND O.OBJECT_TYPE = 'TRIGGER'                               
+       AND O.OBJECT_NAME = :NOME_DA_TRIGGER                          
+       AND O.STATUS = 'VALID'                                      
+       AND T.STATUS = 'ENABLED'                                    
+       AND O.OWNER = SYS_CONTEXT('USERENV', 'CURRENT_SCHEMA')    
+       AND T.OWNER = O.OWNER
+Time: 16:05:14 Bind (out)  [167920980]  bind function                  session #
+    'T'
+Time: 16:05:14 Execute     [167920980]  OCIStmtExecute                 session #1
+    SELECT PCFILIAL.CODIGO
+         , TRUNC(SYSDATE) DATAATUAL 
+      FROM PCFILIAL 
+     WHERE PCFILIAL.UTILIZANFE = 'S' 
+       AND PCFILIAL.CODIGO <> '99'  
+    ORDER BY LPAD(PCFILIAL.CODIGO, 2, '00')
+Time: 16:05:40 Execute     [144689660]  OCIStmtExecute                 session #1
+    prepared sql statement not found
+Time: 16:06:10 Execute     [144689660]  OCIStmtExecute                 session #1
+    prepared sql statement not found
+Time: 16:06:40 Execute     [144689660]  OCIStmtExecute                 session #1
+    prepared sql statement not found
+Time: 16:07:10 Execute     [144689660]  OCIStmtExecute                 session #1
+    prepared sql statement not found
+Time: 16:07:40 Execute     [144689660]  OCIStmtExecute                 session #1
+    prepared sql statement not found
+Time: 16:08:10 Execute     [144689660]  OCIStmtExecute                 session #1
+    prepared sql statement not found
+Time: 16:08:40 Execute     [144689660]  OCIStmtExecute                 session #1
+    prepared sql statement not found
+Time: 16:09:10 Execute     [144689660]  OCIStmtExecute                 session #1
+    prepared sql statement not found
+Time: 16:09:40 Execute     [144689660]  OCIStmtExecute                 session #1
+    prepared sql statement not found
+Time: 16:10:10 Execute     [144689660]  OCIStmtExecute                 session #1
+    prepared sql statement not found
+Time: 16:10:13 Execute     [144688624]  OCIStmtExecute                 session #1
+    SELECT 'A' FROM DUAL
+Time: 16:10:13 Error       [0]          OCIErrorGet                    session #
+    ORA-28002: the password will expire within 3 days
+Time: 16:10:13 Bind (in)   [167920980]  bind function                  session #
+    Null
+Time: 16:10:13 Bind (in)   [167920980]  bind function                  session #
+    Null
+Time: 16:10:13 Bind (in)   [167920980]  bind function                  session #
+    Null
+Time: 16:10:13 Bind (in)   [167920980]  bind function                  session #
+    Null
+Time: 16:10:13 Bind (in)   [167920980]  bind function                  session #
+    Null
+Time: 16:10:13 Bind (in)   [167920980]  bind function                  session #
+    Null
+Time: 16:10:13 Bind (in)   [167920980]  bind function                  session #
+    Null
+Time: 16:10:13 Bind (in)   [167920980]  bind function                  session #
+    Null
+Time: 16:10:13 Execute     [167920980]  OCIStmtExecute                 session #3
+    declare  cursor NlsParamsCursor is    SELECT * FROM nls_session_parameters;begin  SELECT Nvl(Lengthb(Chr(16777216)), Nvl(Lengthb(Chr(65536)), Nvl(Lengthb(Chr(256)), 1))), Nvl(Lengthb(Chr(1)), 1)    INTO :MaxCharLength, :MinCharLength FROM dual;  for NlsRecord in NlsParamsCursor loop    if NlsRecord.parameter = 'NLS_DATE_LANGUAGE' then      :NlsDateLanguage := NlsRecord.value;    elsif NlsRecord.parameter = 'NLS_DATE_FORMAT' then      :NlsDateFormat := NlsRecord.value;    elsif NlsRecord.parameter = 'NLS_NUMERIC_CHARACTERS' then      :NlsNumericCharacters := NlsRecord.value;    elsif NlsRecord.parameter = 'NLS_TIMESTAMP_FORMAT' then      :NlsTimeStampFormat := NlsRecord.value;    elsif NlsRecord.parameter = 'NLS_TIMESTAMP_TZ_FORMAT' then      :NlsTimeStampTZFormat := NlsRecord.value;    end if;  end loop;  SELECT NLS_CHARSET_ID('WE8ISO8859P1') INTO :CharsetId FROM DUAL;end;
+Time: 16:10:13 Bind (out)  [167920980]  bind function                  session #
+    1
+Time: 16:10:13 Bind (out)  [167920980]  bind function                  session #
+    1
+Time: 16:10:13 Bind (out)  [167920980]  bind function                  session #
+    'AMERICAN'
+Time: 16:10:13 Bind (out)  [167920980]  bind function                  session #
+    'DD-MON-RR'
+Time: 16:10:13 Bind (out)  [167920980]  bind function                  session #
+    '.,'
+Time: 16:10:13 Bind (out)  [167920980]  bind function                  session #
+    'DD-MON-RR HH.MI.SSXFF AM'
+Time: 16:10:13 Bind (out)  [167920980]  bind function                  session #
+    'DD-MON-RR HH.MI.SSXFF AM TZR'
+Time: 16:10:13 Bind (out)  [167920980]  bind function                  session #
+    31
+Time: 16:10:13 Execute     [167920980]  OCIStmtExecute                 session #3
+    ALTER SESSION SET NLS_DATE_FORMAT='DD/MM/YYYY'
+Time: 16:10:13 Execute     [167920980]  OCIStmtExecute                 session #3
+    ALTER SESSION SET NLS_NUMERIC_CHARACTERS='.,'
+Time: 16:10:13 Execute     [167920980]  OCIStmtExecute                 session #3
+    SELECT CODFILIAL
+      FROM PCEMPR
+     WHERE MATRICULA=0
+Time: 16:10:13 Execute     [167920980]  OCIStmtExecute                 session #3
+    SELECT FILIALPADRAO
+      FROM PCCONSUM
+Time: 16:10:13 Execute     [167920980]  OCIStmtExecute                 session #1
+    SELECT 'A' FROM DUAL
+Time: 16:10:13 Execute     [167948044]  OCIStmtExecute                 session #3
+    SELECT MAX(DATA_LOG) FROM PCLOGJOB WHERE TIPO_LOG = 'PI'
+Time: 16:10:13 Execute     [167920980]  OCIStmtExecute                 session #1
+    SELECT COUNT(O.OBJECT_NAME) FROM ALL_OBJECTS O WHERE O.OWNER = SYS_CONTEXT('USERENV', 'CURRENT_SCHEMA') AND O.OBJECT_NAME = 'FNC_QTMANIFABERTA'
+Time: 16:10:13 Execute     [167920980]  OCIStmtExecute                 session #1
+    SELECT UPPER(STATUS) FROM ALL_OBJECTS WHERE OWNER = SYS_CONTEXT('USERENV', 'CURRENT_SCHEMA') AND OBJECT_NAME = 'FNC_QTMANIFABERTA'
+Time: 16:10:13 Execute     [144812504]  OCIStmtExecute                 session #3
+    SELECT TRUNC(SYSDATE) FROM DUAL
+Time: 16:10:13 Execute     [167920980]  OCIStmtExecute                 session #1
+    SELECT FNC_QTMANIFABERTA(2245) FROM DUAL
+Time: 16:10:13 Bind (in)   [144690696]  bind function                  session #
+    '99'
+Time: 16:10:13 Bind (in)   [144690696]  bind function                  session #
+    1899.12.01 00:00:00
+Time: 16:10:13 Bind (in)   [144690696]  bind function                  session #
+    1899.12.01 00:00:00
+Time: 16:10:13 Bind (in)   [144690696]  bind function                  session #
+    '1'
+Time: 16:10:13 Bind (in)   [144690696]  bind function                  session #
+    'EPRMANUT'
+Time: 16:10:13 Execute     [144690696]  OCIStmtExecute                 session #1
+    SELECT ROWID ID, CODREGISTRO, CODREGISTROPAI, CODFILIAL, DATA, REGISTRO,
+           DADOSID, TIPOCAMPO, CAMPO, VALOR_TEXTO, VALOR_DATA, VALOR_NUM
+    FROM   PCDADOSGENERICOS
+    WHERE  CODFILIAL = :CODFILIAL
+    AND    DATA BETWEEN :DATA1 AND :DATA2
+    AND    REGISTRO = :REGISTRO
+    AND    DADOSID = :DADOSID
+    ORDER BY REGISTRO, DATA, CODREGISTROPAI, CODREGISTRO
+Time: 16:10:13 Bind (out)  [144690696]  bind function                  session #
+    '99'
+Time: 16:10:13 Bind (out)  [144690696]  bind function                  session #
+    1899.12.01 00:00:00
+Time: 16:10:13 Bind (out)  [144690696]  bind function                  session #
+    1899.12.01 00:00:00
+Time: 16:10:13 Bind (out)  [144690696]  bind function                  session #
+    '1'
+Time: 16:10:13 Bind (out)  [144690696]  bind function                  session #
+    'EPRMANUT'
+Time: 16:10:13 Execute     [167920980]  OCIStmtExecute                 session #3
+    SELECT MAX(DATA) FROM PCDIASUTEIS WHERE DATA < TRUNC(SYSDATE) AND UPPER(CODFILIAL) = '1' AND DIAFINANCEIRO = 'S'
+Time: 16:10:13 Bind (in)   [167920980]  bind function                  session #
+    98
+Time: 16:10:13 Execute     [167920980]  OCIStmtExecute                 session #3
+    SELECT MAX(TRUNC(DATA)) DATA_ATUALIZACAO_MAIS_RECENTE, TRUNC(SYSDATE - :NUM_DIAS_UTEIS_ANTES_HOJE) ULTIMO_DIA_UTIL_ANTES_HOJE
+    FROM PCLOGFINANC
+    WHERE CODROTINA in (504,820)
+Time: 16:10:13 Bind (out)  [167920980]  bind function                  session #
+    98
+Time: 16:10:13 Execute     [167920980]  OCIStmtExecute                 session #3
+    SELECT CODFILIAL
+      FROM PCEMPR
+     WHERE MATRICULA=2245
+Time: 16:10:13 Bind (in)   [167920980]  bind function                  session #
+    '1'
+Time: 16:10:13 Execute     [167920980]  OCIStmtExecute                 session #3
+    SELECT COUNT(DATA) FROM PCDIASUTEIS
+    WHERE DATA = TRUNC(SYSDATE)        
+    AND UPPER(CODFILIAL) = UPPER(:CODFILIAL)
+Time: 16:10:13 Bind (out)  [167920980]  bind function                  session #
+    '1'
+Time: 16:10:13 Execute     [167920980]  OCIStmtExecute                 session #3
+    SELECT DTPROXATU
+    ,TRUNC(SYSDATE) HOJE
+    ,NUMDIASATU
+    ,TRUNC(DTPROXFECHAMES) DTPROXFECHAMES
+    ,EMPRESA
+    ,DTPROCESSAMENTO
+    FROM PCCONSUM
+Time: 16:10:13 Execute     [167920980]  OCIStmtExecute                 session #3
+    SELECT MAX(DATA) FROM PCDIASUTEIS WHERE DATA < TRUNC(SYSDATE) AND UPPER(CODFILIAL) = '1' AND DIAFINANCEIRO = 'S'
+Time: 16:10:13 Execute     [167920980]  OCIStmtExecute                 session #1
+    SELECT MAX(DATA) DTFINANC FROM PCFINANC
+Time: 16:10:13 Execute     [167920980]  OCIStmtExecute                 session #3
+    SELECT MAX(DATA) FROM PCDIASUTEIS WHERE DATA < TRUNC(SYSDATE) AND UPPER(CODFILIAL) = '1' AND DIAVENDAS = 'S'
+Time: 16:10:14 Execute     [167920980]  OCIStmtExecute                 session #1
+    SELECT MAX(DATA) FROM PCHISTEST WHERE DATA BETWEEN TRUNC(SYSDATE -90) AND TRUNC(SYSDATE)
+Time: 16:10:14 Execute     [167920980]  OCIStmtExecute                 session #1
+    SELECT COUNT(O.OBJECT_NAME) FROM ALL_OBJECTS O WHERE O.OWNER = SYS_CONTEXT('USERENV', 'CURRENT_SCHEMA') AND O.OBJECT_NAME = 'FNC_QTMANIFABERTA'
+Time: 16:10:14 Execute     [167920980]  OCIStmtExecute                 session #1
+    SELECT UPPER(STATUS) FROM ALL_OBJECTS WHERE OWNER = SYS_CONTEXT('USERENV', 'CURRENT_SCHEMA') AND OBJECT_NAME = 'FNC_QTMANIFABERTA'
+Time: 16:10:14 Execute     [167920980]  OCIStmtExecute                 session #1
+    SELECT FNC_QTMANIFABERTA(2245) FROM DUAL
+Time: 16:10:14 Execute     [167920980]  OCIStmtExecute                 session #3
+    SELECT ACESSO FROM PCCONTRO WHERE CODROTINA = 336 AND CODUSUARIO = 2245
+Time: 16:10:14 Execute     [167920980]  OCIStmtExecute                 session #3
+    SELECT COUNT(PCPEDC.POSICAO)                                        FROM PCPEDC                                                      WHERE ((PCPEDC.POSICAO = 'P') OR(PCPEDC.POSICAO = 'B'))         AND PCPEDC.DATA BETWEEN TRUNC(SYSDATE) - 90 AND TRUNC(SYSDATE)
+Time: 16:10:14 Execute     [167920980]  OCIStmtExecute                 session #3
+    SELECT PCEMPR.USUARIOBD, COUNT(PCEMPR.USUARIOBD), UPPER(NVL(PCEMPR.SEXO, 'M'))
+      FROM PCAGENDA, PCEMPR
+     WHERE PCEMPR.MATRICULA = PCAGENDA.CODOPERADORA
+       AND PCAGENDA.DATA < TRUNC(SYSDATE)
+       AND PCAGENDA.DTFECHAMENTO IS NULL
+       AND PCEMPR.MATRICULA = 2245
+     GROUP BY PCEMPR.USUARIOBD, PCEMPR.SEXO
+     ORDER BY PCEMPR.USUARIOBD
+Time: 16:10:14 Execute     [167920980]  OCIStmtExecute                 session #3
+    SELECT PCEMPR.USUARIOBD, COUNT(PCEMPR.USUARIOBD), UPPER(NVL(PCEMPR.SEXO, 'M')), PCPARAMFILIAL.VALOR MINUTOS 
+       FROM PCAGENDA, PCEMPR, PCPARAMFILIAL
+      WHERE PCEMPR.MATRICULA = PCAGENDA.CODOPERADORA
+        AND PCAGENDA.DATA >= TRUNC(SYSDATE)
+        AND ((PCAGENDA.HORA - SYSDATE) * 24 * 60) BETWEEN 0 AND TO_NUMBER(PCPARAMFILIAL.VALOR)
+        AND PCAGENDA.DTFECHAMENTO IS NULL
+        AND PCEMPR.MATRICULA = 2245
+        AND PCPARAMFILIAL.CODFILIAL = '99'
+        AND PCPARAMFILIAL.NOME = 'TEMPOVERIFAGENDACRM'
+      GROUP BY PCEMPR.USUARIOBD, PCEMPR.SEXO, PCPARAMFILIAL.VALOR
+      ORDER BY PCEMPR.USUARIOBD
+Time: 16:10:14 Execute     [167920980]  OCIStmtExecute                 session #3
+    SELECT NVL(PERLIMVENDAPF,100) PERLIMVENDAPF
+    FROM PCCONSUM
+Time: 16:10:14 Execute     [167920980]  OCIStmtExecute                 session #3
+    SELECT CODFILIAL
+      FROM PCEMPR
+     WHERE MATRICULA=2245
+Time: 16:10:14 Execute     [167920980]  OCIStmtExecute                 session #3
+    SELECT PERVENDAPF FROM PCFILIAL WHERE CODIGO='1'
+Time: 16:10:14 Execute     [167920980]  OCIStmtExecute                 session #3
+    SELECT NOMEROTINA, TRUNC(DTULTUTILIZACAO) DTULTUTILIZACAO, TRUNC(SYSDATE) DATAATUAL
+    FROM PCROTINA
+    WHERE CODIGO = 153
+Time: 16:10:14 Execute     [167920980]  OCIStmtExecute                 session #3
+    SELECT 1                                                            FROM PCCONSUM                                                    WHERE EXISTS(SELECT PCEMPR.CODSETOR                                              FROM PCEMPR                                                      WHERE PCEMPR.CODSETOR = PCCONSUM.CODSETORDIRETORIA                  AND PCEMPR.MATRICULA = 2245)
+Time: 16:10:14 Execute     [167920980]  OCIStmtExecute                 session #3
+    SELECT VALUE FROM V$NLS_PARAMETERS WHERE PARAMETER = 'NLS_CHARACTERSET'
+Time: 16:10:14 Bind (in)   [167920980]  bind function                  session #
+    'G'
+Time: 16:10:14 Execute     [167920980]  OCIStmtExecute                 session #3
+    SELECT O.OBJECT_NAME                                             
+         , O.STATUS                                                  
+         , O.STATUS                                                  
+      FROM ALL_OBJECTS O                                             
+         , ALL_TRIGGERS T                                            
+     WHERE O.OBJECT_NAME = T.TRIGGER_NAME                            
+       AND O.OBJECT_TYPE = 'TRIGGER'                               
+       AND O.OBJECT_NAME = :NOME_DA_TRIGGER                          
+       AND O.STATUS = 'VALID'                                      
+       AND T.STATUS = 'ENABLED'                                    
+       AND O.OWNER = SYS_CONTEXT('USERENV', 'CURRENT_SCHEMA')    
+       AND T.OWNER = O.OWNER
+Time: 16:10:14 Bind (out)  [167920980]  bind function                  session #
+    'G'
+Time: 16:10:14 Bind (in)   [167920980]  bind function                  session #
+    'G'
+Time: 16:10:14 Execute     [167920980]  OCIStmtExecute                 session #3
+    SELECT O.OBJECT_NAME                                             
+         , O.STATUS                                                  
+         , O.STATUS                                                  
+      FROM ALL_OBJECTS O                                             
+         , ALL_TRIGGERS T                                            
+     WHERE O.OBJECT_NAME = T.TRIGGER_NAME                            
+       AND O.OBJECT_TYPE = 'TRIGGER'                               
+       AND O.OBJECT_NAME = :NOME_DA_TRIGGER                          
+       AND O.STATUS = 'VALID'                                      
+       AND T.STATUS = 'ENABLED'                                    
+       AND O.OWNER = SYS_CONTEXT('USERENV', 'CURRENT_SCHEMA')    
+       AND T.OWNER = O.OWNER
+Time: 16:10:14 Bind (out)  [167920980]  bind function                  session #
+    'G'
+Time: 16:10:14 Bind (in)   [167920980]  bind function                  session #
+    'T'
+Time: 16:10:14 Execute     [167920980]  OCIStmtExecute                 session #3
+    SELECT O.OBJECT_NAME                                             
+         , O.STATUS                                                  
+         , O.STATUS                                                  
+      FROM ALL_OBJECTS O                                             
+         , ALL_TRIGGERS T                                            
+     WHERE O.OBJECT_NAME = T.TRIGGER_NAME                            
+       AND O.OBJECT_TYPE = 'TRIGGER'                               
+       AND O.OBJECT_NAME = :NOME_DA_TRIGGER                          
+       AND O.STATUS = 'VALID'                                      
+       AND T.STATUS = 'ENABLED'                                    
+       AND O.OWNER = SYS_CONTEXT('USERENV', 'CURRENT_SCHEMA')    
+       AND T.OWNER = O.OWNER
+Time: 16:10:14 Bind (out)  [167920980]  bind function                  session #
+    'T'
+Time: 16:10:14 Bind (in)   [167920980]  bind function                  session #
+    'T'
+Time: 16:10:14 Execute     [167920980]  OCIStmtExecute                 session #3
+    SELECT O.OBJECT_NAME                                             
+         , O.STATUS                                                  
+         , O.STATUS                                                  
+      FROM ALL_OBJECTS O                                             
+         , ALL_TRIGGERS T                                            
+     WHERE O.OBJECT_NAME = T.TRIGGER_NAME                            
+       AND O.OBJECT_TYPE = 'TRIGGER'                               
+       AND O.OBJECT_NAME = :NOME_DA_TRIGGER                          
+       AND O.STATUS = 'VALID'                                      
+       AND T.STATUS = 'ENABLED'                                    
+       AND O.OWNER = SYS_CONTEXT('USERENV', 'CURRENT_SCHEMA')    
+       AND T.OWNER = O.OWNER
+Time: 16:10:14 Bind (out)  [167920980]  bind function                  session #
+    'T'
+Time: 16:10:14 Bind (in)   [167920980]  bind function                  session #
+    'T'
+Time: 16:10:14 Execute     [167920980]  OCIStmtExecute                 session #3
+    SELECT O.OBJECT_NAME                                             
+         , O.STATUS                                                  
+         , O.STATUS                                                  
+      FROM ALL_OBJECTS O                                             
+         , ALL_TRIGGERS T                                            
+     WHERE O.OBJECT_NAME = T.TRIGGER_NAME                            
+       AND O.OBJECT_TYPE = 'TRIGGER'                               
+       AND O.OBJECT_NAME = :NOME_DA_TRIGGER                          
+       AND O.STATUS = 'VALID'                                      
+       AND T.STATUS = 'ENABLED'                                    
+       AND O.OWNER = SYS_CONTEXT('USERENV', 'CURRENT_SCHEMA')    
+       AND T.OWNER = O.OWNER
+Time: 16:10:14 Bind (out)  [167920980]  bind function                  session #
+    'T'
+Time: 16:10:14 Execute     [167920980]  OCIStmtExecute                 session #1
+    SELECT PCFILIAL.CODIGO
+         , TRUNC(SYSDATE) DATAATUAL 
+      FROM PCFILIAL 
+     WHERE PCFILIAL.UTILIZANFE = 'S' 
+       AND PCFILIAL.CODIGO <> '99'  
+    ORDER BY LPAD(PCFILIAL.CODIGO, 2, '00')
+Time: 16:10:40 Execute     [144689660]  OCIStmtExecute                 session #1
+    prepared sql statement not found
+Time: 16:11:10 Execute     [144689660]  OCIStmtExecute                 session #1
+    prepared sql statement not found
+Time: 16:11:40 Execute     [144689660]  OCIStmtExecute                 session #1
+    prepared sql statement not found
+Time: 16:12:10 Execute     [144689660]  OCIStmtExecute                 session #1
+    prepared sql statement not found
+Time: 16:12:40 Execute     [144689660]  OCIStmtExecute                 session #1
+    prepared sql statement not found
+Time: 16:13:10 Execute     [144689660]  OCIStmtExecute                 session #1
+    prepared sql statement not found
+Time: 16:13:40 Execute     [144689660]  OCIStmtExecute                 session #1
+    prepared sql statement not found
+Time: 16:14:10 Execute     [144689660]  OCIStmtExecute                 session #1
+    prepared sql statement not found
+Time: 16:14:40 Execute     [144689660]  OCIStmtExecute                 session #1
+    prepared sql statement not found
+Time: 16:15:10 Execute     [144689660]  OCIStmtExecute                 session #1
+    prepared sql statement not found
+Time: 16:15:13 Execute     [144688624]  OCIStmtExecute                 session #1
+    SELECT 'A' FROM DUAL
+Time: 16:15:13 Error       [0]          OCIErrorGet                    session #
+    ORA-28002: the password will expire within 3 days
+Time: 16:15:13 Bind (in)   [167920980]  bind function                  session #
+    Null
+Time: 16:15:13 Bind (in)   [167920980]  bind function                  session #
+    Null
+Time: 16:15:13 Bind (in)   [167920980]  bind function                  session #
+    Null
+Time: 16:15:13 Bind (in)   [167920980]  bind function                  session #
+    Null
+Time: 16:15:13 Bind (in)   [167920980]  bind function                  session #
+    Null
+Time: 16:15:13 Bind (in)   [167920980]  bind function                  session #
+    Null
+Time: 16:15:13 Bind (in)   [167920980]  bind function                  session #
+    Null
+Time: 16:15:13 Bind (in)   [167920980]  bind function                  session #
+    Null
+Time: 16:15:13 Execute     [167920980]  OCIStmtExecute                 session #3
+    declare  cursor NlsParamsCursor is    SELECT * FROM nls_session_parameters;begin  SELECT Nvl(Lengthb(Chr(16777216)), Nvl(Lengthb(Chr(65536)), Nvl(Lengthb(Chr(256)), 1))), Nvl(Lengthb(Chr(1)), 1)    INTO :MaxCharLength, :MinCharLength FROM dual;  for NlsRecord in NlsParamsCursor loop    if NlsRecord.parameter = 'NLS_DATE_LANGUAGE' then      :NlsDateLanguage := NlsRecord.value;    elsif NlsRecord.parameter = 'NLS_DATE_FORMAT' then      :NlsDateFormat := NlsRecord.value;    elsif NlsRecord.parameter = 'NLS_NUMERIC_CHARACTERS' then      :NlsNumericCharacters := NlsRecord.value;    elsif NlsRecord.parameter = 'NLS_TIMESTAMP_FORMAT' then      :NlsTimeStampFormat := NlsRecord.value;    elsif NlsRecord.parameter = 'NLS_TIMESTAMP_TZ_FORMAT' then      :NlsTimeStampTZFormat := NlsRecord.value;    end if;  end loop;  SELECT NLS_CHARSET_ID('WE8ISO8859P1') INTO :CharsetId FROM DUAL;end;
+Time: 16:15:13 Bind (out)  [167920980]  bind function                  session #
+    1
+Time: 16:15:13 Bind (out)  [167920980]  bind function                  session #
+    1
+Time: 16:15:13 Bind (out)  [167920980]  bind function                  session #
+    'AMERICAN'
+Time: 16:15:13 Bind (out)  [167920980]  bind function                  session #
+    'DD-MON-RR'
+Time: 16:15:13 Bind (out)  [167920980]  bind function                  session #
+    '.,'
+Time: 16:15:13 Bind (out)  [167920980]  bind function                  session #
+    'DD-MON-RR HH.MI.SSXFF AM'
+Time: 16:15:13 Bind (out)  [167920980]  bind function                  session #
+    'DD-MON-RR HH.MI.SSXFF AM TZR'
+Time: 16:15:13 Bind (out)  [167920980]  bind function                  session #
+    31
+Time: 16:15:13 Execute     [167920980]  OCIStmtExecute                 session #3
+    ALTER SESSION SET NLS_DATE_FORMAT='DD/MM/YYYY'
+Time: 16:15:13 Execute     [167920980]  OCIStmtExecute                 session #3
+    ALTER SESSION SET NLS_NUMERIC_CHARACTERS='.,'
+Time: 16:15:13 Execute     [167920980]  OCIStmtExecute                 session #3
+    SELECT CODFILIAL
+      FROM PCEMPR
+     WHERE MATRICULA=0
+Time: 16:15:13 Execute     [167920980]  OCIStmtExecute                 session #3
+    SELECT FILIALPADRAO
+      FROM PCCONSUM
+Time: 16:15:13 Execute     [167920980]  OCIStmtExecute                 session #1
+    SELECT 'A' FROM DUAL
+Time: 16:15:13 Execute     [144812504]  OCIStmtExecute                 session #3
+    SELECT MAX(DATA_LOG) FROM PCLOGJOB WHERE TIPO_LOG = 'PI'
+Time: 16:15:13 Execute     [167920980]  OCIStmtExecute                 session #1
+    SELECT COUNT(O.OBJECT_NAME) FROM ALL_OBJECTS O WHERE O.OWNER = SYS_CONTEXT('USERENV', 'CURRENT_SCHEMA') AND O.OBJECT_NAME = 'FNC_QTMANIFABERTA'
+Time: 16:15:13 Execute     [144699024]  OCIStmtExecute                 session #3
+    SELECT TRUNC(SYSDATE) FROM DUAL
+Time: 16:15:13 Execute     [167920980]  OCIStmtExecute                 session #1
+    SELECT UPPER(STATUS) FROM ALL_OBJECTS WHERE OWNER = SYS_CONTEXT('USERENV', 'CURRENT_SCHEMA') AND OBJECT_NAME = 'FNC_QTMANIFABERTA'
+Time: 16:15:13 Execute     [167920980]  OCIStmtExecute                 session #1
+    SELECT FNC_QTMANIFABERTA(2245) FROM DUAL
+Time: 16:15:13 Bind (in)   [144690696]  bind function                  session #
+    '99'
+Time: 16:15:13 Bind (in)   [144690696]  bind function                  session #
+    1899.12.01 00:00:00
+Time: 16:15:13 Bind (in)   [144690696]  bind function                  session #
+    1899.12.01 00:00:00
+Time: 16:15:13 Bind (in)   [144690696]  bind function                  session #
+    '1'
+Time: 16:15:13 Bind (in)   [144690696]  bind function                  session #
+    'EPRMANUT'
+Time: 16:15:13 Execute     [144690696]  OCIStmtExecute                 session #1
+    SELECT ROWID ID, CODREGISTRO, CODREGISTROPAI, CODFILIAL, DATA, REGISTRO,
+           DADOSID, TIPOCAMPO, CAMPO, VALOR_TEXTO, VALOR_DATA, VALOR_NUM
+    FROM   PCDADOSGENERICOS
+    WHERE  CODFILIAL = :CODFILIAL
+    AND    DATA BETWEEN :DATA1 AND :DATA2
+    AND    REGISTRO = :REGISTRO
+    AND    DADOSID = :DADOSID
+    ORDER BY REGISTRO, DATA, CODREGISTROPAI, CODREGISTRO
+Time: 16:15:13 Bind (out)  [144690696]  bind function                  session #
+    '99'
+Time: 16:15:13 Bind (out)  [144690696]  bind function                  session #
+    1899.12.01 00:00:00
+Time: 16:15:13 Bind (out)  [144690696]  bind function                  session #
+    1899.12.01 00:00:00
+Time: 16:15:13 Bind (out)  [144690696]  bind function                  session #
+    '1'
+Time: 16:15:13 Execute     [167920980]  OCIStmtExecute                 session #3
+    SELECT MAX(DATA) FROM PCDIASUTEIS WHERE DATA < TRUNC(SYSDATE) AND UPPER(CODFILIAL) = '1' AND DIAFINANCEIRO = 'S'
+Time: 16:15:13 Bind (out)  [144690696]  bind function                  session #
+    'EPRMANUT'
+Time: 16:15:13 Bind (in)   [167920980]  bind function                  session #
+    98
+Time: 16:15:13 Execute     [167920980]  OCIStmtExecute                 session #3
+    SELECT MAX(TRUNC(DATA)) DATA_ATUALIZACAO_MAIS_RECENTE, TRUNC(SYSDATE - :NUM_DIAS_UTEIS_ANTES_HOJE) ULTIMO_DIA_UTIL_ANTES_HOJE
+    FROM PCLOGFINANC
+    WHERE CODROTINA in (504,820)
+Time: 16:15:13 Bind (out)  [167920980]  bind function                  session #
+    98
+Time: 16:15:13 Execute     [167920980]  OCIStmtExecute                 session #3
+    SELECT CODFILIAL
+      FROM PCEMPR
+     WHERE MATRICULA=2245
+Time: 16:15:13 Bind (in)   [167920980]  bind function                  session #
+    '1'
+Time: 16:15:13 Execute     [167920980]  OCIStmtExecute                 session #3
+    SELECT COUNT(DATA) FROM PCDIASUTEIS
+    WHERE DATA = TRUNC(SYSDATE)        
+    AND UPPER(CODFILIAL) = UPPER(:CODFILIAL)
+Time: 16:15:13 Bind (out)  [167920980]  bind function                  session #
+    '1'
+Time: 16:15:13 Execute     [167920980]  OCIStmtExecute                 session #3
+    SELECT DTPROXATU
+    ,TRUNC(SYSDATE) HOJE
+    ,NUMDIASATU
+    ,TRUNC(DTPROXFECHAMES) DTPROXFECHAMES
+    ,EMPRESA
+    ,DTPROCESSAMENTO
+    FROM PCCONSUM
+Time: 16:15:13 Execute     [167920980]  OCIStmtExecute                 session #3
+    SELECT MAX(DATA) FROM PCDIASUTEIS WHERE DATA < TRUNC(SYSDATE) AND UPPER(CODFILIAL) = '1' AND DIAFINANCEIRO = 'S'
+Time: 16:15:13 Execute     [167920980]  OCIStmtExecute                 session #1
+    SELECT MAX(DATA) DTFINANC FROM PCFINANC
+Time: 16:15:13 Execute     [167920980]  OCIStmtExecute                 session #3
+    SELECT MAX(DATA) FROM PCDIASUTEIS WHERE DATA < TRUNC(SYSDATE) AND UPPER(CODFILIAL) = '1' AND DIAVENDAS = 'S'
+Time: 16:15:13 Execute     [167920980]  OCIStmtExecute                 session #1
+    SELECT MAX(DATA) FROM PCHISTEST WHERE DATA BETWEEN TRUNC(SYSDATE -90) AND TRUNC(SYSDATE)
+Time: 16:15:13 Execute     [167920980]  OCIStmtExecute                 session #1
+    SELECT COUNT(O.OBJECT_NAME) FROM ALL_OBJECTS O WHERE O.OWNER = SYS_CONTEXT('USERENV', 'CURRENT_SCHEMA') AND O.OBJECT_NAME = 'FNC_QTMANIFABERTA'
+Time: 16:15:13 Execute     [167920980]  OCIStmtExecute                 session #1
+    SELECT UPPER(STATUS) FROM ALL_OBJECTS WHERE OWNER = SYS_CONTEXT('USERENV', 'CURRENT_SCHEMA') AND OBJECT_NAME = 'FNC_QTMANIFABERTA'
+Time: 16:15:13 Execute     [167920980]  OCIStmtExecute                 session #1
+    SELECT FNC_QTMANIFABERTA(2245) FROM DUAL
+Time: 16:15:14 Execute     [167920980]  OCIStmtExecute                 session #3
+    SELECT ACESSO FROM PCCONTRO WHERE CODROTINA = 336 AND CODUSUARIO = 2245
+Time: 16:15:14 Execute     [167920980]  OCIStmtExecute                 session #3
+    SELECT COUNT(PCPEDC.POSICAO)                                        FROM PCPEDC                                                      WHERE ((PCPEDC.POSICAO = 'P') OR(PCPEDC.POSICAO = 'B'))         AND PCPEDC.DATA BETWEEN TRUNC(SYSDATE) - 90 AND TRUNC(SYSDATE)
+Time: 16:15:14 Execute     [167920980]  OCIStmtExecute                 session #3
+    SELECT PCEMPR.USUARIOBD, COUNT(PCEMPR.USUARIOBD), UPPER(NVL(PCEMPR.SEXO, 'M'))
+      FROM PCAGENDA, PCEMPR
+     WHERE PCEMPR.MATRICULA = PCAGENDA.CODOPERADORA
+       AND PCAGENDA.DATA < TRUNC(SYSDATE)
+       AND PCAGENDA.DTFECHAMENTO IS NULL
+       AND PCEMPR.MATRICULA = 2245
+     GROUP BY PCEMPR.USUARIOBD, PCEMPR.SEXO
+     ORDER BY PCEMPR.USUARIOBD
+Time: 16:15:14 Execute     [167920980]  OCIStmtExecute                 session #3
+    SELECT PCEMPR.USUARIOBD, COUNT(PCEMPR.USUARIOBD), UPPER(NVL(PCEMPR.SEXO, 'M')), PCPARAMFILIAL.VALOR MINUTOS 
+       FROM PCAGENDA, PCEMPR, PCPARAMFILIAL
+      WHERE PCEMPR.MATRICULA = PCAGENDA.CODOPERADORA
+        AND PCAGENDA.DATA >= TRUNC(SYSDATE)
+        AND ((PCAGENDA.HORA - SYSDATE) * 24 * 60) BETWEEN 0 AND TO_NUMBER(PCPARAMFILIAL.VALOR)
+        AND PCAGENDA.DTFECHAMENTO IS NULL
+        AND PCEMPR.MATRICULA = 2245
+        AND PCPARAMFILIAL.CODFILIAL = '99'
+        AND PCPARAMFILIAL.NOME = 'TEMPOVERIFAGENDACRM'
+      GROUP BY PCEMPR.USUARIOBD, PCEMPR.SEXO, PCPARAMFILIAL.VALOR
+      ORDER BY PCEMPR.USUARIOBD
+Time: 16:15:14 Execute     [167920980]  OCIStmtExecute                 session #3
+    SELECT NVL(PERLIMVENDAPF,100) PERLIMVENDAPF
+    FROM PCCONSUM
+Time: 16:15:14 Execute     [167920980]  OCIStmtExecute                 session #3
+    SELECT CODFILIAL
+      FROM PCEMPR
+     WHERE MATRICULA=2245
+Time: 16:15:14 Execute     [167920980]  OCIStmtExecute                 session #3
+    SELECT PERVENDAPF FROM PCFILIAL WHERE CODIGO='1'
+Time: 16:15:14 Execute     [167920980]  OCIStmtExecute                 session #3
+    SELECT NOMEROTINA, TRUNC(DTULTUTILIZACAO) DTULTUTILIZACAO, TRUNC(SYSDATE) DATAATUAL
+    FROM PCROTINA
+    WHERE CODIGO = 153
+Time: 16:15:14 Execute     [167920980]  OCIStmtExecute                 session #3
+    SELECT 1                                                            FROM PCCONSUM                                                    WHERE EXISTS(SELECT PCEMPR.CODSETOR                                              FROM PCEMPR                                                      WHERE PCEMPR.CODSETOR = PCCONSUM.CODSETORDIRETORIA                  AND PCEMPR.MATRICULA = 2245)
+Time: 16:15:14 Execute     [167920980]  OCIStmtExecute                 session #3
+    SELECT VALUE FROM V$NLS_PARAMETERS WHERE PARAMETER = 'NLS_CHARACTERSET'
+Time: 16:15:14 Bind (in)   [167920980]  bind function                  session #
+    'G'
+Time: 16:15:14 Execute     [167920980]  OCIStmtExecute                 session #3
+    SELECT O.OBJECT_NAME                                             
+         , O.STATUS                                                  
+         , O.STATUS                                                  
+      FROM ALL_OBJECTS O                                             
+         , ALL_TRIGGERS T                                            
+     WHERE O.OBJECT_NAME = T.TRIGGER_NAME                            
+       AND O.OBJECT_TYPE = 'TRIGGER'                               
+       AND O.OBJECT_NAME = :NOME_DA_TRIGGER                          
+       AND O.STATUS = 'VALID'                                      
+       AND T.STATUS = 'ENABLED'                                    
+       AND O.OWNER = SYS_CONTEXT('USERENV', 'CURRENT_SCHEMA')    
+       AND T.OWNER = O.OWNER
+Time: 16:15:14 Bind (out)  [167920980]  bind function                  session #
+    'G'
+Time: 16:15:14 Bind (in)   [167920980]  bind function                  session #
+    'G'
+Time: 16:15:14 Execute     [167920980]  OCIStmtExecute                 session #3
+    SELECT O.OBJECT_NAME                                             
+         , O.STATUS                                                  
+         , O.STATUS                                                  
+      FROM ALL_OBJECTS O                                             
+         , ALL_TRIGGERS T                                            
+     WHERE O.OBJECT_NAME = T.TRIGGER_NAME                            
+       AND O.OBJECT_TYPE = 'TRIGGER'                               
+       AND O.OBJECT_NAME = :NOME_DA_TRIGGER                          
+       AND O.STATUS = 'VALID'                                      
+       AND T.STATUS = 'ENABLED'                                    
+       AND O.OWNER = SYS_CONTEXT('USERENV', 'CURRENT_SCHEMA')    
+       AND T.OWNER = O.OWNER
+Time: 16:15:14 Bind (out)  [167920980]  bind function                  session #
+    'G'
+Time: 16:15:14 Bind (in)   [167920980]  bind function                  session #
+    'T'
+Time: 16:15:14 Execute     [167920980]  OCIStmtExecute                 session #3
+    SELECT O.OBJECT_NAME                                             
+         , O.STATUS                                                  
+         , O.STATUS                                                  
+      FROM ALL_OBJECTS O                                             
+         , ALL_TRIGGERS T                                            
+     WHERE O.OBJECT_NAME = T.TRIGGER_NAME                            
+       AND O.OBJECT_TYPE = 'TRIGGER'                               
+       AND O.OBJECT_NAME = :NOME_DA_TRIGGER                          
+       AND O.STATUS = 'VALID'                                      
+       AND T.STATUS = 'ENABLED'                                    
+       AND O.OWNER = SYS_CONTEXT('USERENV', 'CURRENT_SCHEMA')    
+       AND T.OWNER = O.OWNER
+Time: 16:15:14 Bind (out)  [167920980]  bind function                  session #
+    'T'
+Time: 16:15:14 Bind (in)   [167920980]  bind function                  session #
+    'T'
+Time: 16:15:14 Execute     [167920980]  OCIStmtExecute                 session #3
+    SELECT O.OBJECT_NAME                                             
+         , O.STATUS                                                  
+         , O.STATUS                                                  
+      FROM ALL_OBJECTS O                                             
+         , ALL_TRIGGERS T                                            
+     WHERE O.OBJECT_NAME = T.TRIGGER_NAME                            
+       AND O.OBJECT_TYPE = 'TRIGGER'                               
+       AND O.OBJECT_NAME = :NOME_DA_TRIGGER                          
+       AND O.STATUS = 'VALID'                                      
+       AND T.STATUS = 'ENABLED'                                    
+       AND O.OWNER = SYS_CONTEXT('USERENV', 'CURRENT_SCHEMA')    
+       AND T.OWNER = O.OWNER
+Time: 16:15:14 Bind (out)  [167920980]  bind function                  session #
+    'T'
+Time: 16:15:14 Bind (in)   [167920980]  bind function                  session #
+    'T'
+Time: 16:15:14 Execute     [167920980]  OCIStmtExecute                 session #3
+    SELECT O.OBJECT_NAME                                             
+         , O.STATUS                                                  
+         , O.STATUS                                                  
+      FROM ALL_OBJECTS O                                             
+         , ALL_TRIGGERS T                                            
+     WHERE O.OBJECT_NAME = T.TRIGGER_NAME                            
+       AND O.OBJECT_TYPE = 'TRIGGER'                               
+       AND O.OBJECT_NAME = :NOME_DA_TRIGGER                          
+       AND O.STATUS = 'VALID'                                      
+       AND T.STATUS = 'ENABLED'                                    
+       AND O.OWNER = SYS_CONTEXT('USERENV', 'CURRENT_SCHEMA')    
+       AND T.OWNER = O.OWNER
+Time: 16:15:14 Bind (out)  [167920980]  bind function                  session #
+    'T'
+Time: 16:15:14 Execute     [167920980]  OCIStmtExecute                 session #1
+    SELECT PCFILIAL.CODIGO
+         , TRUNC(SYSDATE) DATAATUAL 
+      FROM PCFILIAL 
+     WHERE PCFILIAL.UTILIZANFE = 'S' 
+       AND PCFILIAL.CODIGO <> '99'  
+    ORDER BY LPAD(PCFILIAL.CODIGO, 2, '00')
+Time: 16:15:40 Execute     [144689660]  OCIStmtExecute                 session #1
+    prepared sql statement not found
+Time: 16:16:10 Execute     [144689660]  OCIStmtExecute                 session #1
+    prepared sql statement not found
+Time: 16:16:40 Execute     [144689660]  OCIStmtExecute                 session #1
+    prepared sql statement not found
+Time: 16:17:10 Execute     [144689660]  OCIStmtExecute                 session #1
+    prepared sql statement not found
+Time: 16:17:40 Execute     [144689660]  OCIStmtExecute                 session #1
+    prepared sql statement not found
+Time: 16:18:10 Execute     [144689660]  OCIStmtExecute                 session #1
+    prepared sql statement not found
+Time: 16:18:40 Execute     [144689660]  OCIStmtExecute                 session #1
+    prepared sql statement not found
+Time: 16:19:10 Execute     [144689660]  OCIStmtExecute                 session #1
+    prepared sql statement not found
+Time: 16:19:40 Execute     [144689660]  OCIStmtExecute                 session #1
+    prepared sql statement not found
+Time: 16:20:10 Execute     [144689660]  OCIStmtExecute                 session #1
+    prepared sql statement not found
+Time: 16:20:13 Execute     [144688624]  OCIStmtExecute                 session #1
+    SELECT 'A' FROM DUAL
+Time: 16:20:13 Error       [0]          OCIErrorGet                    session #
+    ORA-28002: the password will expire within 3 days
+Time: 16:20:13 Bind (in)   [167920980]  bind function                  session #
+    Null
+Time: 16:20:13 Bind (in)   [167920980]  bind function                  session #
+    Null
+Time: 16:20:13 Bind (in)   [167920980]  bind function                  session #
+    Null
+Time: 16:20:13 Bind (in)   [167920980]  bind function                  session #
+    Null
+Time: 16:20:13 Bind (in)   [167920980]  bind function                  session #
+    Null
+Time: 16:20:13 Bind (in)   [167920980]  bind function                  session #
+    Null
+Time: 16:20:13 Bind (in)   [167920980]  bind function                  session #
+    Null
+Time: 16:20:13 Bind (in)   [167920980]  bind function                  session #
+    Null
+Time: 16:20:13 Execute     [167920980]  OCIStmtExecute                 session #3
+    declare  cursor NlsParamsCursor is    SELECT * FROM nls_session_parameters;begin  SELECT Nvl(Lengthb(Chr(16777216)), Nvl(Lengthb(Chr(65536)), Nvl(Lengthb(Chr(256)), 1))), Nvl(Lengthb(Chr(1)), 1)    INTO :MaxCharLength, :MinCharLength FROM dual;  for NlsRecord in NlsParamsCursor loop    if NlsRecord.parameter = 'NLS_DATE_LANGUAGE' then      :NlsDateLanguage := NlsRecord.value;    elsif NlsRecord.parameter = 'NLS_DATE_FORMAT' then      :NlsDateFormat := NlsRecord.value;    elsif NlsRecord.parameter = 'NLS_NUMERIC_CHARACTERS' then      :NlsNumericCharacters := NlsRecord.value;    elsif NlsRecord.parameter = 'NLS_TIMESTAMP_FORMAT' then      :NlsTimeStampFormat := NlsRecord.value;    elsif NlsRecord.parameter = 'NLS_TIMESTAMP_TZ_FORMAT' then      :NlsTimeStampTZFormat := NlsRecord.value;    end if;  end loop;  SELECT NLS_CHARSET_ID('WE8ISO8859P1') INTO :CharsetId FROM DUAL;end;
+Time: 16:20:13 Bind (out)  [167920980]  bind function                  session #
+    1
+Time: 16:20:13 Bind (out)  [167920980]  bind function                  session #
+    1
+Time: 16:20:13 Bind (out)  [167920980]  bind function                  session #
+    'AMERICAN'
+Time: 16:20:13 Bind (out)  [167920980]  bind function                  session #
+    'DD-MON-RR'
+Time: 16:20:13 Bind (out)  [167920980]  bind function                  session #
+    '.,'
+Time: 16:20:13 Bind (out)  [167920980]  bind function                  session #
+    'DD-MON-RR HH.MI.SSXFF AM'
+Time: 16:20:13 Bind (out)  [167920980]  bind function                  session #
+    'DD-MON-RR HH.MI.SSXFF AM TZR'
+Time: 16:20:13 Bind (out)  [167920980]  bind function                  session #
+    31
+Time: 16:20:13 Execute     [167920980]  OCIStmtExecute                 session #3
+    ALTER SESSION SET NLS_DATE_FORMAT='DD/MM/YYYY'
+Time: 16:20:13 Execute     [167920980]  OCIStmtExecute                 session #3
+    ALTER SESSION SET NLS_NUMERIC_CHARACTERS='.,'
+Time: 16:20:13 Execute     [167920980]  OCIStmtExecute                 session #3
+    SELECT CODFILIAL
+      FROM PCEMPR
+     WHERE MATRICULA=0
+Time: 16:20:13 Execute     [167920980]  OCIStmtExecute                 session #3
+    SELECT FILIALPADRAO
+      FROM PCCONSUM
+Time: 16:20:13 Execute     [167920980]  OCIStmtExecute                 session #1
+    SELECT 'A' FROM DUAL
+Time: 16:20:13 Execute     [144694860]  OCIStmtExecute                 session #3
+    SELECT MAX(DATA_LOG) FROM PCLOGJOB WHERE TIPO_LOG = 'PI'
+Time: 16:20:13 Execute     [167920980]  OCIStmtExecute                 session #1
+    SELECT COUNT(O.OBJECT_NAME) FROM ALL_OBJECTS O WHERE O.OWNER = SYS_CONTEXT('USERENV', 'CURRENT_SCHEMA') AND O.OBJECT_NAME = 'FNC_QTMANIFABERTA'
+Time: 16:20:13 Execute     [167920980]  OCIStmtExecute                 session #1
+    SELECT UPPER(STATUS) FROM ALL_OBJECTS WHERE OWNER = SYS_CONTEXT('USERENV', 'CURRENT_SCHEMA') AND OBJECT_NAME = 'FNC_QTMANIFABERTA'
+Time: 16:20:13 Execute     [144699024]  OCIStmtExecute                 session #3
+    SELECT TRUNC(SYSDATE) FROM DUAL
+Time: 16:20:13 Execute     [167920980]  OCIStmtExecute                 session #1
+    SELECT FNC_QTMANIFABERTA(2245) FROM DUAL
+Time: 16:20:13 Bind (in)   [144690696]  bind function                  session #
+    '99'
+Time: 16:20:13 Bind (in)   [144690696]  bind function                  session #
+    1899.12.01 00:00:00
+Time: 16:20:13 Bind (in)   [144690696]  bind function                  session #
+    1899.12.01 00:00:00
+Time: 16:20:13 Bind (in)   [144690696]  bind function                  session #
+    '1'
+Time: 16:20:13 Bind (in)   [144690696]  bind function                  session #
+    'EPRMANUT'
+Time: 16:20:13 Execute     [144690696]  OCIStmtExecute                 session #1
+    SELECT ROWID ID, CODREGISTRO, CODREGISTROPAI, CODFILIAL, DATA, REGISTRO,
+           DADOSID, TIPOCAMPO, CAMPO, VALOR_TEXTO, VALOR_DATA, VALOR_NUM
+    FROM   PCDADOSGENERICOS
+    WHERE  CODFILIAL = :CODFILIAL
+    AND    DATA BETWEEN :DATA1 AND :DATA2
+    AND    REGISTRO = :REGISTRO
+    AND    DADOSID = :DADOSID
+    ORDER BY REGISTRO, DATA, CODREGISTROPAI, CODREGISTRO
+Time: 16:20:13 Bind (out)  [144690696]  bind function                  session #
+    '99'
+Time: 16:20:13 Bind (out)  [144690696]  bind function                  session #
+    1899.12.01 00:00:00
+Time: 16:20:13 Bind (out)  [144690696]  bind function                  session #
+    1899.12.01 00:00:00
+Time: 16:20:13 Bind (out)  [144690696]  bind function                  session #
+    '1'
+Time: 16:20:13 Bind (out)  [144690696]  bind function                  session #
+    'EPRMANUT'
+Time: 16:20:13 Execute     [167920980]  OCIStmtExecute                 session #3
+    SELECT MAX(DATA) FROM PCDIASUTEIS WHERE DATA < TRUNC(SYSDATE) AND UPPER(CODFILIAL) = '1' AND DIAFINANCEIRO = 'S'
+Time: 16:20:13 Bind (in)   [167920980]  bind function                  session #
+    98
+Time: 16:20:13 Execute     [167920980]  OCIStmtExecute                 session #3
+    SELECT MAX(TRUNC(DATA)) DATA_ATUALIZACAO_MAIS_RECENTE, TRUNC(SYSDATE - :NUM_DIAS_UTEIS_ANTES_HOJE) ULTIMO_DIA_UTIL_ANTES_HOJE
+    FROM PCLOGFINANC
+    WHERE CODROTINA in (504,820)
+Time: 16:20:13 Bind (out)  [167920980]  bind function                  session #
+    98
+Time: 16:20:13 Execute     [167920980]  OCIStmtExecute                 session #3
+    SELECT CODFILIAL
+      FROM PCEMPR
+     WHERE MATRICULA=2245
+Time: 16:20:13 Bind (in)   [167920980]  bind function                  session #
+    '1'
+Time: 16:20:13 Execute     [167920980]  OCIStmtExecute                 session #3
+    SELECT COUNT(DATA) FROM PCDIASUTEIS
+    WHERE DATA = TRUNC(SYSDATE)        
+    AND UPPER(CODFILIAL) = UPPER(:CODFILIAL)
+Time: 16:20:13 Bind (out)  [167920980]  bind function                  session #
+    '1'
+Time: 16:20:13 Execute     [167920980]  OCIStmtExecute                 session #3
+    SELECT DTPROXATU
+    ,TRUNC(SYSDATE) HOJE
+    ,NUMDIASATU
+    ,TRUNC(DTPROXFECHAMES) DTPROXFECHAMES
+    ,EMPRESA
+    ,DTPROCESSAMENTO
+    FROM PCCONSUM
+Time: 16:20:13 Execute     [167920980]  OCIStmtExecute                 session #3
+    SELECT MAX(DATA) FROM PCDIASUTEIS WHERE DATA < TRUNC(SYSDATE) AND UPPER(CODFILIAL) = '1' AND DIAFINANCEIRO = 'S'
+Time: 16:20:13 Execute     [167920980]  OCIStmtExecute                 session #1
+    SELECT MAX(DATA) DTFINANC FROM PCFINANC
+Time: 16:20:13 Execute     [167920980]  OCIStmtExecute                 session #3
+    SELECT MAX(DATA) FROM PCDIASUTEIS WHERE DATA < TRUNC(SYSDATE) AND UPPER(CODFILIAL) = '1' AND DIAVENDAS = 'S'
+Time: 16:20:14 Execute     [167920980]  OCIStmtExecute                 session #1
+    SELECT MAX(DATA) FROM PCHISTEST WHERE DATA BETWEEN TRUNC(SYSDATE -90) AND TRUNC(SYSDATE)
+Time: 16:20:14 Execute     [167920980]  OCIStmtExecute                 session #1
+    SELECT COUNT(O.OBJECT_NAME) FROM ALL_OBJECTS O WHERE O.OWNER = SYS_CONTEXT('USERENV', 'CURRENT_SCHEMA') AND O.OBJECT_NAME = 'FNC_QTMANIFABERTA'
+Time: 16:20:14 Execute     [167920980]  OCIStmtExecute                 session #1
+    SELECT UPPER(STATUS) FROM ALL_OBJECTS WHERE OWNER = SYS_CONTEXT('USERENV', 'CURRENT_SCHEMA') AND OBJECT_NAME = 'FNC_QTMANIFABERTA'
+Time: 16:20:14 Execute     [167920980]  OCIStmtExecute                 session #1
+    SELECT FNC_QTMANIFABERTA(2245) FROM DUAL
+Time: 16:20:14 Execute     [167920980]  OCIStmtExecute                 session #3
+    SELECT ACESSO FROM PCCONTRO WHERE CODROTINA = 336 AND CODUSUARIO = 2245
+Time: 16:20:14 Execute     [167920980]  OCIStmtExecute                 session #3
+    SELECT COUNT(PCPEDC.POSICAO)                                        FROM PCPEDC                                                      WHERE ((PCPEDC.POSICAO = 'P') OR(PCPEDC.POSICAO = 'B'))         AND PCPEDC.DATA BETWEEN TRUNC(SYSDATE) - 90 AND TRUNC(SYSDATE)
+Time: 16:20:14 Execute     [167920980]  OCIStmtExecute                 session #3
+    SELECT PCEMPR.USUARIOBD, COUNT(PCEMPR.USUARIOBD), UPPER(NVL(PCEMPR.SEXO, 'M'))
+      FROM PCAGENDA, PCEMPR
+     WHERE PCEMPR.MATRICULA = PCAGENDA.CODOPERADORA
+       AND PCAGENDA.DATA < TRUNC(SYSDATE)
+       AND PCAGENDA.DTFECHAMENTO IS NULL
+       AND PCEMPR.MATRICULA = 2245
+     GROUP BY PCEMPR.USUARIOBD, PCEMPR.SEXO
+     ORDER BY PCEMPR.USUARIOBD
+Time: 16:20:14 Execute     [167920980]  OCIStmtExecute                 session #3
+    SELECT PCEMPR.USUARIOBD, COUNT(PCEMPR.USUARIOBD), UPPER(NVL(PCEMPR.SEXO, 'M')), PCPARAMFILIAL.VALOR MINUTOS 
+       FROM PCAGENDA, PCEMPR, PCPARAMFILIAL
+      WHERE PCEMPR.MATRICULA = PCAGENDA.CODOPERADORA
+        AND PCAGENDA.DATA >= TRUNC(SYSDATE)
+        AND ((PCAGENDA.HORA - SYSDATE) * 24 * 60) BETWEEN 0 AND TO_NUMBER(PCPARAMFILIAL.VALOR)
+        AND PCAGENDA.DTFECHAMENTO IS NULL
+        AND PCEMPR.MATRICULA = 2245
+        AND PCPARAMFILIAL.CODFILIAL = '99'
+        AND PCPARAMFILIAL.NOME = 'TEMPOVERIFAGENDACRM'
+      GROUP BY PCEMPR.USUARIOBD, PCEMPR.SEXO, PCPARAMFILIAL.VALOR
+      ORDER BY PCEMPR.USUARIOBD
+Time: 16:20:14 Execute     [167920980]  OCIStmtExecute                 session #3
+    SELECT NVL(PERLIMVENDAPF,100) PERLIMVENDAPF
+    FROM PCCONSUM
+Time: 16:20:14 Execute     [167920980]  OCIStmtExecute                 session #3
+    SELECT CODFILIAL
+      FROM PCEMPR
+     WHERE MATRICULA=2245
+Time: 16:20:14 Execute     [167920980]  OCIStmtExecute                 session #3
+    SELECT PERVENDAPF FROM PCFILIAL WHERE CODIGO='1'
+Time: 16:20:14 Execute     [167920980]  OCIStmtExecute                 session #3
+    SELECT NOMEROTINA, TRUNC(DTULTUTILIZACAO) DTULTUTILIZACAO, TRUNC(SYSDATE) DATAATUAL
+    FROM PCROTINA
+    WHERE CODIGO = 153
+Time: 16:20:14 Execute     [167920980]  OCIStmtExecute                 session #3
+    SELECT 1                                                            FROM PCCONSUM                                                    WHERE EXISTS(SELECT PCEMPR.CODSETOR                                              FROM PCEMPR                                                      WHERE PCEMPR.CODSETOR = PCCONSUM.CODSETORDIRETORIA                  AND PCEMPR.MATRICULA = 2245)
+Time: 16:20:14 Execute     [167920980]  OCIStmtExecute                 session #3
+    SELECT VALUE FROM V$NLS_PARAMETERS WHERE PARAMETER = 'NLS_CHARACTERSET'
+Time: 16:20:14 Bind (in)   [167920980]  bind function                  session #
+    'G'
+Time: 16:20:14 Execute     [167920980]  OCIStmtExecute                 session #3
+    SELECT O.OBJECT_NAME                                             
+         , O.STATUS                                                  
+         , O.STATUS                                                  
+      FROM ALL_OBJECTS O                                             
+         , ALL_TRIGGERS T                                            
+     WHERE O.OBJECT_NAME = T.TRIGGER_NAME                            
+       AND O.OBJECT_TYPE = 'TRIGGER'                               
+       AND O.OBJECT_NAME = :NOME_DA_TRIGGER                          
+       AND O.STATUS = 'VALID'                                      
+       AND T.STATUS = 'ENABLED'                                    
+       AND O.OWNER = SYS_CONTEXT('USERENV', 'CURRENT_SCHEMA')    
+       AND T.OWNER = O.OWNER
+Time: 16:20:14 Bind (out)  [167920980]  bind function                  session #
+    'G'
+Time: 16:20:14 Bind (in)   [167920980]  bind function                  session #
+    'G'
+Time: 16:20:14 Execute     [167920980]  OCIStmtExecute                 session #3
+    SELECT O.OBJECT_NAME                                             
+         , O.STATUS                                                  
+         , O.STATUS                                                  
+      FROM ALL_OBJECTS O                                             
+         , ALL_TRIGGERS T                                            
+     WHERE O.OBJECT_NAME = T.TRIGGER_NAME                            
+       AND O.OBJECT_TYPE = 'TRIGGER'                               
+       AND O.OBJECT_NAME = :NOME_DA_TRIGGER                          
+       AND O.STATUS = 'VALID'                                      
+       AND T.STATUS = 'ENABLED'                                    
+       AND O.OWNER = SYS_CONTEXT('USERENV', 'CURRENT_SCHEMA')    
+       AND T.OWNER = O.OWNER
+Time: 16:20:14 Bind (out)  [167920980]  bind function                  session #
+    'G'
+Time: 16:20:14 Bind (in)   [167920980]  bind function                  session #
+    'T'
+Time: 16:20:14 Execute     [167920980]  OCIStmtExecute                 session #3
+    SELECT O.OBJECT_NAME                                             
+         , O.STATUS                                                  
+         , O.STATUS                                                  
+      FROM ALL_OBJECTS O                                             
+         , ALL_TRIGGERS T                                            
+     WHERE O.OBJECT_NAME = T.TRIGGER_NAME                            
+       AND O.OBJECT_TYPE = 'TRIGGER'                               
+       AND O.OBJECT_NAME = :NOME_DA_TRIGGER                          
+       AND O.STATUS = 'VALID'                                      
+       AND T.STATUS = 'ENABLED'                                    
+       AND O.OWNER = SYS_CONTEXT('USERENV', 'CURRENT_SCHEMA')    
+       AND T.OWNER = O.OWNER
+Time: 16:20:14 Bind (out)  [167920980]  bind function                  session #
+    'T'
+Time: 16:20:14 Bind (in)   [167920980]  bind function                  session #
+    'T'
+Time: 16:20:14 Execute     [167920980]  OCIStmtExecute                 session #3
+    SELECT O.OBJECT_NAME                                             
+         , O.STATUS                                                  
+         , O.STATUS                                                  
+      FROM ALL_OBJECTS O                                             
+         , ALL_TRIGGERS T                                            
+     WHERE O.OBJECT_NAME = T.TRIGGER_NAME                            
+       AND O.OBJECT_TYPE = 'TRIGGER'                               
+       AND O.OBJECT_NAME = :NOME_DA_TRIGGER                          
+       AND O.STATUS = 'VALID'                                      
+       AND T.STATUS = 'ENABLED'                                    
+       AND O.OWNER = SYS_CONTEXT('USERENV', 'CURRENT_SCHEMA')    
+       AND T.OWNER = O.OWNER
+Time: 16:20:14 Bind (out)  [167920980]  bind function                  session #
+    'T'
+Time: 16:20:14 Bind (in)   [167920980]  bind function                  session #
+    'T'
+Time: 16:20:14 Execute     [167920980]  OCIStmtExecute                 session #3
+    SELECT O.OBJECT_NAME                                             
+         , O.STATUS                                                  
+         , O.STATUS                                                  
+      FROM ALL_OBJECTS O                                             
+         , ALL_TRIGGERS T                                            
+     WHERE O.OBJECT_NAME = T.TRIGGER_NAME                            
+       AND O.OBJECT_TYPE = 'TRIGGER'                               
+       AND O.OBJECT_NAME = :NOME_DA_TRIGGER                          
+       AND O.STATUS = 'VALID'                                      
+       AND T.STATUS = 'ENABLED'                                    
+       AND O.OWNER = SYS_CONTEXT('USERENV', 'CURRENT_SCHEMA')    
+       AND T.OWNER = O.OWNER
+Time: 16:20:14 Bind (out)  [167920980]  bind function                  session #
+    'T'
+Time: 16:20:14 Execute     [167920980]  OCIStmtExecute                 session #1
+    SELECT PCFILIAL.CODIGO
+         , TRUNC(SYSDATE) DATAATUAL 
+      FROM PCFILIAL 
+     WHERE PCFILIAL.UTILIZANFE = 'S' 
+       AND PCFILIAL.CODIGO <> '99'  
+    ORDER BY LPAD(PCFILIAL.CODIGO, 2, '00')
+Time: 16:20:24 Shutdown    [0]          Shutdown                       session #
+    Log stopped [shutdown] for WinThor - Sistema de Gestão Empresarial [process id 28108,147040]
+**** end log for [stopped] WinThor - Sistema de Gestão Empresarial *************************
+
+**** start log for [stopped] 749 - Inclusão de Lançamentos no Contas a Pagar *************************
+Time: 16:00:16 Attach      [0]          installed                      session #
+    Log started for 749 - Inclusão de Lançamentos no Contas a Pagar [process id 19388,147057]
+Time: 16:00:28 Execute     [231991584]  OCIStmtExecute                 session #2
+    SELECT 	RECNUM, 
+    		RECNUMPRINC, 
+    		DTLANC,
+    		CODFILIAL,
+    		TIPOLANC,
+    		INDICE, 
+    		MOEDA,
+    		CODCONTA,
+    		HISTORICO,
+    		HISTORICO2, 
+    		TIPOPARCEIRO,
+    		CODFORNEC,
+    		TO_CHAR(NUMNOTA) NUMNOTA,
+    		DUPLIC,
+    		DTVENC,
+    		VALOR,
+    		NUMCODBARRA, 
+    		NUMNOTADEV,
+    		VALORDEV, 
+    		DESCONTOFIN,
+    		TXPERM, 
+    		PRORROG,
+    		DTEMISSAO,
+    		LOCALIZACAO,
+    		NOMEFUNC,
+    		NUMTRANSENT, 
+    		FROTA_CODPRACA,
+    		FROTA_QTLITROS,
+    		FROTA_NUMCAR,
+    		FROTA_CODVEICULO,
+    		FROTA_COMISSAO,
+    		FROTA_DTABASTECE, 
+    		FROTA_KMABASTECE, 
+    		NVL(NFSERVICO,'N') NFSERVICO,
+    		CODPROJETO,DTCOMPETENCIA,
+    		VLISS,
+    		VLINSS,
+    		VLCSRF,
+    		VLIRRF,
+    		VLPIS,
+    		VLCOFINS,
+    		NVL(BOLETO,'N') BOLETO, 
+    		NVL(UTILIZOURATEIOCONTA, 'N') UTILIZOURATEIOCONTA, 
+    		NVL(PRCRATEIOUTILIZADO, 100) PRCRATEIOUTILIZADO, 
+    		COTACAO, 
+    		DTCOTACAO, 
+    		MOEDAESTRANGEIRA, 
+    		CODRECEITA, 
+    		FORMAPGTO, 
+    		VRECEITABRUTA, 
+    		PERCRECEITABRUTA, 
+    		PARCELA,
+    		NUMPARCELAMENTO, 
+    		NUMSEQPARCELAMENTO, 
+    		NUMNEGOCIACAO, 
+    		FORNECEDOR, 
+    		CODSERVICOSPEDEFD, 
+    		TIPOSERVICO, 
+    		OPCAOPAGAMENTOIPVA, 
+    		IDENTIFICADORFGTS,
+    		LACREDIGCONECSOCIAL,
+    		NUMBANCO,
+    		NUMCCDESTDOC,
+    		NUMAGDESTDOC,
+    		NUMDVDESTDOC,
+    		DVAG,
+    		VALORMOEDAESTRANGEIRA,
+    		CODSERVICOSPEDIRPF,
+    		CODSERVICOSPEDIRPJ,
+    		REINFEVENTOR4040,
+    		CODSERVICOSPEDBNI,
+    		DTCOMPETENCIAIRRETIDO,
+            CODTIPOCHAVEPIX,
+            TIPOCHAVEPIX,
+            CHAVEPIX,
+            QRCODEPIX,
+            VLBASEIR,
+            VLBASEPCC
+     FROM 	PCLANC
+     WHERE 	RECNUM=0 
+Time: 16:00:28 Bind (in)   [231956168]  bind function                  session #
+    '2245'
+Time: 16:00:28 Execute     [231956168]  OCIStmtExecute                 session #2
+    SELECT COUNT(*) CONTADOR FROM PCLIB
+    WHERE CODTABELA = 1
+     AND CODIGOA = '99'
+     AND CODFUNC = :CODFUNC
+Time: 16:00:28 Bind (out)  [231956168]  bind function                  session #
+    '2245'
+Time: 16:00:28 Execute     [231955132]  OCIStmtExecute                 session #2
+    SELECT CODIGO,RAZAOSOCIAL,CODPAIS FROM PCFILIAL WHERE CODIGO <> '99' AND DTEXCLUSAO IS NULL 
+     ORDER BY CODIGO
+Time: 16:00:28 Bind (in)   [231991584]  bind function                  session #
+    '1'
+Time: 16:00:28 Execute     [231991584]  OCIStmtExecute                 session #3
+    SELECT F.CODIGO,
+           F.RAZAOSOCIAL,
+           F.FANTASIA,
+           F.CODIGO || ' - ' || F.RAZAOSOCIAL FILIAL,
+           F.IE,
+           F.CGC,
+           F.TELEFONE,
+           F.ENDERECO,
+           F.EMAIL,
+           NVL(F.NUMERO2, TO_CHAR(F.NUMERO)) NUMERO,
+           F.BAIRRO,
+           F.CIDADE,
+           F.UF,
+           F.CEP,
+           F.CONTATO,
+           F.CODMUN CODIBGE,
+           F.NUMIDF,
+           F.CODDOCNFC,
+           F.UTILIZANFE,
+           F.INDUSTRIA,
+           NVL(F.TIPOMONTAGEM, 'R') TIPOMONTAGEM,
+           F.INTEGRADORAWMS
+      FROM PCFILIAL F
+     WHERE (((F.CODIGO <> '99') AND EXISTS
+            (SELECT CODIGOA
+                FROM PCLIB
+               WHERE CODTABELA = 1
+                 AND CODFUNC = 2245
+                 AND CODIGOA = '99')) OR
+           ((F.CODIGO IN (SELECT CODIGOA
+                             FROM PCLIB
+                            WHERE CODTABELA = 1
+                              AND CODFUNC = 2245)) AND NOT EXISTS
+            (SELECT CODIGOA
+                FROM PCLIB
+               WHERE CODTABELA = 1
+                 AND CODFUNC = 2245
+                 AND CODIGOA = '99')))
+     AND UPPER( F.CODIGO  )= UPPER( :PARAM1 ) ORDER BY F.CODIGO
+Time: 16:00:28 Bind (out)  [231991584]  bind function                  session #
+    '1'
+Time: 16:00:28 Transaction [0]          OCITransCommit                 session #3
+    Commit statement
+Time: 16:00:28 Bind (in)   [231981268]  bind function                  session #
+    Null
+Time: 16:00:28 Execute     [231981268]  OCIStmtExecute                 session #3
+    begin  :result := sys.dbms_transaction.local_transaction_id(true); end;
+Time: 16:00:28 Bind (out)  [231981268]  bind function                  session #
+    '8.30.57224'
+Time: 16:00:28 Bind (in)   [231981268]  bind function                  session #
+    Null
+Time: 16:00:28 Execute     [231981268]  OCIStmtExecute                 session #3
+    begin  :result := sys.dbms_transaction.local_transaction_id; end;
+Time: 16:00:28 Bind (out)  [231981268]  bind function                  session #
+    '8.30.57224'
+Time: 16:00:28 Execute     [231981268]  OCIStmtExecute                 session #3
+    SELECT NVL(PROXNUMLANC,1) PROXNUMLANC FROM PCCONSUM FOR UPDATE
+Time: 16:00:28 Execute     [231981268]  OCIStmtExecute                 session #3
+    UPDATE PCCONSUM SET PROXNUMLANC = NVL(PROXNUMLANC,1) + 1
+Time: 16:00:28 Transaction [0]          OCITransCommit                 session #3
+    Commit statement
+Time: 16:00:28 Bind (in)   [231981268]  bind function                  session #
+    Null
+Time: 16:00:28 Execute     [231981268]  OCIStmtExecute                 session #2
+    SELECT PCCONTA.TIPO FROM PCCONTA    
+     WHERE PCCONTA.CODCONTA = :CODCONTA
+Time: 16:00:28 Bind (out)  [231981268]  bind function                  session #
+    Null
+Time: 16:00:28 Execute     [231981268]  OCIStmtExecute                 session #3
+    SELECT TRUNC(SYSDATE)
+      FROM DUAL
+Time: 16:00:49 Bind (in)   [231991584]  bind function                  session #
+    '1'
+Time: 16:00:49 Execute     [231991584]  OCIStmtExecute                 session #3
+    SELECT F.CODIGO,
+           F.RAZAOSOCIAL,
+           F.FANTASIA,
+           F.CODIGO || ' - ' || F.RAZAOSOCIAL FILIAL,
+           F.IE,
+           F.CGC,
+           F.TELEFONE,
+           F.ENDERECO,
+           F.EMAIL,
+           NVL(F.NUMERO2, TO_CHAR(F.NUMERO)) NUMERO,
+           F.BAIRRO,
+           F.CIDADE,
+           F.UF,
+           F.CEP,
+           F.CONTATO,
+           F.CODMUN CODIBGE,
+           F.NUMIDF,
+           F.CODDOCNFC,
+           F.UTILIZANFE,
+           F.INDUSTRIA,
+           NVL(F.TIPOMONTAGEM, 'R') TIPOMONTAGEM,
+           F.INTEGRADORAWMS
+      FROM PCFILIAL F
+     WHERE (((F.CODIGO <> '99') AND EXISTS
+            (SELECT CODIGOA
+                FROM PCLIB
+               WHERE CODTABELA = 1
+                 AND CODFUNC = 2245
+                 AND CODIGOA = '99')) OR
+           ((F.CODIGO IN (SELECT CODIGOA
+                             FROM PCLIB
+                            WHERE CODTABELA = 1
+                              AND CODFUNC = 2245)) AND NOT EXISTS
+            (SELECT CODIGOA
+                FROM PCLIB
+               WHERE CODTABELA = 1
+                 AND CODFUNC = 2245
+                 AND CODIGOA = '99')))
+     AND UPPER( F.CODIGO  )= UPPER( :PARAM1 ) ORDER BY F.CODIGO
+Time: 16:00:49 Bind (out)  [231991584]  bind function                  session #
+    '1'
+Time: 16:01:26 Bind (in)   [231956168]  bind function                  session #
+    '100010'
+Time: 16:01:26 Execute     [231956168]  OCIStmtExecute                 session #2
+    SELECT PCCONTA.CODCONTA,
+           PCCONTA.CONTA, PCCONTA.TIPO, NVL(PCCONTA.USARATEIOCENTROCUSTO,'N')USARATEIOCENTROCUSTO
+    FROM PCCONTA, PCLIB, PCCONSUM, PCGRUPO
+    WHERE PCCONTA.CODCONTA = :CODCONTA
+    AND PCCONTA.CODCONTA <> NVL(CODCONTFOR,0) 
+    AND PCCONTA.CODCONTA <> NVL(CODCONTFRE,0) 
+    AND PCCONTA.CODCONTA <> NVL(CODCONTOUT,0) 
+    AND PCCONTA.CODCONTA <> NVL(CODCONTAADIANTFOR,0)
+    AND PCCONTA.CODCONTA <> NVL(CODCONTAADIANTFOROUTROS,0)
+    AND PCCONTA.CODCONTA <> (SELECT NVL(CODCONTAJUSTEEST,0) FROM PCCONSUM ) 
+    AND PCCONTA.GRUPOCONTA = PCGRUPO.CODGRUPO 
+    AND PCGRUPO.CODGRUPO >= 100 
+    AND PCCONTA.TIPO<>'I'
+    AND ((PCCONTA.CODCONTA NOT IN (NVL(CODCONTANTPAG,0)))
+    AND (PCCONTA.CODCONTA NOT IN (NVL(CODCONTRECJUR,0)))
+    AND (PCCONTA.CODCONTA NOT IN (NVL(CODCONTPAGJUR,0))))
+    AND TO_CHAR(PCCONTA.CODCONTA) NOT IN (SELECT NVL(P.VALOR, 0) FROM PCPARAMFILIAL P WHERE P.NOME = 'CODCONTAADIANTFUNC')
+    AND (SELECT COUNT(*) FROM PCPARAMFILIAL WHERE NOME = 'CODCONTAADIANTFUNC' AND VALOR = PCCONTA.CODCONTA) <= 0
+    AND PCCONTA.GRUPOCONTA = PCLIB.CODIGON
+    AND PCLIB.CODTABELA = 6
+    AND PCLIB.CODFUNC = 2245
+Time: 16:01:26 Bind (out)  [231956168]  bind function                  session #
+    '100010'
+Time: 16:01:27 Bind (in)   [231993656]  bind function                  session #
+    100010.000000
+Time: 16:01:27 Execute     [231993656]  OCIStmtExecute                 session #2
+    SELECT COUNT(C.CODRATEIOCONTA) CONTADOR                  
+        FROM PCRATEIOPADRAOCONTA C, PCITENSRATEIOPADRAOCONTA I 
+       WHERE 1 = 1                                             
+         AND C.CODRATEIOCONTA = I.CODRATEIOCONTA               
+         AND I.CODIGOCONTA = :CODIGOCONTA
+Time: 16:01:27 Bind (out)  [231993656]  bind function                  session #
+    100010.000000
+Time: 16:01:27 Bind (in)   [231981268]  bind function                  session #
+    '1'
+Time: 16:01:27 Execute     [231981268]  OCIStmtExecute                 session #2
+    SELECT PCCONTA.TIPO FROM PCCONTA    
+     WHERE PCCONTA.CODCONTA = :CODCONTA
+Time: 16:01:27 Bind (out)  [231981268]  bind function                  session #
+    '1'
+Time: 16:01:27 Bind (in)   [231981268]  bind function                  session #
+    '1'
+Time: 16:01:27 Execute     [231981268]  OCIStmtExecute                 session #2
+    SELECT DISTINCT CODCONTA, USARATEIOCENTROCUSTO USACENTROCUSTO
+    FROM PCCONTA
+    WHERE NVL(USARATEIOCENTROCUSTO, 'N') = 'S'
+      AND CODCONTA = :CODCONTA
+Time: 16:01:27 Bind (out)  [231981268]  bind function                  session #
+    '1'
+Time: 16:01:45 Bind (in)   [231981268]  bind function                  session #
+    2245
+Time: 16:01:45 Bind (in)   [231981268]  bind function                  session #
+    '1'
+Time: 16:01:45 Execute     [231981268]  OCIStmtExecute                 session #2
+    SELECT NVL(CO.CODIGOCENTROCUSTO, CO.CODCENTROCUSTO) AS CODIGOCENTROCUSTO,                         
+          CASE WHEN (SELECT COUNT(L.CODIGON) QTD                                                      
+                       FROM PCLIB L                                                                   
+                      WHERE L.CODTABELA = 10                                                          
+                        AND L.CODIGOA = CC.CODIGOCENTROCUSTO                                          
+                        AND L.CODFUNC = :CODFUNC                                                      
+                        AND ROWNUM = 1) >= 1 THEN 'S'                                               
+               ELSE 'N'                                                                             
+          END CCTEMPERMISSAO_PCLIB                                                                    
+     FROM PCCONTACENTROCUSTO CO, PCCENTROCUSTO CC                                                     
+    WHERE NVL(CO.CODIGOCENTROCUSTO, CO.CODCENTROCUSTO) = NVL(CC.CODIGOCENTROCUSTO, CC.CODCENTROCUSTO) 
+      AND CO.CODCONTA = :CODCONTA                                                                     
+      AND NVL(CC.ATIVO, 'S') = 'S'                                                                
+      AND NVL(CC.RECEBE_LANCTO, 'S') = 'S'                                                        
+    ORDER BY NVL(CO.CODIGOCENTROCUSTO, CO.CODCENTROCUSTO)
+Time: 16:01:45 Bind (out)  [231981268]  bind function                  session #
+    2245
+Time: 16:01:45 Bind (out)  [231981268]  bind function                  session #
+    '1'
+Time: 16:01:46 Bind (in)   [231981268]  bind function                  session #
+    '1'
+Time: 16:01:46 Execute     [231981268]  OCIStmtExecute                 session #2
+    SELECT DISTINCT CODCONTA, USARATEIOCENTROCUSTO USACENTROCUSTO
+    FROM PCCONTA
+    WHERE NVL(USARATEIOCENTROCUSTO, 'N') = 'S'
+      AND CODCONTA = :CODCONTA
+Time: 16:01:46 Bind (out)  [231981268]  bind function                  session #
+    '1'
+Time: 16:19:27 Bind (in)   [231956168]  bind function                  session #
+    '11'
+Time: 16:19:27 Execute     [231956168]  OCIStmtExecute                 session #2
+    SELECT NOME AS PARCEIRO,                  
+           NVL(TIPOPESSOA,'J') AS TIPOPESSOA
+      FROM PCUSUARI                           
+     WHERE NOME           IS NOT NULL         
+       AND PCUSUARI.DTTERMINO IS NULL         
+       AND CODUSUR             = :COD
+Time: 16:19:27 Bind (out)  [231956168]  bind function                  session #
+    '11'
+Time: 16:20:14 Execute     [231981268]  OCIStmtExecute                 session #3
+    SELECT 1 FROM USER_VIEWS WHERE VIEW_NAME = 'V_CTBCONFEXERCICIO'
+Time: 16:20:14 Execute     [231982304]  OCIStmtExecute                 session #2
+    prepared sql statement not found
+Time: 16:20:14 Execute     [231982304]  OCIStmtExecute                 session #2
+    prepared sql statement not found
+Time: 16:20:14 Bind (in)   [231981268]  bind function                  session #
+    '7'
+Time: 16:20:14 Execute     [231981268]  OCIStmtExecute                 session #2
+    SELECT *               
+     FROM PCLANC           
+    WHERE RECNUM = :RECNUM
+Time: 16:20:14 Bind (out)  [231981268]  bind function                  session #
+    '7'
+Time: 16:20:14 Transaction [0]          OCITransCommit                 session #2
+    Commit statement
+Time: 16:20:14 Bind (in)   [231981268]  bind function                  session #
+    Null
+Time: 16:20:14 Execute     [231981268]  OCIStmtExecute                 session #2
+    begin  :result := sys.dbms_transaction.local_transaction_id(true); end;
+Time: 16:20:14 Bind (out)  [231981268]  bind function                  session #
+    '10.13.1217099'
+Time: 16:20:14 Bind (in)   [231981268]  bind function                  session #
+    Null
+Time: 16:20:14 Execute     [231981268]  OCIStmtExecute                 session #2
+    begin  :result := sys.dbms_transaction.local_transaction_id; end;
+Time: 16:20:14 Bind (out)  [231981268]  bind function                  session #
+    '10.13.1217099'
+Time: 16:20:19 Bind (in)   [231981268]  bind function                  session #
+    Null
+Time: 16:20:19 Execute     [231981268]  OCIStmtExecute                 session #2
+    begin  :result := sys.dbms_transaction.local_transaction_id; end;
+Time: 16:20:19 Bind (out)  [231981268]  bind function                  session #
+    '10.13.1217099'
+Time: 16:20:19 Bind (in)   [231981268]  bind function                  session #
+    7350476.000000
+Time: 16:20:19 Bind (in)   [231981268]  bind function                  session #
+    2026.04.07 00:00:00
+Time: 16:20:19 Bind (in)   [231981268]  bind function                  session #
+    'c'
+Time: 16:20:19 Bind (in)   [231981268]  bind function                  session #
+    '1'
+Time: 16:20:19 Bind (in)   [231981268]  bind function                  session #
+    Null
+Time: 16:20:19 Bind (in)   [231981268]  bind function                  session #
+    '1'
+Time: 16:20:19 Bind (in)   [231981268]  bind function                  session #
+    'A'
+Time: 16:20:19 Bind (in)   [231981268]  bind function                  session #
+    Null
+Time: 16:20:19 Bind (in)   [231981268]  bind function                  session #
+    'C'
+Time: 16:20:19 Bind (in)   [231981268]  bind function                  session #
+    'R'
+Time: 16:20:19 Bind (in)   [231981268]  bind function                  session #
+    'E'
+Time: 16:20:19 Bind (in)   [231981268]  bind function                  session #
+    Null
+Time: 16:20:19 Bind (in)   [231981268]  bind function                  session #
+    Null
+Time: 16:20:19 Bind (in)   [231981268]  bind function                  session #
+    Null
+Time: 16:20:19 Bind (in)   [231981268]  bind function                  session #
+    Null
+Time: 16:20:19 Bind (in)   [231981268]  bind function                  session #
+    '('
+Time: 16:20:19 Bind (in)   [231981268]  bind function                  session #
+    'R'
+Time: 16:20:19 Bind (in)   [231981268]  bind function                  session #
+    Null
+Time: 16:20:19 Bind (in)   [231981268]  bind function                  session #
+    Null
+Time: 16:20:19 Bind (in)   [231981268]  bind function                  session #
+    Null
+Time: 16:20:19 Bind (in)   [231981268]  bind function                  session #
+    Null
+Time: 16:20:19 Bind (in)   [231981268]  bind function                  session #
+    'N'
+Time: 16:20:19 Bind (in)   [231981268]  bind function                  session #
+    Null
+Time: 16:20:19 Bind (in)   [231981268]  bind function                  session #
+    Null
+Time: 16:20:19 Bind (in)   [231981268]  bind function                  session #
+    Null
+Time: 16:20:19 Bind (in)   [231981268]  bind function                  session #
+    Null
+Time: 16:20:19 Bind (in)   [231981268]  bind function                  session #
+    Null
+Time: 16:20:19 Bind (in)   [231981268]  bind function                  session #
+    Null
+Time: 16:20:19 Bind (in)   [231981268]  bind function                  session #
+    Null
+Time: 16:20:19 Bind (in)   [231981268]  bind function                  session #
+    Null
+Time: 16:20:19 Bind (in)   [231981268]  bind function                  session #
+    749.000000
+Time: 16:20:19 Bind (in)   [231981268]  bind function                  session #
+    Null
+Time: 16:20:19 Bind (in)   [231981268]  bind function                  session #
+    'A'
+Time: 16:20:19 Bind (in)   [231981268]  bind function                  session #
+    '1'
+Time: 16:20:19 Bind (in)   [231981268]  bind function                  session #
+    0.000000
+Time: 16:20:19 Bind (in)   [231981268]  bind function                  session #
+    11.000000
+Time: 16:20:19 Bind (in)   [231981268]  bind function                  session #
+    0.000000
+Time: 16:20:19 Bind (in)   [231981268]  bind function                  session #
+    '9'
+Time: 16:20:19 Bind (in)   [231981268]  bind function                  session #
+    Null
+Time: 16:20:19 Bind (in)   [231981268]  bind function                  session #
+    0
+Time: 16:20:19 Bind (in)   [231981268]  bind function                  session #
+    0
+Time: 16:20:19 Bind (in)   [231981268]  bind function                  session #
+    'N'
+Time: 16:20:19 Bind (in)   [231981268]  bind function                  session #
+    100.000000
+Time: 16:20:19 Bind (in)   [231981268]  bind function                  session #
+    7219.480000
+Time: 16:20:19 Bind (in)   [231981268]  bind function                  session #
+    100010.000000
+Time: 16:20:19 Bind (in)   [231981268]  bind function                  session #
+    7350476.000000
+Time: 16:20:19 Bind (in)   [231981268]  bind function                  session #
+    2026.04.07 00:00:00
+Time: 16:20:19 Bind (in)   [231981268]  bind function                  session #
+    2026.04.07 00:00:00
+Time: 16:20:19 Bind (in)   [231981268]  bind function                  session #
+    Null
+Time: 16:20:19 Bind (in)   [231981268]  bind function                  session #
+    2026.04.08 00:00:00
+Time: 16:20:19 Bind (in)   [231981268]  bind function                  session #
+    Null
+Time: 16:20:19 Bind (in)   [231981268]  bind function                  session #
+    'TELMI TEIXEIRA DO LAGO'
+Time: 16:20:19 Bind (in)   [231981268]  bind function                  session #
+    'N'
+Time: 16:20:19 Execute     [231981268]  OCIStmtExecute                 session #2
+    INSERT INTO PCLANC (     RECNUM,                  DTLANC,                  HISTORICO,               DUPLIC,                  LOCALIZACAO,             CODFILIAL,               INDICE,                  NUMCHEQUE,               TIPOLANC,                TIPOPARCEIRO,            NOMEFUNC,                ASSINATURA,              TIPOPAGTO,               NUMDVDESTDOC,            NUMCODBARRA,             HISTORICO2,              MOEDA,                   DVAG,                    PORTADORCHEQUE,          NUMDIIMPORTACAO,         ADIANTAMENTO,            NFSERVICO,               PREST,                   BOLETO,                  PAGTONOMEDOCLIENTE,      OBSBLOQ,                 AGENDAMENTO,             NUMCONTRATOCAMBIO,       IDCONTROLEEMBARQUE,      FORMAPGTO,               CODROTINACAD,            DTMOEDA,                 CODROTINAALT,            PARCELA,                 NUMNOTA,                 CODFORNEC,               VLRUTILIZADOADIANTFORNEC,TIPOSERVICO,             IDENTIFICADORFGTS,       LACREDIGCONECSOCIAL,     OPCAOPAGAMENTOIPVA,      UTILIZOURATEIOCONTA,     PRCRATEIOUTILIZADO       , VALOR, CODCONTA, RECNUMPRINC, DTVENC , DTEMISSAO , DTCOTACAO , DTCOMPETENCIA , DTAGENDAMENTO , FORNECEDOR , REINFEVENTOR4040 )                         VALUES(                   :RECNUM,                  :DTLANC,                  :HISTORICO,               :DUPLIC,                  :LOCALIZACAO,             :CODFILIAL,               :INDICE,                  :NUMCHEQUE,               :TIPOLANC,                :TIPOPARCEIRO,            :NOMEFUNC,                :ASSINATURA,              :TIPOPAGTO,               :NUMDVDESTDOC,            :NUMCODBARRA,             :HISTORICO2,              :MOEDA,                   :DVAG,                    :PORTADORCHEQUE,          :NUMDIIMPORTACAO,         :ADIANTAMENTO,            :NFSERVICO,               :PREST,                   :BOLETO,                  :PAGTONOMEDOCLIENTE,      :OBSBLOQ,                 :AGENDAMENTO,             :NUMCONTRATOCAMBIO,       :IDCONTROLEEMBARQUE,      :FORMAPGTO,               :CODROTINACAD,            :DTMOEDA,                 :CODROTINAALT,            :PARCELA,                 :NUMNOTA,                 :CODFORNEC,               :VLRUTILIZADOADIANTFORNEC,:TIPOSERVICO,             :IDENTIFICADORFGTS,       :LACREDIGCONECSOCIAL,     :OPCAOPAGAMENTOIPVA,      :UTILIZOURATEIOCONTA,     :PRCRATEIOUTILIZADO       , :VALOR, :CODCONTA, :RECNUMPRINC, :DTVENC                 , :DTEMISSAO              , :DTCOTACAO              , :DTCOMPETENCIA          , :DTAGENDAMENTO          , :FORNECEDOR , :REINFEVENTOR4040 )
+Time: 16:20:19 Bind (out)  [231981268]  bind function                  session #
+    7350476.000000
+Time: 16:20:19 Bind (out)  [231981268]  bind function                  session #
+    2026.04.07 00:00:00
+Time: 16:20:19 Bind (out)  [231981268]  bind function                  session #
+    'c'
+Time: 16:20:19 Bind (out)  [231981268]  bind function                  session #
+    '1'
+Time: 16:20:19 Bind (out)  [231981268]  bind function                  session #
+    Null
+Time: 16:20:19 Bind (out)  [231981268]  bind function                  session #
+    '1'
+Time: 16:20:19 Bind (out)  [231981268]  bind function                  session #
+    'A'
+Time: 16:20:19 Bind (out)  [231981268]  bind function                  session #
+    Null
+Time: 16:20:19 Bind (out)  [231981268]  bind function                  session #
+    'C'
+Time: 16:20:19 Bind (out)  [231981268]  bind function                  session #
+    'R'
+Time: 16:20:19 Bind (out)  [231981268]  bind function                  session #
+    'E'
+Time: 16:20:19 Bind (out)  [231981268]  bind function                  session #
+    Null
+Time: 16:20:19 Bind (out)  [231981268]  bind function                  session #
+    Null
+Time: 16:20:19 Bind (out)  [231981268]  bind function                  session #
+    Null
+Time: 16:20:19 Bind (out)  [231981268]  bind function                  session #
+    Null
+Time: 16:20:19 Bind (out)  [231981268]  bind function                  session #
+    '('
+Time: 16:20:19 Bind (out)  [231981268]  bind function                  session #
+    'R'
+Time: 16:20:19 Bind (out)  [231981268]  bind function                  session #
+    Null
+Time: 16:20:19 Bind (out)  [231981268]  bind function                  session #
+    Null
+Time: 16:20:19 Bind (out)  [231981268]  bind function                  session #
+    Null
+Time: 16:20:19 Bind (out)  [231981268]  bind function                  session #
+    Null
+Time: 16:20:19 Bind (out)  [231981268]  bind function                  session #
+    'N'
+Time: 16:20:19 Bind (out)  [231981268]  bind function                  session #
+    Null
+Time: 16:20:19 Bind (out)  [231981268]  bind function                  session #
+    Null
+Time: 16:20:19 Bind (out)  [231981268]  bind function                  session #
+    Null
+Time: 16:20:19 Bind (out)  [231981268]  bind function                  session #
+    Null
+Time: 16:20:19 Bind (out)  [231981268]  bind function                  session #
+    Null
+Time: 16:20:19 Bind (out)  [231981268]  bind function                  session #
+    Null
+Time: 16:20:19 Bind (out)  [231981268]  bind function                  session #
+    Null
+Time: 16:20:19 Bind (out)  [231981268]  bind function                  session #
+    Null
+Time: 16:20:19 Bind (out)  [231981268]  bind function                  session #
+    749.000000
+Time: 16:20:19 Bind (out)  [231981268]  bind function                  session #
+    Null
+Time: 16:20:19 Bind (out)  [231981268]  bind function                  session #
+    'A'
+Time: 16:20:19 Bind (out)  [231981268]  bind function                  session #
+    '1'
+Time: 16:20:19 Bind (out)  [231981268]  bind function                  session #
+    0.000000
+Time: 16:20:19 Bind (out)  [231981268]  bind function                  session #
+    11.000000
+Time: 16:20:19 Bind (out)  [231981268]  bind function                  session #
+    0.000000
+Time: 16:20:19 Bind (out)  [231981268]  bind function                  session #
+    '9'
+Time: 16:20:19 Bind (out)  [231981268]  bind function                  session #
+    Null
+Time: 16:20:19 Bind (out)  [231981268]  bind function                  session #
+    0
+Time: 16:20:19 Bind (out)  [231981268]  bind function                  session #
+    0
+Time: 16:20:19 Bind (out)  [231981268]  bind function                  session #
+    'N'
+Time: 16:20:19 Bind (out)  [231981268]  bind function                  session #
+    100.000000
+Time: 16:20:20 Bind (out)  [231981268]  bind function                  session #
+    7219.480000
+Time: 16:20:20 Bind (out)  [231981268]  bind function                  session #
+    100010.000000
+Time: 16:20:20 Bind (out)  [231981268]  bind function                  session #
+    7350476.000000
+Time: 16:20:20 Bind (out)  [231981268]  bind function                  session #
+    2026.04.07 00:00:00
+Time: 16:20:20 Bind (out)  [231981268]  bind function                  session #
+    2026.04.07 00:00:00
+Time: 16:20:20 Bind (out)  [231981268]  bind function                  session #
+    Null
+Time: 16:20:20 Bind (out)  [231981268]  bind function                  session #
+    2026.04.08 00:00:00
+Time: 16:20:20 Bind (out)  [231981268]  bind function                  session #
+    Null
+Time: 16:20:20 Bind (out)  [231981268]  bind function                  session #
+    'TELMI TEIXEIRA DO LAGO'
+Time: 16:20:20 Bind (out)  [231981268]  bind function                  session #
+    'N'
+Time: 16:20:20 Bind (in)   [231981268]  bind function                  session #
+    11.000000
+Time: 16:20:20 Execute     [231981268]  OCIStmtExecute                 session #3
+    select count(1) quantidade from pcusuari t 
+     where length(regexp_replace(t.cpf, '[^0-9]','')) < 14 
+       and nvl(t.tipopessoa, 'F') = 'F' 
+       and t.codusur = :codusur
+Time: 16:20:20 Bind (out)  [231981268]  bind function                  session #
+    11.000000
+Time: 16:20:20 Bind (in)   [231981268]  bind function                  session #
+    2245
+Time: 16:20:20 Bind (in)   [231981268]  bind function                  session #
+    '1'
+Time: 16:20:20 Execute     [231981268]  OCIStmtExecute                 session #2
+    SELECT NVL(CO.CODIGOCENTROCUSTO, CO.CODCENTROCUSTO) AS CODIGOCENTROCUSTO,                         
+          CASE WHEN (SELECT COUNT(L.CODIGON) QTD                                                      
+                       FROM PCLIB L                                                                   
+                      WHERE L.CODTABELA = 10                                                          
+                        AND L.CODIGOA = CC.CODIGOCENTROCUSTO                                          
+                        AND L.CODFUNC = :CODFUNC                                                      
+                        AND ROWNUM = 1) >= 1 THEN 'S'                                               
+               ELSE 'N'                                                                             
+          END CCTEMPERMISSAO_PCLIB                                                                    
+     FROM PCCONTACENTROCUSTO CO, PCCENTROCUSTO CC                                                     
+    WHERE NVL(CO.CODIGOCENTROCUSTO, CO.CODCENTROCUSTO) = NVL(CC.CODIGOCENTROCUSTO, CC.CODCENTROCUSTO) 
+      AND CO.CODCONTA = :CODCONTA                                                                     
+      AND NVL(CC.ATIVO, 'S') = 'S'                                                                
+      AND NVL(CC.RECEBE_LANCTO, 'S') = 'S'                                                        
+    ORDER BY NVL(CO.CODIGOCENTROCUSTO, CO.CODCENTROCUSTO)
+Time: 16:20:20 Bind (out)  [231981268]  bind function                  session #
+    2245
+Time: 16:20:20 Bind (out)  [231981268]  bind function                  session #
+    '1'
+Time: 16:20:20 Bind (in)   [231981268]  bind function                  session #
+    '1'
+Time: 16:20:20 Execute     [231981268]  OCIStmtExecute                 session #2
+    SELECT DISTINCT CODCONTA, USARATEIOCENTROCUSTO USACENTROCUSTO
+    FROM PCCONTA
+    WHERE NVL(USARATEIOCENTROCUSTO, 'N') = 'S'
+      AND CODCONTA = :CODCONTA
+Time: 16:20:20 Bind (out)  [231981268]  bind function                  session #
+    '1'
+Time: 16:20:20 Bind (in)   [231981268]  bind function                  session #
+    Null
+Time: 16:20:20 Execute     [231981268]  OCIStmtExecute                 session #2
+    begin  :result := sys.dbms_transaction.local_transaction_id; end;
+Time: 16:20:20 Bind (out)  [231981268]  bind function                  session #
+    '10.13.1217099'
+Time: 16:20:20 Transaction [0]          OCITransCommit                 session #2
+    Commit statement
+Time: 16:20:20 Transaction [0]          OCITransCommit                 session #2
+    Commit statement
+Time: 16:20:20 Bind (in)   [231981268]  bind function                  session #
+    Null
+Time: 16:20:20 Execute     [231981268]  OCIStmtExecute                 session #2
+    begin  :result := sys.dbms_transaction.local_transaction_id(true); end;
+Time: 16:20:20 Bind (out)  [231981268]  bind function                  session #
+    '10.22.1217122'
+Time: 16:20:20 Bind (in)   [231981268]  bind function                  session #
+    Null
+Time: 16:20:20 Execute     [231981268]  OCIStmtExecute                 session #2
+    begin  :result := sys.dbms_transaction.local_transaction_id; end;
+Time: 16:20:20 Bind (out)  [231981268]  bind function                  session #
+    '10.22.1217122'
+Time: 16:20:20 Bind (in)   [231981268]  bind function                  session #
+    Null
+Time: 16:20:20 Execute     [231981268]  OCIStmtExecute                 session #2
+    begin  :result := sys.dbms_transaction.local_transaction_id; end;
+Time: 16:20:20 Bind (out)  [231981268]  bind function                  session #
+    '10.22.1217122'
+Time: 16:20:20 Transaction [0]          OCITransCommit                 session #2
+    Commit statement
+Time: 16:20:22 Bind (in)   [231991584]  bind function                  session #
+    Null
+Time: 16:20:22 Execute     [231991584]  OCIStmtExecute                 session #2
+    SELECT PCCONTA.TIPO FROM PCCONTA    
+     WHERE PCCONTA.CODCONTA = :CODCONTA
+Time: 16:20:22 Bind (out)  [231991584]  bind function                  session #
+    Null
+Time: 16:20:24 Shutdown    [0]          Shutdown                       session #
+    Log stopped [shutdown] for 749 - Inclusão de Lançamentos no Contas a Pagar [process id 19388,147057]
+**** end log for [stopped] 749 - Inclusão de Lançamentos no Contas a Pagar *************************
+
