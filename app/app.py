@@ -220,220 +220,220 @@ def gerar_modelo_excel() -> bytes:
 # ─────────────────────────────────────────────
 # REMOVED_BY_VISUAL_PATCH: st.set_page_config(page_title="ROFE | Comissão RCA", page_icon="💰", layout="wide")
 
-st.markdown("""
-<style>
-
-/* ===== FONT ===== */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
-
-html, body, [class*="css"] {
-    font-family: 'Inter', sans-serif;
-}
-
-/* ===== SIDEBAR — fundo e catch-all de texto ===== */
-section[data-testid="stSidebar"],
-section[data-testid="stSidebar"] > div,
-section[data-testid="stSidebar"] [data-testid="stVerticalBlock"],
-section[data-testid="stSidebar"] .stMarkdown,
-section[data-testid="stSidebar"] .element-container,
-section[data-testid="stSidebar"] .stSelectbox,
-section[data-testid="stSidebar"] .stTextInput {
-    background-color: #0f172a !important;
-}
-
-/* Texto padrão — tudo branco/cinza claro */
-section[data-testid="stSidebar"] *,
-section[data-testid="stSidebar"] p,
-section[data-testid="stSidebar"] span,
-section[data-testid="stSidebar"] small,
-section[data-testid="stSidebar"] div,
-section[data-testid="stSidebar"] label,
-section[data-testid="stSidebar"] h1,
-section[data-testid="stSidebar"] h2,
-section[data-testid="stSidebar"] h3,
-section[data-testid="stSidebar"] li {
-    color: #cbd5e1 !important;
-    background-color: transparent !important;
-}
-
-/* Títulos um pouco mais brilhantes */
-section[data-testid="stSidebar"] h1,
-section[data-testid="stSidebar"] h2,
-section[data-testid="stSidebar"] h3 {
-    color: #f8fafc !important;
-}
-
-section[data-testid="stSidebar"] hr {
-    border-color: #1e293b !important;
-    margin: 12px 0 !important;
-}
-
-/* === Navegação entre páginas (sidebar) === */
-section[data-testid="stSidebar"] [data-testid="stSidebarNav"] a {
-    border-radius: 8px !important;
-    margin: 2px 6px !important;
-    padding: 10px 12px !important;
-    font-weight: 500 !important;
-    transition: all .15s ease-in-out;
-}
-section[data-testid="stSidebar"] [data-testid="stSidebarNav"] a:hover {
-    background-color: #1e293b !important;
-}
-/* Página selecionada */
-section[data-testid="stSidebar"] [data-testid="stSidebarNav"] a[aria-current="page"] {
-    background: linear-gradient(90deg, #2563eb 0%, #1d4ed8 100%) !important;
-    border-left: 4px solid #ef4444 !important;
-    box-shadow: 0 2px 8px rgba(37,99,235,.4) !important;
-    font-weight: 700 !important;
-    padding-left: 14px !important;
-}
-section[data-testid="stSidebar"] [data-testid="stSidebarNav"] a[aria-current="page"] *,
-section[data-testid="stSidebar"] [data-testid="stSidebarNav"] a[aria-current="page"] span {
-    color: #ffffff !important;
-    font-weight: 700 !important;
-}
-
-/* ===== INPUTS sidebar — padrão único todos os estados ===== */
-section[data-testid="stSidebar"] input,
-section[data-testid="stSidebar"] select {
-    background-color: #1e293b !important;
-    color: #f8fafc !important;
-    -webkit-text-fill-color: #f8fafc !important;
-    border: 1px solid #334155 !important;
-    border-radius: 8px !important;
-    opacity: 1 !important;
-    caret-color: transparent !important;
-}
-
-/* Disabled */
-section[data-testid="stSidebar"] input:disabled,
-section[data-testid="stSidebar"] select:disabled {
-    background-color: #1e293b !important;
-    color: #94a3b8 !important;
-    -webkit-text-fill-color: #94a3b8 !important;
-    border: 1px solid #1e293b !important;
-    opacity: 1 !important;
-    cursor: default !important;
-}
-
-section[data-testid="stSidebar"] input:focus {
-    border: 1px solid #3b82f6 !important;
-    caret-color: #f8fafc !important;
-}
-
-/* Dropdown do selectbox */
-section[data-testid="stSidebar"] [data-testid="stSelectbox"] > div > div {
-    background-color: #1e293b !important;
-    border: 1px solid #334155 !important;
-    border-radius: 8px !important;
-    color: #f8fafc !important;
-}
-
-/* Seta do selectbox */
-section[data-testid="stSidebar"] [data-testid="stSelectbox"] svg {
-    fill: #94a3b8 !important;
-}
-
-/* Botões sidebar */
-section[data-testid="stSidebar"] button {
-    background-color: #22c55e !important;
-    color: #ffffff !important;
-    -webkit-text-fill-color: #ffffff !important;
-    border-radius: 8px !important;
-    font-weight: 600 !important;
-    border: none !important;
-}
-
-section[data-testid="stSidebar"] button:hover {
-    background-color: #16a34a !important;
-}
-
-/* ===== HEADER ===== */
-.erp-header {
-    background: #0f172a;
-    padding: 20px 24px;
-    border-radius: 12px;
-    margin-bottom: 20px;
-}
-.erp-title {
-    color: white;
-    font-size: 24px;
-    font-weight: 700;
-    letter-spacing: 1px;
-}
-.erp-title span { color: #ef4444; }
-.erp-sub {
-    color: #94a3b8;
-    font-size: 14px;
-    margin-top: 4px;
-}
-
-/* ===== CARDS ===== */
-.card {
-    background: white;
-    padding: 20px;
-    border-radius: 12px;
-    border: 1px solid #e2e8f0;
-    margin-bottom: 16px;
-}
-
-/* ===== UPLOAD ===== */
-[data-testid="stFileUploader"] {
-    background-color: #f8fafc;
-    border: 2px dashed #cbd5e1;
-    border-radius: 12px;
-    padding: 25px;
-}
-
-/* ===== BOTÕES ===== */
-div[data-testid="stButton"] > button[kind="primary"] {
-    background-color: #2563eb !important;
-    color: white !important;
-    border-radius: 8px !important;
-    font-weight: 700 !important;
-    font-size: 15px !important;
-    padding: 12px 0 !important;
-    border: none !important;
-}
-div[data-testid="stButton"] > button[kind="primary"]:hover {
-    background-color: #1d4ed8 !important;
-}
-
-/* ===== MÉTRICAS ===== */
-.metric-card {
-    background: #f1f5f9;
-    padding: 16px;
-    border-radius: 10px;
-    text-align: center;
-    border: 1px solid #e2e8f0;
-}
-.metric-card b {
-    display: block;
-    color: #64748b;
-    font-size: 12px;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    margin-bottom: 6px;
-}
-.metric-card .metric-val {
-    font-size: 22px;
-    font-weight: 700;
-    color: #0f172a;
-}
-.metric-card .metric-val.verde { color: #16a34a; }
-.metric-card .metric-val.vermelho { color: #dc2626; }
-.metric-card .metric-val.azul { color: #2563eb; }
-
-/* ===== ALERTS ===== */
-.stAlert { border-radius: 10px; }
-
-/* ===== SCROLL ===== */
-::-webkit-scrollbar { width: 6px; }
-::-webkit-scrollbar-thumb { background: #64748b; border-radius: 10px; }
-
-</style>
-""", unsafe_allow_html=True)
+# # REMOVED_BY_DARK_THEME_PATCH: st.markdown("""
+# # REMOVED_BY_DARK_THEME_PATCH: <style>
+# # REMOVED_BY_DARK_THEME_PATCH: 
+# # REMOVED_BY_DARK_THEME_PATCH: /* ===== FONT ===== */
+# # REMOVED_BY_DARK_THEME_PATCH: @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+# # REMOVED_BY_DARK_THEME_PATCH: 
+# # REMOVED_BY_DARK_THEME_PATCH: html, body, [class*="css"] {
+# # REMOVED_BY_DARK_THEME_PATCH:     font-family: 'Inter', sans-serif;
+# # REMOVED_BY_DARK_THEME_PATCH: }
+# # REMOVED_BY_DARK_THEME_PATCH: 
+# # REMOVED_BY_DARK_THEME_PATCH: /* ===== SIDEBAR — fundo e catch-all de texto ===== */
+# # REMOVED_BY_DARK_THEME_PATCH: section[data-testid="stSidebar"],
+# # REMOVED_BY_DARK_THEME_PATCH: section[data-testid="stSidebar"] > div,
+# # REMOVED_BY_DARK_THEME_PATCH: section[data-testid="stSidebar"] [data-testid="stVerticalBlock"],
+# # REMOVED_BY_DARK_THEME_PATCH: section[data-testid="stSidebar"] .stMarkdown,
+# # REMOVED_BY_DARK_THEME_PATCH: section[data-testid="stSidebar"] .element-container,
+# # REMOVED_BY_DARK_THEME_PATCH: section[data-testid="stSidebar"] .stSelectbox,
+# # REMOVED_BY_DARK_THEME_PATCH: section[data-testid="stSidebar"] .stTextInput {
+# # REMOVED_BY_DARK_THEME_PATCH:     background-color: #0f172a !important;
+# # REMOVED_BY_DARK_THEME_PATCH: }
+# # REMOVED_BY_DARK_THEME_PATCH: 
+# # REMOVED_BY_DARK_THEME_PATCH: /* Texto padrão — tudo branco/cinza claro */
+# # REMOVED_BY_DARK_THEME_PATCH: section[data-testid="stSidebar"] *,
+# # REMOVED_BY_DARK_THEME_PATCH: section[data-testid="stSidebar"] p,
+# # REMOVED_BY_DARK_THEME_PATCH: section[data-testid="stSidebar"] span,
+# # REMOVED_BY_DARK_THEME_PATCH: section[data-testid="stSidebar"] small,
+# # REMOVED_BY_DARK_THEME_PATCH: section[data-testid="stSidebar"] div,
+# # REMOVED_BY_DARK_THEME_PATCH: section[data-testid="stSidebar"] label,
+# # REMOVED_BY_DARK_THEME_PATCH: section[data-testid="stSidebar"] h1,
+# # REMOVED_BY_DARK_THEME_PATCH: section[data-testid="stSidebar"] h2,
+# # REMOVED_BY_DARK_THEME_PATCH: section[data-testid="stSidebar"] h3,
+# # REMOVED_BY_DARK_THEME_PATCH: section[data-testid="stSidebar"] li {
+# # REMOVED_BY_DARK_THEME_PATCH:     color: #cbd5e1 !important;
+# # REMOVED_BY_DARK_THEME_PATCH:     background-color: transparent !important;
+# # REMOVED_BY_DARK_THEME_PATCH: }
+# # REMOVED_BY_DARK_THEME_PATCH: 
+# # REMOVED_BY_DARK_THEME_PATCH: /* Títulos um pouco mais brilhantes */
+# # REMOVED_BY_DARK_THEME_PATCH: section[data-testid="stSidebar"] h1,
+# # REMOVED_BY_DARK_THEME_PATCH: section[data-testid="stSidebar"] h2,
+# # REMOVED_BY_DARK_THEME_PATCH: section[data-testid="stSidebar"] h3 {
+# # REMOVED_BY_DARK_THEME_PATCH:     color: #f8fafc !important;
+# # REMOVED_BY_DARK_THEME_PATCH: }
+# # REMOVED_BY_DARK_THEME_PATCH: 
+# # REMOVED_BY_DARK_THEME_PATCH: section[data-testid="stSidebar"] hr {
+# # REMOVED_BY_DARK_THEME_PATCH:     border-color: #1e293b !important;
+# # REMOVED_BY_DARK_THEME_PATCH:     margin: 12px 0 !important;
+# # REMOVED_BY_DARK_THEME_PATCH: }
+# # REMOVED_BY_DARK_THEME_PATCH: 
+# # REMOVED_BY_DARK_THEME_PATCH: /* === Navegação entre páginas (sidebar) === */
+# # REMOVED_BY_DARK_THEME_PATCH: section[data-testid="stSidebar"] [data-testid="stSidebarNav"] a {
+# # REMOVED_BY_DARK_THEME_PATCH:     border-radius: 8px !important;
+# # REMOVED_BY_DARK_THEME_PATCH:     margin: 2px 6px !important;
+# # REMOVED_BY_DARK_THEME_PATCH:     padding: 10px 12px !important;
+# # REMOVED_BY_DARK_THEME_PATCH:     font-weight: 500 !important;
+# # REMOVED_BY_DARK_THEME_PATCH:     transition: all .15s ease-in-out;
+# # REMOVED_BY_DARK_THEME_PATCH: }
+# # REMOVED_BY_DARK_THEME_PATCH: section[data-testid="stSidebar"] [data-testid="stSidebarNav"] a:hover {
+# # REMOVED_BY_DARK_THEME_PATCH:     background-color: #1e293b !important;
+# # REMOVED_BY_DARK_THEME_PATCH: }
+# # REMOVED_BY_DARK_THEME_PATCH: /* Página selecionada */
+# # REMOVED_BY_DARK_THEME_PATCH: section[data-testid="stSidebar"] [data-testid="stSidebarNav"] a[aria-current="page"] {
+# # REMOVED_BY_DARK_THEME_PATCH:     background: linear-gradient(90deg, #2563eb 0%, #1d4ed8 100%) !important;
+# # REMOVED_BY_DARK_THEME_PATCH:     border-left: 4px solid #ef4444 !important;
+# # REMOVED_BY_DARK_THEME_PATCH:     box-shadow: 0 2px 8px rgba(37,99,235,.4) !important;
+# # REMOVED_BY_DARK_THEME_PATCH:     font-weight: 700 !important;
+# # REMOVED_BY_DARK_THEME_PATCH:     padding-left: 14px !important;
+# # REMOVED_BY_DARK_THEME_PATCH: }
+# # REMOVED_BY_DARK_THEME_PATCH: section[data-testid="stSidebar"] [data-testid="stSidebarNav"] a[aria-current="page"] *,
+# # REMOVED_BY_DARK_THEME_PATCH: section[data-testid="stSidebar"] [data-testid="stSidebarNav"] a[aria-current="page"] span {
+# # REMOVED_BY_DARK_THEME_PATCH:     color: #ffffff !important;
+# # REMOVED_BY_DARK_THEME_PATCH:     font-weight: 700 !important;
+# # REMOVED_BY_DARK_THEME_PATCH: }
+# # REMOVED_BY_DARK_THEME_PATCH: 
+# # REMOVED_BY_DARK_THEME_PATCH: /* ===== INPUTS sidebar — padrão único todos os estados ===== */
+# # REMOVED_BY_DARK_THEME_PATCH: section[data-testid="stSidebar"] input,
+# # REMOVED_BY_DARK_THEME_PATCH: section[data-testid="stSidebar"] select {
+# # REMOVED_BY_DARK_THEME_PATCH:     background-color: #1e293b !important;
+# # REMOVED_BY_DARK_THEME_PATCH:     color: #f8fafc !important;
+# # REMOVED_BY_DARK_THEME_PATCH:     -webkit-text-fill-color: #f8fafc !important;
+# # REMOVED_BY_DARK_THEME_PATCH:     border: 1px solid #334155 !important;
+# # REMOVED_BY_DARK_THEME_PATCH:     border-radius: 8px !important;
+# # REMOVED_BY_DARK_THEME_PATCH:     opacity: 1 !important;
+# # REMOVED_BY_DARK_THEME_PATCH:     caret-color: transparent !important;
+# # REMOVED_BY_DARK_THEME_PATCH: }
+# # REMOVED_BY_DARK_THEME_PATCH: 
+# # REMOVED_BY_DARK_THEME_PATCH: /* Disabled */
+# # REMOVED_BY_DARK_THEME_PATCH: section[data-testid="stSidebar"] input:disabled,
+# # REMOVED_BY_DARK_THEME_PATCH: section[data-testid="stSidebar"] select:disabled {
+# # REMOVED_BY_DARK_THEME_PATCH:     background-color: #1e293b !important;
+# # REMOVED_BY_DARK_THEME_PATCH:     color: #94a3b8 !important;
+# # REMOVED_BY_DARK_THEME_PATCH:     -webkit-text-fill-color: #94a3b8 !important;
+# # REMOVED_BY_DARK_THEME_PATCH:     border: 1px solid #1e293b !important;
+# # REMOVED_BY_DARK_THEME_PATCH:     opacity: 1 !important;
+# # REMOVED_BY_DARK_THEME_PATCH:     cursor: default !important;
+# # REMOVED_BY_DARK_THEME_PATCH: }
+# # REMOVED_BY_DARK_THEME_PATCH: 
+# # REMOVED_BY_DARK_THEME_PATCH: section[data-testid="stSidebar"] input:focus {
+# # REMOVED_BY_DARK_THEME_PATCH:     border: 1px solid #3b82f6 !important;
+# # REMOVED_BY_DARK_THEME_PATCH:     caret-color: #f8fafc !important;
+# # REMOVED_BY_DARK_THEME_PATCH: }
+# # REMOVED_BY_DARK_THEME_PATCH: 
+# # REMOVED_BY_DARK_THEME_PATCH: /* Dropdown do selectbox */
+# # REMOVED_BY_DARK_THEME_PATCH: section[data-testid="stSidebar"] [data-testid="stSelectbox"] > div > div {
+# # REMOVED_BY_DARK_THEME_PATCH:     background-color: #1e293b !important;
+# # REMOVED_BY_DARK_THEME_PATCH:     border: 1px solid #334155 !important;
+# # REMOVED_BY_DARK_THEME_PATCH:     border-radius: 8px !important;
+# # REMOVED_BY_DARK_THEME_PATCH:     color: #f8fafc !important;
+# # REMOVED_BY_DARK_THEME_PATCH: }
+# # REMOVED_BY_DARK_THEME_PATCH: 
+# # REMOVED_BY_DARK_THEME_PATCH: /* Seta do selectbox */
+# # REMOVED_BY_DARK_THEME_PATCH: section[data-testid="stSidebar"] [data-testid="stSelectbox"] svg {
+# # REMOVED_BY_DARK_THEME_PATCH:     fill: #94a3b8 !important;
+# # REMOVED_BY_DARK_THEME_PATCH: }
+# # REMOVED_BY_DARK_THEME_PATCH: 
+# # REMOVED_BY_DARK_THEME_PATCH: /* Botões sidebar */
+# # REMOVED_BY_DARK_THEME_PATCH: section[data-testid="stSidebar"] button {
+# # REMOVED_BY_DARK_THEME_PATCH:     background-color: #22c55e !important;
+# # REMOVED_BY_DARK_THEME_PATCH:     color: #ffffff !important;
+# # REMOVED_BY_DARK_THEME_PATCH:     -webkit-text-fill-color: #ffffff !important;
+# # REMOVED_BY_DARK_THEME_PATCH:     border-radius: 8px !important;
+# # REMOVED_BY_DARK_THEME_PATCH:     font-weight: 600 !important;
+# # REMOVED_BY_DARK_THEME_PATCH:     border: none !important;
+# # REMOVED_BY_DARK_THEME_PATCH: }
+# # REMOVED_BY_DARK_THEME_PATCH: 
+# # REMOVED_BY_DARK_THEME_PATCH: section[data-testid="stSidebar"] button:hover {
+# # REMOVED_BY_DARK_THEME_PATCH:     background-color: #16a34a !important;
+# # REMOVED_BY_DARK_THEME_PATCH: }
+# # REMOVED_BY_DARK_THEME_PATCH: 
+# # REMOVED_BY_DARK_THEME_PATCH: /* ===== HEADER ===== */
+# # REMOVED_BY_DARK_THEME_PATCH: .erp-header {
+# # REMOVED_BY_DARK_THEME_PATCH:     background: #0f172a;
+# # REMOVED_BY_DARK_THEME_PATCH:     padding: 20px 24px;
+# # REMOVED_BY_DARK_THEME_PATCH:     border-radius: 12px;
+# # REMOVED_BY_DARK_THEME_PATCH:     margin-bottom: 20px;
+# # REMOVED_BY_DARK_THEME_PATCH: }
+# # REMOVED_BY_DARK_THEME_PATCH: .erp-title {
+# # REMOVED_BY_DARK_THEME_PATCH:     color: white;
+# # REMOVED_BY_DARK_THEME_PATCH:     font-size: 24px;
+# # REMOVED_BY_DARK_THEME_PATCH:     font-weight: 700;
+# # REMOVED_BY_DARK_THEME_PATCH:     letter-spacing: 1px;
+# # REMOVED_BY_DARK_THEME_PATCH: }
+# # REMOVED_BY_DARK_THEME_PATCH: .erp-title span { color: #ef4444; }
+# # REMOVED_BY_DARK_THEME_PATCH: .erp-sub {
+# # REMOVED_BY_DARK_THEME_PATCH:     color: #94a3b8;
+# # REMOVED_BY_DARK_THEME_PATCH:     font-size: 14px;
+# # REMOVED_BY_DARK_THEME_PATCH:     margin-top: 4px;
+# # REMOVED_BY_DARK_THEME_PATCH: }
+# # REMOVED_BY_DARK_THEME_PATCH: 
+# # REMOVED_BY_DARK_THEME_PATCH: /* ===== CARDS ===== */
+# # REMOVED_BY_DARK_THEME_PATCH: .card {
+# # REMOVED_BY_DARK_THEME_PATCH:     background: white;
+# # REMOVED_BY_DARK_THEME_PATCH:     padding: 20px;
+# # REMOVED_BY_DARK_THEME_PATCH:     border-radius: 12px;
+# # REMOVED_BY_DARK_THEME_PATCH:     border: 1px solid #e2e8f0;
+# # REMOVED_BY_DARK_THEME_PATCH:     margin-bottom: 16px;
+# # REMOVED_BY_DARK_THEME_PATCH: }
+# # REMOVED_BY_DARK_THEME_PATCH: 
+# # REMOVED_BY_DARK_THEME_PATCH: /* ===== UPLOAD ===== */
+# # REMOVED_BY_DARK_THEME_PATCH: [data-testid="stFileUploader"] {
+# # REMOVED_BY_DARK_THEME_PATCH:     background-color: #f8fafc;
+# # REMOVED_BY_DARK_THEME_PATCH:     border: 2px dashed #cbd5e1;
+# # REMOVED_BY_DARK_THEME_PATCH:     border-radius: 12px;
+# # REMOVED_BY_DARK_THEME_PATCH:     padding: 25px;
+# # REMOVED_BY_DARK_THEME_PATCH: }
+# # REMOVED_BY_DARK_THEME_PATCH: 
+# # REMOVED_BY_DARK_THEME_PATCH: /* ===== BOTÕES ===== */
+# # REMOVED_BY_DARK_THEME_PATCH: div[data-testid="stButton"] > button[kind="primary"] {
+# # REMOVED_BY_DARK_THEME_PATCH:     background-color: #2563eb !important;
+# # REMOVED_BY_DARK_THEME_PATCH:     color: white !important;
+# # REMOVED_BY_DARK_THEME_PATCH:     border-radius: 8px !important;
+# # REMOVED_BY_DARK_THEME_PATCH:     font-weight: 700 !important;
+# # REMOVED_BY_DARK_THEME_PATCH:     font-size: 15px !important;
+# # REMOVED_BY_DARK_THEME_PATCH:     padding: 12px 0 !important;
+# # REMOVED_BY_DARK_THEME_PATCH:     border: none !important;
+# # REMOVED_BY_DARK_THEME_PATCH: }
+# # REMOVED_BY_DARK_THEME_PATCH: div[data-testid="stButton"] > button[kind="primary"]:hover {
+# # REMOVED_BY_DARK_THEME_PATCH:     background-color: #1d4ed8 !important;
+# # REMOVED_BY_DARK_THEME_PATCH: }
+# # REMOVED_BY_DARK_THEME_PATCH: 
+# # REMOVED_BY_DARK_THEME_PATCH: /* ===== MÉTRICAS ===== */
+# # REMOVED_BY_DARK_THEME_PATCH: .metric-card {
+# # REMOVED_BY_DARK_THEME_PATCH:     background: #f1f5f9;
+# # REMOVED_BY_DARK_THEME_PATCH:     padding: 16px;
+# # REMOVED_BY_DARK_THEME_PATCH:     border-radius: 10px;
+# # REMOVED_BY_DARK_THEME_PATCH:     text-align: center;
+# # REMOVED_BY_DARK_THEME_PATCH:     border: 1px solid #e2e8f0;
+# # REMOVED_BY_DARK_THEME_PATCH: }
+# # REMOVED_BY_DARK_THEME_PATCH: .metric-card b {
+# # REMOVED_BY_DARK_THEME_PATCH:     display: block;
+# # REMOVED_BY_DARK_THEME_PATCH:     color: #64748b;
+# # REMOVED_BY_DARK_THEME_PATCH:     font-size: 12px;
+# # REMOVED_BY_DARK_THEME_PATCH:     font-weight: 600;
+# # REMOVED_BY_DARK_THEME_PATCH:     text-transform: uppercase;
+# # REMOVED_BY_DARK_THEME_PATCH:     letter-spacing: 0.5px;
+# # REMOVED_BY_DARK_THEME_PATCH:     margin-bottom: 6px;
+# # REMOVED_BY_DARK_THEME_PATCH: }
+# # REMOVED_BY_DARK_THEME_PATCH: .metric-card .metric-val {
+# # REMOVED_BY_DARK_THEME_PATCH:     font-size: 22px;
+# # REMOVED_BY_DARK_THEME_PATCH:     font-weight: 700;
+# # REMOVED_BY_DARK_THEME_PATCH:     color: #0f172a;
+# # REMOVED_BY_DARK_THEME_PATCH: }
+# # REMOVED_BY_DARK_THEME_PATCH: .metric-card .metric-val.verde { color: #16a34a; }
+# # REMOVED_BY_DARK_THEME_PATCH: .metric-card .metric-val.vermelho { color: #dc2626; }
+# # REMOVED_BY_DARK_THEME_PATCH: .metric-card .metric-val.azul { color: #2563eb; }
+# # REMOVED_BY_DARK_THEME_PATCH: 
+# # REMOVED_BY_DARK_THEME_PATCH: /* ===== ALERTS ===== */
+# # REMOVED_BY_DARK_THEME_PATCH: .stAlert { border-radius: 10px; }
+# # REMOVED_BY_DARK_THEME_PATCH: 
+# # REMOVED_BY_DARK_THEME_PATCH: /* ===== SCROLL ===== */
+# # REMOVED_BY_DARK_THEME_PATCH: ::-webkit-scrollbar { width: 6px; }
+# # REMOVED_BY_DARK_THEME_PATCH: ::-webkit-scrollbar-thumb { background: #64748b; border-radius: 10px; }
+# # REMOVED_BY_DARK_THEME_PATCH: 
+# # REMOVED_BY_DARK_THEME_PATCH: </style>
+# # REMOVED_BY_DARK_THEME_PATCH: """, unsafe_allow_html=True)
 
 # ─────────────────────────────────────────────
 # Estado da sessão

@@ -106,60 +106,60 @@ def buscar_bloqueios(codigos: tuple[int, ...]) -> tuple[dict[int, str], str | No
 # REMOVED_BY_VISUAL_PATCH: st.set_page_config(page_title="Cadastro PIX | ROFE", page_icon="💳", layout="wide")
 
 # Reaproveita o CSS principal — versão enxuta (sidebar dark + cards)
-st.markdown("""
-<style>
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
-html, body, [class*="css"] { font-family:'Inter',sans-serif; }
-
-section[data-testid="stSidebar"], section[data-testid="stSidebar"] > div {
-    background-color:#0f172a !important;
-}
-section[data-testid="stSidebar"] * { color:#cbd5e1 !important; background-color:transparent !important; }
-section[data-testid="stSidebar"] h1, section[data-testid="stSidebar"] h2, section[data-testid="stSidebar"] h3 { color:#f8fafc !important; }
-
-/* === Navegação entre páginas (sidebar) === */
-section[data-testid="stSidebar"] [data-testid="stSidebarNav"] a {
-    border-radius: 8px !important;
-    margin: 2px 6px !important;
-    padding: 10px 12px !important;
-    font-weight: 500 !important;
-    transition: all .15s ease-in-out;
-}
-section[data-testid="stSidebar"] [data-testid="stSidebarNav"] a:hover {
-    background-color: #1e293b !important;
-}
-/* Página selecionada */
-section[data-testid="stSidebar"] [data-testid="stSidebarNav"] a[aria-current="page"] {
-    background: linear-gradient(90deg, #2563eb 0%, #1d4ed8 100%) !important;
-    border-left: 4px solid #ef4444 !important;
-    box-shadow: 0 2px 8px rgba(37,99,235,.4) !important;
-    font-weight: 700 !important;
-    padding-left: 14px !important;
-}
-section[data-testid="stSidebar"] [data-testid="stSidebarNav"] a[aria-current="page"] *,
-section[data-testid="stSidebar"] [data-testid="stSidebarNav"] a[aria-current="page"] span {
-    color: #ffffff !important;
-    font-weight: 700 !important;
-}
-
-.erp-header { background:#0f172a; padding:20px 24px; border-radius:12px; margin-bottom:20px; }
-.erp-title  { color:white; font-size:24px; font-weight:700; letter-spacing:1px; }
-.erp-title span { color:#ef4444; }
-.erp-sub    { color:#94a3b8; font-size:14px; margin-top:4px; }
-
-.card { background:white; padding:20px; border-radius:12px; border:1px solid #e2e8f0; margin-bottom:16px; }
-
-.metric-card { background:#f1f5f9; padding:16px; border-radius:10px; text-align:center; border:1px solid #e2e8f0; }
-.metric-card b { display:block; color:#64748b; font-size:12px; font-weight:600; text-transform:uppercase; letter-spacing:.5px; margin-bottom:6px; }
-.metric-card .metric-val { font-size:22px; font-weight:700; color:#0f172a; }
-.metric-card .metric-val.azul { color:#2563eb; }
-
-div[data-testid="stButton"] > button[kind="primary"] {
-    background-color:#2563eb !important; color:white !important; border-radius:8px !important;
-    font-weight:700 !important; font-size:15px !important; padding:12px 0 !important; border:none !important;
-}
-</style>
-""", unsafe_allow_html=True)
+# # REMOVED_BY_DARK_THEME_PATCH: st.markdown("""
+# # REMOVED_BY_DARK_THEME_PATCH: <style>
+# # REMOVED_BY_DARK_THEME_PATCH: @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+# # REMOVED_BY_DARK_THEME_PATCH: html, body, [class*="css"] { font-family:'Inter',sans-serif; }
+# # REMOVED_BY_DARK_THEME_PATCH: 
+# # REMOVED_BY_DARK_THEME_PATCH: section[data-testid="stSidebar"], section[data-testid="stSidebar"] > div {
+# # REMOVED_BY_DARK_THEME_PATCH:     background-color:#0f172a !important;
+# # REMOVED_BY_DARK_THEME_PATCH: }
+# # REMOVED_BY_DARK_THEME_PATCH: section[data-testid="stSidebar"] * { color:#cbd5e1 !important; background-color:transparent !important; }
+# # REMOVED_BY_DARK_THEME_PATCH: section[data-testid="stSidebar"] h1, section[data-testid="stSidebar"] h2, section[data-testid="stSidebar"] h3 { color:#f8fafc !important; }
+# # REMOVED_BY_DARK_THEME_PATCH: 
+# # REMOVED_BY_DARK_THEME_PATCH: /* === Navegação entre páginas (sidebar) === */
+# # REMOVED_BY_DARK_THEME_PATCH: section[data-testid="stSidebar"] [data-testid="stSidebarNav"] a {
+# # REMOVED_BY_DARK_THEME_PATCH:     border-radius: 8px !important;
+# # REMOVED_BY_DARK_THEME_PATCH:     margin: 2px 6px !important;
+# # REMOVED_BY_DARK_THEME_PATCH:     padding: 10px 12px !important;
+# # REMOVED_BY_DARK_THEME_PATCH:     font-weight: 500 !important;
+# # REMOVED_BY_DARK_THEME_PATCH:     transition: all .15s ease-in-out;
+# # REMOVED_BY_DARK_THEME_PATCH: }
+# # REMOVED_BY_DARK_THEME_PATCH: section[data-testid="stSidebar"] [data-testid="stSidebarNav"] a:hover {
+# # REMOVED_BY_DARK_THEME_PATCH:     background-color: #1e293b !important;
+# # REMOVED_BY_DARK_THEME_PATCH: }
+# # REMOVED_BY_DARK_THEME_PATCH: /* Página selecionada */
+# # REMOVED_BY_DARK_THEME_PATCH: section[data-testid="stSidebar"] [data-testid="stSidebarNav"] a[aria-current="page"] {
+# # REMOVED_BY_DARK_THEME_PATCH:     background: linear-gradient(90deg, #2563eb 0%, #1d4ed8 100%) !important;
+# # REMOVED_BY_DARK_THEME_PATCH:     border-left: 4px solid #ef4444 !important;
+# # REMOVED_BY_DARK_THEME_PATCH:     box-shadow: 0 2px 8px rgba(37,99,235,.4) !important;
+# # REMOVED_BY_DARK_THEME_PATCH:     font-weight: 700 !important;
+# # REMOVED_BY_DARK_THEME_PATCH:     padding-left: 14px !important;
+# # REMOVED_BY_DARK_THEME_PATCH: }
+# # REMOVED_BY_DARK_THEME_PATCH: section[data-testid="stSidebar"] [data-testid="stSidebarNav"] a[aria-current="page"] *,
+# # REMOVED_BY_DARK_THEME_PATCH: section[data-testid="stSidebar"] [data-testid="stSidebarNav"] a[aria-current="page"] span {
+# # REMOVED_BY_DARK_THEME_PATCH:     color: #ffffff !important;
+# # REMOVED_BY_DARK_THEME_PATCH:     font-weight: 700 !important;
+# # REMOVED_BY_DARK_THEME_PATCH: }
+# # REMOVED_BY_DARK_THEME_PATCH: 
+# # REMOVED_BY_DARK_THEME_PATCH: .erp-header { background:#0f172a; padding:20px 24px; border-radius:12px; margin-bottom:20px; }
+# # REMOVED_BY_DARK_THEME_PATCH: .erp-title  { color:white; font-size:24px; font-weight:700; letter-spacing:1px; }
+# # REMOVED_BY_DARK_THEME_PATCH: .erp-title span { color:#ef4444; }
+# # REMOVED_BY_DARK_THEME_PATCH: .erp-sub    { color:#94a3b8; font-size:14px; margin-top:4px; }
+# # REMOVED_BY_DARK_THEME_PATCH: 
+# # REMOVED_BY_DARK_THEME_PATCH: .card { background:white; padding:20px; border-radius:12px; border:1px solid #e2e8f0; margin-bottom:16px; }
+# # REMOVED_BY_DARK_THEME_PATCH: 
+# # REMOVED_BY_DARK_THEME_PATCH: .metric-card { background:#f1f5f9; padding:16px; border-radius:10px; text-align:center; border:1px solid #e2e8f0; }
+# # REMOVED_BY_DARK_THEME_PATCH: .metric-card b { display:block; color:#64748b; font-size:12px; font-weight:600; text-transform:uppercase; letter-spacing:.5px; margin-bottom:6px; }
+# # REMOVED_BY_DARK_THEME_PATCH: .metric-card .metric-val { font-size:22px; font-weight:700; color:#0f172a; }
+# # REMOVED_BY_DARK_THEME_PATCH: .metric-card .metric-val.azul { color:#2563eb; }
+# # REMOVED_BY_DARK_THEME_PATCH: 
+# # REMOVED_BY_DARK_THEME_PATCH: div[data-testid="stButton"] > button[kind="primary"] {
+# # REMOVED_BY_DARK_THEME_PATCH:     background-color:#2563eb !important; color:white !important; border-radius:8px !important;
+# # REMOVED_BY_DARK_THEME_PATCH:     font-weight:700 !important; font-size:15px !important; padding:12px 0 !important; border:none !important;
+# # REMOVED_BY_DARK_THEME_PATCH: }
+# # REMOVED_BY_DARK_THEME_PATCH: </style>
+# # REMOVED_BY_DARK_THEME_PATCH: """, unsafe_allow_html=True)
 
 
 # ─────────────────────────────────────────────
