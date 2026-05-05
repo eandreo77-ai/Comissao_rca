@@ -98,10 +98,12 @@ def _enviar_email_otp(to_email: str, codigo: str, nome: str) -> None:
             "Variáveis SMTP não configuradas (SMTP_HOST, SMTP_USER, SMTP_PASSWORD)."
         )
 
-    msg = MIMEMultipart()
-    msg["From"] = f"Comissão RCA - ROFE <{from_email}>"
+    # 'alternative' = cliente escolhe entre plain ou HTML (correto pra OTP).
+    # Subject e From SEM acento — alguns filtros corporativos rejeitam.
+    msg = MIMEMultipart("alternative")
+    msg["From"] = f"Comissao RCA - ROFE <{from_email}>"
     msg["To"] = to_email
-    msg["Subject"] = "Seu código de acesso - Comissão RCA"
+    msg["Subject"] = "Codigo de acesso - Comissao RCA"
 
     body_text = (
         f"Olá {nome},\n\n"
