@@ -1,0 +1,13 @@
+__pycache__/
+*.pyc
+*.pyo
+*.log
+.venv/
+venv/
+env/
+.vscode/
+.idea/
+*.swp
+.DS_Store
+Thumbs.db
+backup_*.zip
