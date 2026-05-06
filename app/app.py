@@ -648,24 +648,6 @@ with st.container():
                     except Exception as e:
                         erros_rca.append(f"Erro na consulta Oracle: {e}")
                     db.desconectar()
-            # === AUDIT_PATCH === registra resultado
-            if _imp_id:
-                try:
-                    audit.registrar_lancamentos(
-                        importacao_id=_imp_id,
-                        lancamentos=st.session_state.lancamentos,
-                        recnums=recnums if sucesso else None,
-                        sucesso=sucesso,
-                        erro_msg=erro_lote if not sucesso else None,
-                    )
-                    audit.finalizar_importacao(
-                        _imp_id,
-                        sucesso=sucesso,
-                        erro_msg=erro_lote if not sucesso else None,
-                    )
-                except Exception as _e:
-                    print(f'[audit] falha registrar/finalizar: {_e}')
-            # === FIM_AUDIT_POS ===
                 else:
                     st.warning("Não foi possível conectar ao Oracle. Verifique o Instant Client.")
 
@@ -819,6 +801,24 @@ if st.session_state.lancamentos:
             sucesso, recnums, erro_lote = gravador.inserir_lote(st.session_state.lancamentos)
             db.desconectar()
 
+            # === AUDIT_PATCH === registra resultado
+            if _imp_id:
+                try:
+                    audit.registrar_lancamentos(
+                        importacao_id=_imp_id,
+                        lancamentos=st.session_state.lancamentos,
+                        recnums=recnums if sucesso else None,
+                        sucesso=sucesso,
+                        erro_msg=erro_lote if not sucesso else None,
+                    )
+                    audit.finalizar_importacao(
+                        _imp_id,
+                        sucesso=sucesso,
+                        erro_msg=erro_lote if not sucesso else None,
+                    )
+                except Exception as _e:
+                    print(f'[audit] falha registrar/finalizar: {_e}')
+            # === FIM_AUDIT_POS ===
             if sucesso:
                 _prog_slot.progress(1.0, text=f"Concluído — {len(recnums)} lançamento(s) gravado(s)")
                 log_gravacao = [
