@@ -811,13 +811,16 @@ if st.session_state.lancamentos:
                         sucesso=sucesso,
                         erro_msg=erro_lote if not sucesso else None,
                     )
+                except Exception as _e:
+                    print(f'[audit] falha registrar_lancamentos: {_e}')
+                try:
                     audit.finalizar_importacao(
                         _imp_id,
                         sucesso=sucesso,
                         erro_msg=erro_lote if not sucesso else None,
                     )
                 except Exception as _e:
-                    print(f'[audit] falha registrar/finalizar: {_e}')
+                    print(f'[audit] falha finalizar_importacao: {_e}')
             # === FIM_AUDIT_POS ===
             if sucesso:
                 _prog_slot.progress(1.0, text=f"Concluído — {len(recnums)} lançamento(s) gravado(s)")

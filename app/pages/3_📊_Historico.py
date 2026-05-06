@@ -100,6 +100,10 @@ if imp_sel:
             lambda v: f"R$ {float(v or 0):,.2f}".replace(",", "X").replace(".", ",").replace("X", ".")
         )
         df_itens["dtvenc"] = pd.to_datetime(df_itens["dtvenc"]).dt.strftime("%d/%m/%Y")
+        # RECNUM como string sem separador de milhar (pra busca no WinThor)
+        df_itens["recnum_oracle"] = df_itens["recnum_oracle"].apply(
+            lambda v: str(int(v)) if pd.notna(v) else "-"
+        )
         df_itens = df_itens[
             ["id", "codusur", "nome_rca", "valor", "dtvenc",
              "recnum_oracle", "status", "erro_msg"]
