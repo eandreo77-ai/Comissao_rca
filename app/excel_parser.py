@@ -42,7 +42,7 @@ def ler_excel(
         if not header_row:
             return [], "Cabeçalho da planilha não encontrado"
 
-        header = [str(v).strip() if v is not None else "" for v in header_row]
+        header = [v if isinstance(v, (datetime, date)) else (str(v).strip() if v is not None else "") for v in header_row]  # EXCEL_DATES_PATCH
 
         col_map, colunas_parcela = mapear_colunas(header)
 
@@ -128,6 +128,13 @@ def mapear_colunas(header: List[str]) -> Tuple[dict, List[Tuple[int, date]]]:
     colunas_parcela = []
 
     for idx, col_name in enumerate(header):
+        # EXCEL_DATES_PATCH: se cabeçalho é datetime/date, é coluna de parcela
+        if isinstance(col_name, (datetime, date)):
+            _dt = col_name.date() if isinstance(col_name, datetime) else col_name
+            colunas_parcela.append((idx, _dt))
+            continue
+        if not isinstance(col_name, str):
+            continue
         col_upper = col_name.strip().upper()
 
         # Tenta casar com colunas fixas
@@ -191,7 +198,7 @@ def parse_date(val) -> Optional[date]:
     if isinstance(val, date):
         return val
     texto = str(val).strip()
-    for fmt in ("%d/%m/%Y", "%Y-%m-%d", "%d-%m-%Y", "%d.%m.%Y", "%d/%m/%y"):
+    for fmt in ("%d/%m/%Y", "%Y-%m-%d", "%d-%m-%Y", "%d.%m.%Y", "%d/%m/%y", "%Y-%m-%d %H:%M:%S", "%d/%m/%Y %H:%M:%S", "%Y-%m-%d %H:%M:%S.%f"):  # EXCEL_DATES_PATCH
         try:
             return datetime.strptime(texto, fmt).date()
         except ValueError:
