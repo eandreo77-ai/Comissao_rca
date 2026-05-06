@@ -510,32 +510,45 @@ def _dialog_confirmacao():
 # # REMOVED_BY_BANNER_PATCH: </div>
 # # REMOVED_BY_BANNER_PATCH: """, unsafe_allow_html=True)
 
-_slot_teste = st.sidebar.empty()
-if st.sidebar.button("🔌 Testar Conexão", use_container_width=True):
-    ok, msg = testar_conexao()
-    if ok:
-        _slot_teste.success(msg)
-    else:
-        _slot_teste.error(msg)
+# === SIDEBAR_ADMIN_PATCH ===
+# Defaults pra quando usuario nao-admin (sidebar nao mostra os campos)
+filial = CODFILIAL_PADRAO
+conta = str(CODCONTA_PADRAO)
+tipo_servico = TIPOSERVICO
+tipo_lanc_op = "C"
+parceiro_op = "R"
+moeda_op = "R"
+nf_op = "N"
 
-st.sidebar.markdown("---")
-st.sidebar.markdown('<p style="font-size:11px;font-weight:700;color:#64748b;letter-spacing:1px;margin:0 0 4px 0;">📌 IDENTIFICAÇÃO</p>', unsafe_allow_html=True)
+if auth.is_admin():
 
-_c1, _c2 = st.sidebar.columns(2)
-filial = _c1.text_input("Filial", value=CODFILIAL_PADRAO, disabled=True, key="sb_filial")
-conta  = _c2.text_input("Conta",  value=str(CODCONTA_PADRAO), disabled=True, key="sb_conta")
-tipo_servico = st.sidebar.text_input("Tipo Serviço", value=TIPOSERVICO, disabled=True, key="sb_tpserv")
+    _slot_teste = st.sidebar.empty()
+    if st.sidebar.button("🔌 Testar Conexão", use_container_width=True):
+        ok, msg = testar_conexao()
+        if ok:
+            _slot_teste.success(msg)
+        else:
+            _slot_teste.error(msg)
 
-st.sidebar.markdown("---")
-st.sidebar.markdown('<p style="font-size:11px;font-weight:700;color:#64748b;letter-spacing:1px;margin:0 0 4px 0;">💰 LANÇAMENTO</p>', unsafe_allow_html=True)
+    st.sidebar.markdown("---")
+    st.sidebar.markdown('<p style="font-size:11px;font-weight:700;color:#64748b;letter-spacing:1px;margin:0 0 4px 0;">📌 IDENTIFICAÇÃO</p>', unsafe_allow_html=True)
 
-_c3, _c4 = st.sidebar.columns(2)
-tipo_lanc_op = _c3.selectbox("Tipo Lanç.", ["C"], disabled=True, key="sb_tplanc")
-parceiro_op  = _c4.selectbox("Parceiro",   ["R"], disabled=True, key="sb_tpparc")
+    _c1, _c2 = st.sidebar.columns(2)
+    filial = _c1.text_input("Filial", value=CODFILIAL_PADRAO, disabled=True, key="sb_filial")
+    conta  = _c2.text_input("Conta",  value=str(CODCONTA_PADRAO), disabled=True, key="sb_conta")
+    tipo_servico = st.sidebar.text_input("Tipo Serviço", value=TIPOSERVICO, disabled=True, key="sb_tpserv")
 
-_c5, _c6 = st.sidebar.columns(2)
-moeda_op = _c5.selectbox("Moeda",    ["R"], disabled=True, key="sb_moeda")
-nf_op    = _c6.text_input("NF Serv.", value="N", disabled=True, key="sb_nfserv")
+    st.sidebar.markdown("---")
+    st.sidebar.markdown('<p style="font-size:11px;font-weight:700;color:#64748b;letter-spacing:1px;margin:0 0 4px 0;">💰 LANÇAMENTO</p>', unsafe_allow_html=True)
+
+    _c3, _c4 = st.sidebar.columns(2)
+    tipo_lanc_op = _c3.selectbox("Tipo Lanç.", ["C"], disabled=True, key="sb_tplanc")
+    parceiro_op  = _c4.selectbox("Parceiro",   ["R"], disabled=True, key="sb_tpparc")
+
+    _c5, _c6 = st.sidebar.columns(2)
+    moeda_op = _c5.selectbox("Moeda",    ["R"], disabled=True, key="sb_moeda")
+    nf_op    = _c6.text_input("NF Serv.", value="N", disabled=True, key="sb_nfserv")
+# === FIM_SIDEBAR_ADMIN_PATCH ===
 
 st.sidebar.markdown("---")
 st.sidebar.download_button(
