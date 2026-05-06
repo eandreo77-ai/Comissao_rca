@@ -613,6 +613,10 @@ with st.container():
     )
 
     if arquivo:
+
+        # === ARQUIVO_NOME_PATCH ===
+
+        st.session_state.arquivo_nome = arquivo.name
         comissoes, erro = ler_excel(arquivo.read(), codfilial_padrao=_filial_ativo)
 
         if erro:
