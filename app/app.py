@@ -16,6 +16,7 @@ from openpyxl.utils import get_column_letter
 from config import ORACLE_CONFIG, CODCONTA_PADRAO, CODFILIAL_PADRAO, TIPOSERVICO, ROTINA_749
 from oracle_db import OracleConnection, GravadorPCLANC, testar_conexao
 from excel_parser import ler_excel
+import audit
 
 # === ROFE_VISUAL_PATCH ===
 from styles import aplicar_visual, header, secao
@@ -647,6 +648,24 @@ with st.container():
                     except Exception as e:
                         erros_rca.append(f"Erro na consulta Oracle: {e}")
                     db.desconectar()
+            # === AUDIT_PATCH === registra resultado
+            if _imp_id:
+                try:
+                    audit.registrar_lancamentos(
+                        importacao_id=_imp_id,
+                        lancamentos=st.session_state.lancamentos,
+                        recnums=recnums if sucesso else None,
+                        sucesso=sucesso,
+                        erro_msg=erro_lote if not sucesso else None,
+                    )
+                    audit.finalizar_importacao(
+                        _imp_id,
+                        sucesso=sucesso,
+                        erro_msg=erro_lote if not sucesso else None,
+                    )
+                except Exception as _e:
+                    print(f'[audit] falha registrar/finalizar: {_e}')
+            # === FIM_AUDIT_POS ===
                 else:
                     st.warning("Não foi possível conectar ao Oracle. Verifique o Instant Client.")
 
@@ -776,6 +795,23 @@ if st.session_state.lancamentos:
         if not ok_conn:
             st.session_state.erro_gravacao = "Não foi possível conectar ao Oracle."
         else:
+            # === AUDIT_PATCH === inicia auditoria
+            _imp_id = None
+            try:
+                _u = auth.usuario_logado()
+                _arquivo_nome = st.session_state.get('arquivo_nome') or '(sem nome)'
+                _total_itens = len(st.session_state.lancamentos)
+                _valor_total = sum(float(_l['valor']) for _l in st.session_state.lancamentos)
+                if _u:
+                    _imp_id = audit.iniciar_importacao(
+                        usuario_id=_u['id'],
+                        arquivo_nome=_arquivo_nome,
+                        total_itens=_total_itens,
+                        valor_total=_valor_total,
+                    )
+            except Exception as _e:
+                print(f'[audit] falha iniciar_importacao: {_e}')
+            # === FIM_AUDIT_PRE ===
             gravador   = GravadorPCLANC(db)
             _prog_slot = st.empty()
 
