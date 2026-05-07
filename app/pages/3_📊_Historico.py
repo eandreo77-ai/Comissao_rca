@@ -100,9 +100,17 @@ if imp_sel:
             lambda v: f"R$ {float(v or 0):,.2f}".replace(",", "X").replace(".", ",").replace("X", ".")
         )
         df_itens["dtvenc"] = pd.to_datetime(df_itens["dtvenc"]).dt.strftime("%d/%m/%Y")
+        # CODUSUR como string sem separador de milhar
+        df_itens["codusur"] = df_itens["codusur"].apply(
+            lambda v: str(int(v)) if pd.notna(v) else "-"
+        )
         # RECNUM como string sem separador de milhar (pra busca no WinThor)
         df_itens["recnum_oracle"] = df_itens["recnum_oracle"].apply(
             lambda v: str(int(v)) if pd.notna(v) else "-"
+        )
+        # Erro: troca "None"/NaN por string vazia (mais limpo na UI)
+        df_itens["erro_msg"] = df_itens["erro_msg"].apply(
+            lambda v: "" if v is None or (isinstance(v, float) and pd.isna(v)) else str(v)
         )
         df_itens = df_itens[
             ["id", "codusur", "nome_rca", "valor", "dtvenc",
