@@ -357,14 +357,14 @@ if "gravacao_confirmada" not in st.session_state: st.session_state.gravacao_conf
 if "duplicatas"          not in st.session_state: st.session_state.duplicatas          = []
 
 
-@st.dialog("Confirmar Gravação na PCLANC", width="large")
+@st.dialog("Confirmar Gravação", width="large")
 def _dialog_confirmacao():
     lancs       = st.session_state.lancamentos
     valor_total = sum(l["valor"] for l in lancs)
     duplicatas  = st.session_state.duplicatas
 
     st.markdown(
-        f"Você está prestes a gravar **{len(lancs)} lançamentos** na PCLANC. "
+        f"Você está prestes a gravar **{len(lancs)} lançamentos**. "
         f"Revise o resumo abaixo antes de confirmar."
     )
 
@@ -379,7 +379,7 @@ def _dialog_confirmacao():
             for l in duplicatas
         }))
         st.warning(
-            f"⚠ **{len(duplicatas)} lançamento(s) possivelmente duplicado(s)** já existem na PCLANC hoje "
+            f"⚠ **{len(duplicatas)} lançamento(s) possivelmente duplicado(s)** já existem hoje "
             f"com os mesmos dados: {nomes_dup}. Confirme apenas se tiver certeza."
         )
 
@@ -398,7 +398,7 @@ def _dialog_confirmacao():
 
     st.markdown("")
     btn1, btn2 = st.columns(2)
-    if btn1.button("✔  Confirmar e Gravar", type="primary", use_container_width=True):
+    if btn1.button("✔  Gravar", type="primary", use_container_width=True):
         st.session_state.gravacao_confirmada = True
         st.rerun()
     if btn2.button("✘  Cancelar", use_container_width=True):
@@ -516,14 +516,14 @@ with st.container():
     # === DATAS_NO_APP_PATCH ===
     _dcol1, _dcol2, _dcol3 = st.columns([1, 1, 2])
     _dt_p1 = _dcol1.date_input(
-        'Data Parcela 1',
+        'Parcela 1',
         value=st.session_state.get('dt_parcela_1'),
         format='DD/MM/YYYY',
         help='Data de vencimento da 1a (ou unica) parcela',
         key='dt_p1_input',
     )
     _dt_p2 = _dcol2.date_input(
-        'Data Parcela 2',
+        'Parcela 2',
         value=st.session_state.get('dt_parcela_2'),
         format='DD/MM/YYYY',
         help='Data da 2a parcela (so usada se valor > R$ 2.000)',
@@ -702,7 +702,7 @@ if st.session_state.lancamentos:
             f"**{_nomes_alerta}**. Corrija os alertas antes de prosseguir."
         )
 
-    if st.button("▶  Executar Gravação na PCLANC", type="primary", use_container_width=True, disabled=bool(_alertados)):
+    if st.button("▶  Gravar", type="primary", use_container_width=True, disabled=bool(_alertados)):
         # Guarda dupla: impede gravação se houver alertas no momento do clique
         if [l for l in st.session_state.lancamentos if l.get("alerta")]:
             st.session_state.erro_gravacao = (
@@ -753,7 +753,7 @@ if st.session_state.lancamentos:
             gravador   = GravadorPCLANC(db)
             _prog_slot = st.empty()
 
-            _prog_slot.progress(0.0, text="Gravando lote na PCLANC...")
+            _prog_slot.progress(0.0, text="Gravando...")
             sucesso, recnums, erro_lote = gravador.inserir_lote(st.session_state.lancamentos)
             db.desconectar()
 
@@ -794,7 +794,7 @@ if st.session_state.lancamentos:
                     for recnum, r in zip(recnums, st.session_state.lancamentos)
                 ]
             else:
-                _prog_slot.progress(1.0, text="Erro — rollback realizado")
+                _prog_slot.progress(1.0, text="Erro — desfeito")
                 log_gravacao = [
                     {
                         "RECNUM":    "-",
@@ -834,7 +834,7 @@ if st.session_state.log_gravacao:
     st.markdown("")
 
     if err_count == 0:
-        st.success(f"{ok_count} lançamentos gravados com sucesso na PCLANC!")
+        st.success(f"{ok_count} lançamentos gravados com sucesso!")
     else:
         st.error(f"{err_count} erro(s) durante a gravação.")
 

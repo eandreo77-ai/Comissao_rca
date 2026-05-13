@@ -18,7 +18,7 @@ auth.gate_login()
 aplicar_visual()
 header(
     titulo="Histórico de Importações",
-    subtitulo="Auditoria das gravações realizadas na PCLANC",
+    subtitulo="Auditoria das gravações realizadas",
     icone="📊",
     usuario=auth.usuario_logado()["email"],
 )
