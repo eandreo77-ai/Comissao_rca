@@ -30,6 +30,7 @@ import db
 # =============================================================================
 OTP_TTL_MINUTES = int(os.environ.get("OTP_TTL_MINUTES", "10"))
 OTP_LENGTH = 20
+SESSAO_TTL_HORAS = int(os.environ.get("SESSAO_TTL_HORAS", "8"))
 
 
 # =============================================================================
@@ -207,12 +208,97 @@ def is_admin() -> bool:
 
 
 def logout() -> None:
+    # Invalida sessão server-side se houver token na URL
+    sid = st.query_params.get("s")
+    if sid:
+        try:
+            invalidar_sessao(sid)
+        except Exception as _e:
+            print(f"[auth] falha invalidar sessao: {_e}")
+
     for k in (
         "user_id", "user_email", "user_nome", "user_perfil",
         "codigo_enviado_para",
     ):
         if k in st.session_state:
             del st.session_state[k]
+
+    # Remove token da URL
+    try:
+        st.query_params.clear()
+    except Exception:
+        pass
+
+
+# =============================================================================
+# Sessão persistente (sobrevive a F5) — usa tabela `sessoes` do MariaDB
+# =============================================================================
+def criar_sessao(usuario_id: int) -> str:
+    """Cria nova sessão server-side e retorna session_id (UUID) pra usar no
+    query param da URL."""
+    import uuid
+    session_id = uuid.uuid4().hex  # 32 chars hex
+    db.execute(
+        """
+        INSERT INTO sessoes (usuario_id, session_id, ativa)
+        VALUES (%s, %s, 1)
+        """,
+        (int(usuario_id), session_id),
+    )
+    return session_id
+
+
+def validar_sessao(session_id: str) -> Optional[dict]:
+    """Retorna dict do usuário se a sessão é válida, senão None.
+
+    Válida = ativa=1 e dt_ultimo_uso > NOW() - SESSAO_TTL_HORAS.
+    Em caso de sucesso, atualiza dt_ultimo_uso (touch).
+    """
+    if not session_id:
+        return None
+
+    row = db.fetch_one(
+        """
+        SELECT s.id   AS sessao_id,
+               u.id   AS user_id,
+               u.email,
+               u.nome,
+               u.perfil
+          FROM sessoes  s
+          JOIN usuarios u ON u.id = s.usuario_id
+         WHERE s.session_id    = %s
+           AND s.ativa         = 1
+           AND u.ativo         = 1
+           AND s.dt_ultimo_uso > (NOW() - INTERVAL %s HOUR)
+         LIMIT 1
+        """,
+        (session_id, SESSAO_TTL_HORAS),
+    )
+    if not row:
+        return None
+
+    # Touch — atualiza dt_ultimo_uso pra renovar TTL
+    db.execute(
+        "UPDATE sessoes SET dt_ultimo_uso = NOW() WHERE id = %s",
+        (row["sessao_id"],),
+    )
+
+    return {
+        "id":     row["user_id"],
+        "email":  row["email"],
+        "nome":   row["nome"],
+        "perfil": row["perfil"],
+    }
+
+
+def invalidar_sessao(session_id: str) -> None:
+    """Marca uma sessão como inativa (logout)."""
+    if not session_id:
+        return
+    db.execute(
+        "UPDATE sessoes SET ativa = 0 WHERE session_id = %s",
+        (session_id,),
+    )
 
 
 # =============================================================================
@@ -226,11 +312,27 @@ def gate_login() -> None:
     # Logout via querystring (link "Sair" do header passa ?logout=1)
     if st.query_params.get("logout"):
         logout()
-        st.query_params.clear()
         st.rerun()
 
+    # Sessão em memória OK → libera
     if usuario_logado():
-        return  # liberado
+        return
+
+    # Sem sessão em memória, mas há token na URL (?s=...) → tenta re-hidratar
+    sid = st.query_params.get("s")
+    if sid:
+        user = validar_sessao(sid)
+        if user:
+            st.session_state.user_id     = user["id"]
+            st.session_state.user_email  = user["email"]
+            st.session_state.user_nome   = user["nome"]
+            st.session_state.user_perfil = user["perfil"]
+            return  # liberado
+        # Token inválido/expirado → limpa a URL e mostra login
+        try:
+            del st.query_params["s"]
+        except Exception:
+            pass
 
     # ── Tela de login ──────────────────────────────────────────────────────
     from styles import aplicar_visual, header
@@ -303,6 +405,12 @@ def gate_login() -> None:
                         st.session_state.user_nome = user["nome"]
                         st.session_state.user_perfil = user["perfil"]
                         del st.session_state.codigo_enviado_para
+                        # Cria sessão persistente + coloca token na URL (sobrevive F5)
+                        try:
+                            sid = criar_sessao(user["id"])
+                            st.query_params["s"] = sid
+                        except Exception as _e:
+                            print(f"[auth] falha criar_sessao: {_e}")
                         st.rerun()
                     else:
                         st.error("Código inválido ou expirado.")
