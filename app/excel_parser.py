@@ -1,34 +1,71 @@
 """
 Módulo de leitura e parse da planilha Excel de comissões RCA.
 
-Formato real da planilha:
-  - Colunas fixas: parceiro(COD), RCA, contadebito, historico, ...
-  - Colunas de parcelas: cabeçalho = DATA (ex: 13/03/2026), valor = R$ da parcela
-  - A DTLANC não está na planilha — é informada pelo usuário no app
+Formato da planilha (sem colunas de data):
+  - parceiro(COD)  CODUSUR do RCA
+  - RCA            nome (opcional)
+  - contadebito    conta contábil (opcional, default CODCONTA_PADRAO)
+  - historico      descrição do lançamento (opcional)
+  - VALOR          valor total da comissão
 
-Para cada coluna cujo cabeçalho seja uma data válida, é gerado um lançamento
-com dtvenc = essa data e valor = célula correspondente.
+Regra de parcelamento (definida pelo app, não pela planilha):
+  - valor <= LIMITE_PARCELA_UNICA  → 1 lançamento com dt_parcela_1
+  - valor > LIMITE_PARCELA_UNICA   → 2 lançamentos (valor/2 cada)
+                                     parcela 1: round(valor/2, 2)  com dt_parcela_1
+                                     parcela 2: valor - parcela 1   com dt_parcela_2
+
+A data de vencimento é informada pelo USUÁRIO no app (não vem da planilha).
 """
+from __future__ import annotations
+
 import openpyxl
 from datetime import date, datetime
-from typing import List, Optional, Tuple
+from decimal import Decimal, ROUND_HALF_UP
 from io import BytesIO
+from typing import List, Optional, Tuple
+
 from models import ComissaoRCA
 from config import CODCONTA_PADRAO, CODFILIAL_PADRAO
 
 
+def _meio_arredondar_cima(valor_total: float) -> float:
+    """Retorna valor_total/2 com ROUND_HALF_UP na 2ª casa decimal.
+
+    Exemplo:
+      2.219,49 / 2 = 1.109,745  → 1.109,75  (pra cima)
+      2.219,48 / 2 = 1.109,74   → 1.109,74
+    """
+    metade = Decimal(str(valor_total)) / Decimal(2)
+    return float(metade.quantize(Decimal("0.01"), rounding=ROUND_HALF_UP))
+
+
+# Limite (R$) abaixo do qual o lançamento NÃO é parcelado.
+LIMITE_PARCELA_UNICA = 2000.00
+
+
+# =============================================================================
+# Entrypoint
+# =============================================================================
 def ler_excel(
     conteudo_bytes: bytes,
+    dt_parcela_1: date,
+    dt_parcela_2: date,
+    historico: str = "COMISSAO RCA",
     codfilial_padrao: str = CODFILIAL_PADRAO,
+    limite_parcela_unica: float = LIMITE_PARCELA_UNICA,
 ) -> Tuple[List[ComissaoRCA], Optional[str]]:
-    """
-    Lê a planilha e retorna lista de ComissaoRCA.
+    """Lê a planilha e retorna lista de ComissaoRCA aplicando a regra de parcelamento.
 
-    - Detecta automaticamente as colunas fixas pelo nome.
-    - Detecta colunas de parcela pelo cabeçalho ser uma data.
-    - Uma linha gera N lançamentos (um por coluna de data preenchida).
+    Args:
+        conteudo_bytes:       bytes do arquivo .xlsx
+        dt_parcela_1:         data de vencimento da 1ª parcela (sempre usada)
+        dt_parcela_2:         data da 2ª parcela (só usada se valor > limite)
+        historico:            texto do histórico (igual pra todos os lançamentos)
+        codfilial_padrao:     filial default se a coluna não vier na planilha
+        limite_parcela_unica: acima desse valor (R$), divide em 2 parcelas
 
-    Retorna: (lista_comissoes, erro)
+    Retorna:
+        (lista_de_lancamentos, mensagem_de_erro_ou_None)
     """
     try:
         wb = openpyxl.load_workbook(BytesIO(conteudo_bytes), read_only=True, data_only=True)
@@ -37,136 +74,161 @@ def ler_excel(
         if ws is None:
             return [], "Planilha vazia ou não encontrada"
 
-        # Ler cabeçalho
         header_row = next(ws.iter_rows(min_row=1, max_row=1, values_only=True), None)
         if not header_row:
             return [], "Cabeçalho da planilha não encontrado"
 
-        header = [v if isinstance(v, (datetime, date)) else (str(v).strip() if v is not None else "") for v in header_row]  # EXCEL_DATES_PATCH
+        header = [
+            str(v).strip() if v is not None else ""
+            for v in header_row
+        ]
 
-        col_map, colunas_parcela = mapear_colunas(header)
+        col_map = _mapear_colunas(header)
 
         if "codusur" not in col_map:
-            return [], f"Coluna CODUSUR / parceiro(COD) não encontrada. Colunas: {', '.join(h for h in header if h)}"
+            return [], (
+                f"Coluna CODUSUR / parceiro(COD) não encontrada. "
+                f"Colunas detectadas: {', '.join(h for h in header if h)}"
+            )
 
-        if not colunas_parcela:
-            return [], "Nenhuma coluna de data (parcela) encontrada no cabeçalho."
+        if "valor" not in col_map:
+            return [], (
+                f"Coluna VALOR não encontrada. "
+                f"Esperava uma coluna com nome 'VALOR' ou 'VALOR_TOTAL'. "
+                f"Colunas detectadas: {', '.join(h for h in header if h)}"
+            )
 
-        comissoes = []
+        comissoes: List[ComissaoRCA] = []
+
         for row_num, row in enumerate(ws.iter_rows(min_row=2, values_only=True), start=2):
             if row is None or all(v is None for v in row):
                 continue
 
-            codusur_val = get_cell_value(row, col_map.get("codusur"))
+            codusur_val = _get_cell(row, col_map.get("codusur"))
             if codusur_val is None:
                 continue
-
             try:
                 codusur = int(float(str(codusur_val)))
             except (ValueError, TypeError):
                 continue
 
-            nome_rca  = parse_str(get_cell_value(row, col_map.get("nome_rca"))) or ""
-            codconta  = parse_int(get_cell_value(row, col_map.get("codconta"))) or CODCONTA_PADRAO
-            codfilial = parse_str(get_cell_value(row, col_map.get("codfilial"))) or codfilial_padrao
-            historico = parse_str(get_cell_value(row, col_map.get("historico"))) or "COMISSAO RCA"
+            valor_val = _get_cell(row, col_map.get("valor"))
+            if valor_val is None:
+                continue
+            try:
+                valor_total = _parse_valor(valor_val)
+            except (ValueError, TypeError):
+                continue
+            if valor_total <= 0:
+                continue
 
-            # Gera um lançamento por coluna de data que tiver valor
-            for parcela_num, (col_idx, dtvenc) in enumerate(colunas_parcela, start=1):
-                valor_val = get_cell_value(row, col_idx)
-                if valor_val is None:
-                    continue
+            # Nome do RCA é buscado depois no Oracle (CODUSUR). Aqui só
+            # mantém vazio se a planilha não trouxer.
+            nome_rca  = _parse_str(_get_cell(row, col_map.get("nome_rca"))) or ""
+            # Conta contábil: opcional na planilha; default do .env/config
+            codconta  = _parse_int(_get_cell(row, col_map.get("codconta"))) or CODCONTA_PADRAO
+            codfilial = _parse_str(_get_cell(row, col_map.get("codfilial"))) or codfilial_padrao
+            # Histórico: SEMPRE do parâmetro (digitado no app pelo usuário).
+            # Ignora qualquer coluna 'historico' da planilha.
+            historico_linha = historico
 
-                try:
-                    valor = parse_valor(valor_val)
-                except (ValueError, TypeError):
-                    continue
-
-                if valor <= 0:
-                    continue
-
+            # ── Aplica regra de parcelamento ────────────────────────────────
+            if valor_total <= limite_parcela_unica:
+                # Parcela única — usa data 1
                 comissoes.append(ComissaoRCA(
                     linha=row_num,
-                    parcela=parcela_num,
+                    parcela=1,
                     codusur=codusur,
                     nome_rca=nome_rca,
-                    valor=valor,
+                    valor=round(valor_total, 2),
                     codconta=codconta,
                     codfilial=codfilial,
-                    historico=historico,
-                    dtvenc=dtvenc,
+                    historico=historico_linha,
+                    dtvenc=dt_parcela_1,
+                ))
+            else:
+                # 2 parcelas: p1 = metade arredondada PRA CIMA (ROUND_HALF_UP)
+                # p2 = total - p1 (garante soma exata)
+                valor_p1 = _meio_arredondar_cima(valor_total)
+                valor_p2 = round(valor_total - valor_p1, 2)
+                comissoes.append(ComissaoRCA(
+                    linha=row_num,
+                    parcela=1,
+                    codusur=codusur,
+                    nome_rca=nome_rca,
+                    valor=valor_p1,
+                    codconta=codconta,
+                    codfilial=codfilial,
+                    historico=historico_linha,
+                    dtvenc=dt_parcela_1,
+                ))
+                comissoes.append(ComissaoRCA(
+                    linha=row_num,
+                    parcela=2,
+                    codusur=codusur,
+                    nome_rca=nome_rca,
+                    valor=valor_p2,
+                    codconta=codconta,
+                    codfilial=codfilial,
+                    historico=historico_linha,
+                    dtvenc=dt_parcela_2,
                 ))
 
         wb.close()
 
         if not comissoes:
-            return [], "Nenhum lançamento encontrado. Verifique se as colunas de data possuem valores."
+            return [], "Nenhum lançamento encontrado. Verifique se a coluna VALOR possui valores positivos."
 
         return comissoes, None
 
     except Exception as e:
-        return [], f"Erro ao ler planilha: {str(e)}"
+        return [], f"Erro ao ler planilha: {e}"
 
 
-def mapear_colunas(header: List[str]) -> Tuple[dict, List[Tuple[int, date]]]:
-    """
-    Retorna:
-      col_map         → {campo: índice_coluna} para colunas fixas
-      colunas_parcela → [(índice_coluna, date), ...] para colunas cujo cabeçalho é uma data
-    """
-    aliases = {
-        "codusur":   ["PARCEIRO(COD)", "PARCEIRO", "CODUSUR", "COD_USUR",
-                      "CODIGO_RCA", "COD_RCA", "RCA_COD", "CODRCA", "COD"],
-        "nome_rca":  ["RCA", "NOME_RCA", "NOME RCA", "NOME", "PARCEIRO_NOME"],
-        "codconta":  ["CONTADEBITO", "CONTA DEBITO", "CONTA_DEBITO",
-                      "CODCONTA", "COD_CONTA", "CONTA", "CODIGO_CONTA"],
-        "codfilial": ["CODFILIAL", "COD_FILIAL", "FILIAL", "CODIGO_FILIAL"],
-        "historico": ["HISTORICO", "HISTÓRICO", "DESCRICAO", "DESCRIÇÃO", "OBS"],
-    }
+# =============================================================================
+# Mapeamento de colunas (só fixas — sem detecção de data)
+# =============================================================================
+_ALIASES = {
+    "codusur":   ["PARCEIRO(COD)", "PARCEIRO", "CODUSUR", "COD_USUR",
+                  "CODIGO_RCA", "COD_RCA", "RCA_COD", "CODRCA", "COD"],
+    "nome_rca":  ["RCA", "NOME_RCA", "NOME RCA", "NOME", "PARCEIRO_NOME"],
+    "codconta":  ["CONTADEBITO", "CONTA DEBITO", "CONTA_DEBITO",
+                  "CODCONTA", "COD_CONTA", "CONTA", "CODIGO_CONTA"],
+    "codfilial": ["CODFILIAL", "COD_FILIAL", "FILIAL", "CODIGO_FILIAL"],
+    "historico": ["HISTORICO", "HISTÓRICO", "DESCRICAO", "DESCRIÇÃO", "OBS"],
+    "valor":     ["VALOR", "VALOR_TOTAL", "VALORTOTAL", "VALOR TOTAL",
+                  "TOTAL", "VALOR_COMISSAO", "COMISSAO"],
+}
 
-    col_map = {}
-    colunas_parcela = []
 
+def _mapear_colunas(header: List[str]) -> dict:
+    col_map: dict = {}
     for idx, col_name in enumerate(header):
-        # EXCEL_DATES_PATCH: se cabeçalho é datetime/date, é coluna de parcela
-        if isinstance(col_name, (datetime, date)):
-            _dt = col_name.date() if isinstance(col_name, datetime) else col_name
-            colunas_parcela.append((idx, _dt))
-            continue
-        if not isinstance(col_name, str):
+        if not col_name:
             continue
         col_upper = col_name.strip().upper()
-
-        # Tenta casar com colunas fixas
-        mapeado = False
-        for campo, nomes in aliases.items():
+        for campo, nomes in _ALIASES.items():
             if col_upper in nomes and campo not in col_map:
                 col_map[campo] = idx
-                mapeado = True
                 break
-
-        # Se não mapeou, tenta interpretar como data (coluna de parcela)
-        if not mapeado and col_name.strip():
-            dt = parse_date(col_name.strip())
-            if dt is not None:
-                colunas_parcela.append((idx, dt))
-
-    return col_map, colunas_parcela
+    return col_map
 
 
-def get_cell_value(row: tuple, idx: Optional[int]):
+# =============================================================================
+# Helpers
+# =============================================================================
+def _get_cell(row: tuple, idx: Optional[int]):
     if idx is None or idx >= len(row):
         return None
     return row[idx]
 
 
-def parse_valor(val) -> float:
+def _parse_valor(val) -> float:
     """Converte valor monetário para float (aceita R$, ponto de milhar, vírgula decimal)."""
     if isinstance(val, (int, float)):
         return float(val)
     texto = str(val).strip()
     texto = texto.replace("R$", "").replace(" ", "")
-    # Se tiver vírgula como separador decimal (formato BR: 7.219,48)
     if "," in texto and "." in texto:
         texto = texto.replace(".", "").replace(",", ".")
     elif "," in texto:
@@ -174,7 +236,7 @@ def parse_valor(val) -> float:
     return float(texto)
 
 
-def parse_int(val) -> Optional[int]:
+def _parse_int(val) -> Optional[int]:
     if val is None:
         return None
     try:
@@ -183,24 +245,8 @@ def parse_int(val) -> Optional[int]:
         return None
 
 
-def parse_str(val) -> Optional[str]:
+def _parse_str(val) -> Optional[str]:
     if val is None:
         return None
     s = str(val).strip()
     return s if s and s.upper() not in ("NONE", "NAN") else None
-
-
-def parse_date(val) -> Optional[date]:
-    if val is None:
-        return None
-    if isinstance(val, datetime):
-        return val.date()
-    if isinstance(val, date):
-        return val
-    texto = str(val).strip()
-    for fmt in ("%d/%m/%Y", "%Y-%m-%d", "%d-%m-%Y", "%d.%m.%Y", "%d/%m/%y", "%Y-%m-%d %H:%M:%S", "%d/%m/%Y %H:%M:%S", "%Y-%m-%d %H:%M:%S.%f"):  # EXCEL_DATES_PATCH
-        try:
-            return datetime.strptime(texto, fmt).date()
-        except ValueError:
-            continue
-    return None

@@ -57,36 +57,31 @@ def badge(texto: str, cor: str) -> str:
 
 
 def gerar_modelo_excel() -> bytes:
-    from openpyxl.formatting.rule import FormulaRule
     from openpyxl.worksheet.datavalidation import DataValidation
 
     wb  = openpyxl.Workbook()
     ws  = wb.active
     ws.title = "Comissoes"
 
-    # Colunas: apenas as usadas pelo parser
-    # Fixas obrigatórias / opcionais + duas datas de exemplo
-    fixed = [
-        ("parceiro(COD)", 16),   # A — CODUSUR (obrigatório)
-        ("RCA",           28),   # B — nome referência (opcional)
-        ("contadebito",   14),   # C — conta contábil (obrigatório)
-        ("historico",     32),   # D — descrição (opcional)
+    # Planilha SIMPLIFICADA: so 2 colunas obrigatorias.
+    # Nome do RCA: buscado automaticamente pelo Oracle (CODUSUR).
+    # Conta contabil: usa default (100010) do .env / configuracoes.
+    # Historico, Data Parcela 1, Data Parcela 2: digitados no app.
+    cols = [
+        ("parceiro(COD)", 18),
+        ("VALOR",         18),
     ]
-    datas = [("13/04/2026", 16), ("30/04/2026", 16)]   # E, F
-    cols  = fixed + datas
-    n_fixed     = len(fixed)
     n_rows_data = 1
-    max_row     = 1 + n_rows_data   # linha 2
+    max_row     = 1 + n_rows_data
 
-    # ── Estilos ──────────────────────────────────────────────────────
+    # Estilos
     sd   = Side(style="thin", color="AAAAAA")
     brd  = Border(left=sd, right=sd, top=sd, bottom=sd)
     ct   = Alignment(horizontal="center", vertical="center")
     hf   = Font(bold=True, color="FFFFFF", size=11)
-    hbl  = PatternFill("solid", fgColor="0F172A")   # cabeçalho — navy
-    ferr = PatternFill("solid", fgColor="FEE2E2")   # CF erro — vermelho
+    hbl  = PatternFill("solid", fgColor="0F172A")
 
-    # ── Cabeçalho ────────────────────────────────────────────────────
+    # Cabecalho
     for ci, (h, w) in enumerate(cols, 1):
         c = ws.cell(1, ci, h)
         c.font = hf
@@ -96,26 +91,20 @@ def gerar_modelo_excel() -> bytes:
         ws.column_dimensions[get_column_letter(ci)].width = w
     ws.row_dimensions[1].height = 22
 
-    # ── 1 linha de exemplo — sem cor ─────────────────────────────────
-    exemplo = [11, "TELMI TEIXEIRA DO LAGO", 100010, "COMISSAO ABR/2026", 7219.48, 7219.48]
+    # 1 linha de exemplo
+    exemplo = [11, 7219.48]
     for ci, val in enumerate(exemplo, 1):
-        is_p = ci > n_fixed
         c = ws.cell(2, ci, val)
         c.border = brd
-        c.alignment = Alignment(vertical="center")
         if ci == 1:
             c.number_format = "0"
             c.alignment = Alignment(horizontal="center", vertical="center")
-        elif ci == 3:
-            c.number_format = "0"
-            c.alignment = Alignment(horizontal="center", vertical="center")
-        elif is_p and val is not None:
+        elif ci == 2:
             c.number_format = "#,##0.00"
             c.alignment = Alignment(horizontal="right", vertical="center")
     ws.row_dimensions[2].height = 18
 
-    # ── Validação de dados ───────────────────────────────────────────
-    # parceiro(COD): inteiro entre 1 e 999999
+    # Validacao: parceiro(COD)
     dv_cod = DataValidation(
         type="whole", operator="between", formula1="1", formula2="999999",
         error="Informe um codigo RCA inteiro valido (ex: 11)",
@@ -124,100 +113,18 @@ def gerar_modelo_excel() -> bytes:
     dv_cod.sqref = f"A2:A{max_row + 50}"
     ws.add_data_validation(dv_cod)
 
-    # contadebito: inteiro > 0
-    dv_conta = DataValidation(
-        type="whole", operator="greaterThan", formula1="0",
-        error="Informe o codigo da conta contabil (ex: 100010)",
-        errorTitle="Conta invalida", showErrorMessage=True,
+    # Validacao: VALOR > 0
+    dv_val = DataValidation(
+        type="decimal", operator="greaterThan", formula1="0",
+        error="Informe o valor total da comissao maior que zero",
+        errorTitle="Valor invalido", showErrorMessage=True,
     )
-    dv_conta.sqref = f"C2:C{max_row + 50}"
-    ws.add_data_validation(dv_conta)
+    dv_val.sqref = f"B2:B{max_row + 50}"
+    ws.add_data_validation(dv_val)
 
-    # colunas de parcela: decimal > 0
-    for col_idx in range(n_fixed + 1, len(cols) + 1):
-        col_letter = get_column_letter(col_idx)
-        dv_val = DataValidation(
-            type="decimal", operator="greaterThan", formula1="0",
-            error="Informe o valor da parcela maior que zero",
-            errorTitle="Valor invalido", showErrorMessage=True,
-        )
-        dv_val.sqref = f"{col_letter}2:{col_letter}{max_row + 50}"
-        ws.add_data_validation(dv_val)
-
-    # ── Formatação condicional — todos obrigatórios ──────────────────
-    limite = max_row + 50
-
-    # A — parceiro(COD): vazio ou não-numérico → vermelho
-    ws.conditional_formatting.add(
-        f"A2:A{limite}",
-        FormulaRule(formula=["OR(ISBLANK(A2),NOT(ISNUMBER(A2)))"],
-                    fill=ferr, stopIfTrue=True)
-    )
-    # B — RCA: vazio quando linha tem dado → vermelho
-    ws.conditional_formatting.add(
-        f"B2:B{limite}",
-        FormulaRule(formula=["AND(NOT(ISBLANK(A2)),ISBLANK(B2))"],
-                    fill=ferr, stopIfTrue=True)
-    )
-    # C — contadebito: vazio ou não-numérico → vermelho
-    ws.conditional_formatting.add(
-        f"C2:C{limite}",
-        FormulaRule(formula=["OR(ISBLANK(C2),NOT(ISNUMBER(C2)))"],
-                    fill=ferr, stopIfTrue=True)
-    )
-    # D — historico: vazio quando linha tem dado → vermelho
-    ws.conditional_formatting.add(
-        f"D2:D{limite}",
-        FormulaRule(formula=["AND(NOT(ISBLANK(A2)),ISBLANK(D2))"],
-                    fill=ferr, stopIfTrue=True)
-    )
-    # Colunas de parcela: valor negativo ou zero → vermelho
-    for col_idx in range(n_fixed + 1, len(cols) + 1):
-        col_letter = get_column_letter(col_idx)
-        ws.conditional_formatting.add(
-            f"{col_letter}2:{col_letter}{limite}",
-            FormulaRule(formula=[f"AND(NOT(ISBLANK({col_letter}2)),{col_letter}2<=0)"],
-                        fill=ferr, stopIfTrue=True)
-        )
-
-    # ── Aba Instruções ───────────────────────────────────────────────
-    wi = wb.create_sheet("Instrucoes")
-    wi.column_dimensions["A"].width = 18
-    wi.column_dimensions["B"].width = 55
-    wi.column_dimensions["C"].width = 14
-    wi.column_dimensions["D"].width = 30
-
-    for cc in ["A1","B1","C1","D1"]:
-        wi[cc].font = hf; wi[cc].fill = hbl; wi[cc].border = brd
-        wi[cc].alignment = ct
-    wi["A1"] = "Coluna"; wi["B1"] = "Descricao"
-    wi["C1"] = "Obrigatorio"; wi["D1"] = "Alerta / Validacao"
-
-    ins = [
-        ("parceiro(COD)", "Codigo do RCA no WinThor (inteiro)",          "SIM", "Vermelho se vazio ou nao-numerico"),
-        ("RCA",           "Nome do RCA (referencia visual)",             "SIM", "Vermelho se linha preenchida sem RCA"),
-        ("contadebito",   "Codigo da conta contabil (ex: 100010)",       "SIM", "Vermelho se vazio ou nao-numerico"),
-        ("historico",     "Descricao do lancamento (COMISSAO ABR/2026)", "SIM", "Vermelho se linha preenchida sem historico"),
-        ("DD/MM/AAAA",    "Cabecalho = data de vencimento da parcela",   "SIM", "Vermelho se valor <= 0"),
-        ("DD/MM/AAAA ...", "Adicione quantas colunas de data precisar",  "SIM", "Vermelho se valor <= 0"),
-    ]
-    bf = Font(bold=True)
-    for ri2, (campo, desc, ob, alerta) in enumerate(ins, 2):
-        wi.cell(ri2, 1, campo).font = bf
-        wi.cell(ri2, 2, desc)
-        wi.cell(ri2, 3, ob).alignment = Alignment(horizontal="center")
-        wi.cell(ri2, 4, alerta)
-        for cc in range(1, 5):
-            wi.cell(ri2, cc).border = brd
-        wi.row_dimensions[ri2].height = 18
-
-    nr = len(ins) + 3
-    c_regra = wi.cell(nr, 1, "REGRA:")
-    c_regra.font = Font(bold=True, color="C00000")
-    wi.cell(nr, 2, "Colunas com cabecalho no formato DD/MM/AAAA viram lancamentos separados na PCLANC.")
-
-    buf = BytesIO(); wb.save(buf); return buf.getvalue()
-
+    buf = BytesIO()
+    wb.save(buf)
+    return buf.getvalue()
 
 # ─────────────────────────────────────────────
 # Página
@@ -606,6 +513,35 @@ st.markdown("### 📂 Importação de Arquivo")
 
 with st.container():
     st.markdown('<div class="card">', unsafe_allow_html=True)
+    # === DATAS_NO_APP_PATCH ===
+    _dcol1, _dcol2, _dcol3 = st.columns([1, 1, 2])
+    _dt_p1 = _dcol1.date_input(
+        'Data Parcela 1',
+        value=st.session_state.get('dt_parcela_1'),
+        format='DD/MM/YYYY',
+        help='Data de vencimento da 1a (ou unica) parcela',
+        key='dt_p1_input',
+    )
+    _dt_p2 = _dcol2.date_input(
+        'Data Parcela 2',
+        value=st.session_state.get('dt_parcela_2'),
+        format='DD/MM/YYYY',
+        help='Data da 2a parcela (so usada se valor > R$ 2.000)',
+        key='dt_p2_input',
+    )
+    _historico = _dcol3.text_input(
+        'Historico',
+        value=st.session_state.get('hist_comissao', ''),
+        placeholder='ex: COMISSAO ABR/2026',
+        help='Texto que vai no historico de todos os lancamentos',
+        key='hist_input',
+        max_chars=120,
+    )
+    st.session_state.dt_parcela_1 = _dt_p1
+    st.session_state.dt_parcela_2 = _dt_p2
+    st.session_state.hist_comissao = _historico
+    # === FIM_DATAS_NO_APP_PATCH ===
+
 
     arquivo = st.file_uploader(
         "Arraste ou selecione o arquivo (.xlsx)",
@@ -617,7 +553,23 @@ with st.container():
         # === ARQUIVO_NOME_PATCH ===
 
         st.session_state.arquivo_nome = arquivo.name
-        comissoes, erro = ler_excel(arquivo.read(), codfilial_padrao=_filial_ativo)
+        if not _dt_p1 or not _dt_p2:
+            st.warning('Informe as duas datas de parcela antes do upload.')
+            comissoes, erro = [], None
+        elif _dt_p2 < _dt_p1:
+            st.warning('A 2a parcela deve ter data igual ou posterior a 1a.')
+            comissoes, erro = [], None
+        elif not (_historico or '').strip():
+            st.warning('Informe o Historico antes do upload.')
+            comissoes, erro = [], None
+        else:
+            comissoes, erro = ler_excel(
+                arquivo.read(),
+                dt_parcela_1=_dt_p1,
+                dt_parcela_2=_dt_p2,
+                historico=_historico.strip(),
+                codfilial_padrao=_filial_ativo,
+            )
 
         if erro:
             st.error(f"Erro ao ler planilha: {erro}")
