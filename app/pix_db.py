@@ -1,23 +1,22 @@
 """
 Camada de persistência das chaves PIX dos RCAs.
 
-Hoje: SQLite local (arquivo em app/data/pix.db).
-Futuro: trocar a implementação por MariaDB/Django mantendo a mesma API pública.
+Backend: MariaDB (tabelas `rca_pix` e `rca_ignorar` criadas pela migration 001).
+Antes era SQLite local em app/data/pix.db.
+
+Mantém a MESMA API pública da versão SQLite — a página de Cadastro_PIX
+NÃO precisa mudar de linha alguma.
 """
 from __future__ import annotations
 
-import os
 import re
-import sqlite3
-from contextlib import contextmanager
 from dataclasses import dataclass
-from datetime import datetime
-from typing import Iterable
+from typing import Iterable, Optional
 
 import pandas as pd
 
-DB_DIR  = os.path.join(os.path.dirname(__file__), "data")
-DB_PATH = os.path.join(DB_DIR, "pix.db")
+import db
+
 
 TIPOS_VALIDOS = ("CPF", "CNPJ", "EMAIL", "TELEFONE", "ALEATORIA")
 
@@ -28,141 +27,82 @@ class RegistroPix:
     nome_rca:   str
     chave_pix:  str
     tipo_chave: str
-    dt_atualizacao: str | None = None
-    usuario:        str | None = None
+    dt_atualizacao: Optional[str] = None
+    usuario:        Optional[str] = None
 
 
-# ─────────────────────────────────────────────
-# Conexão / schema
-# ─────────────────────────────────────────────
-def _ensure_dir() -> None:
-    os.makedirs(DB_DIR, exist_ok=True)
-
-
-@contextmanager
-def _conn():
-    _ensure_dir()
-    con = sqlite3.connect(DB_PATH)
-    con.row_factory = sqlite3.Row
-    try:
-        yield con
-        con.commit()
-    finally:
-        con.close()
-
-
+# =============================================================================
+# Compat: SQLite usava init_db() pra criar tabelas. No MariaDB já existem
+# (criadas pela migration 001). Função vira no-op.
+# =============================================================================
 def init_db() -> None:
-    with _conn() as con:
-        con.execute("""
-            CREATE TABLE IF NOT EXISTS rca_pix (
-                codrca         INTEGER PRIMARY KEY,
-                nome_rca       TEXT    NOT NULL,
-                chave_pix      TEXT    NOT NULL,
-                tipo_chave     TEXT    NOT NULL,
-                dt_atualizacao TEXT    NOT NULL,
-                usuario        TEXT
-            )
-        """)
-        con.execute("""
-            CREATE TABLE IF NOT EXISTS rca_ignorar (
-                codrca       INTEGER PRIMARY KEY,
-                motivo       TEXT    NOT NULL DEFAULT '',
-                dt_inclusao  TEXT    NOT NULL
-            )
-        """)
+    pass
 
 
-# ─────────────────────────────────────────────
-# Lista de ignorados (testers / usuários internos)
-# ─────────────────────────────────────────────
-def listar_ignorados() -> pd.DataFrame:
-    init_db()
-    with _conn() as con:
-        return pd.read_sql_query(
-            "SELECT codrca, motivo, dt_inclusao FROM rca_ignorar ORDER BY codrca", con,
-        )
-
-
-def codigos_ignorados() -> set[int]:
-    init_db()
-    with _conn() as con:
-        rows = con.execute("SELECT codrca FROM rca_ignorar").fetchall()
-    return {int(r[0]) for r in rows}
-
-
-def adicionar_ignorado(codrca: int, motivo: str = "") -> None:
-    init_db()
-    agora = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-    with _conn() as con:
-        con.execute("""
-            INSERT INTO rca_ignorar (codrca, motivo, dt_inclusao) VALUES (?, ?, ?)
-            ON CONFLICT(codrca) DO UPDATE SET motivo = excluded.motivo
-        """, (int(codrca), (motivo or "").strip(), agora))
-
-
-def remover_ignorado(codrca: int) -> None:
-    init_db()
-    with _conn() as con:
-        con.execute("DELETE FROM rca_ignorar WHERE codrca = ?", (int(codrca),))
-
-
-# ─────────────────────────────────────────────
-# CRUD
-# ─────────────────────────────────────────────
+# =============================================================================
+# CRUD de rca_pix
+# =============================================================================
 def listar() -> pd.DataFrame:
-    init_db()
-    with _conn() as con:
-        df = pd.read_sql_query(
-            "SELECT codrca, nome_rca, chave_pix, tipo_chave, dt_atualizacao, usuario "
-            "FROM rca_pix ORDER BY nome_rca",
-            con,
-        )
-    return df
+    rows = db.fetch_all(
+        """
+        SELECT codrca, nome_rca, chave_pix, tipo_chave,
+               DATE_FORMAT(dt_atualizacao, '%Y-%m-%d %H:%i:%S') AS dt_atualizacao,
+               usuario
+          FROM rca_pix
+         ORDER BY nome_rca
+        """
+    )
+    return pd.DataFrame(rows or [])
 
 
-def buscar(codrca: int) -> RegistroPix | None:
-    init_db()
-    with _conn() as con:
-        row = con.execute(
-            "SELECT codrca, nome_rca, chave_pix, tipo_chave, dt_atualizacao, usuario "
-            "FROM rca_pix WHERE codrca = ?",
-            (int(codrca),),
-        ).fetchone()
+def buscar(codrca: int) -> Optional[RegistroPix]:
+    row = db.fetch_one(
+        """
+        SELECT codrca, nome_rca, chave_pix, tipo_chave,
+               DATE_FORMAT(dt_atualizacao, '%Y-%m-%d %H:%i:%S') AS dt_atualizacao,
+               usuario
+          FROM rca_pix
+         WHERE codrca = %s
+        """,
+        (int(codrca),),
+    )
     if not row:
         return None
-    return RegistroPix(**dict(row))
+    return RegistroPix(**row)
 
 
-def upsert(reg: RegistroPix, usuario: str | None = None) -> None:
-    init_db()
+def upsert(reg: RegistroPix, usuario: Optional[str] = None) -> None:
     erro = validar(reg)
     if erro:
         raise ValueError(erro)
 
-    agora = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-    with _conn() as con:
-        con.execute("""
-            INSERT INTO rca_pix (codrca, nome_rca, chave_pix, tipo_chave, dt_atualizacao, usuario)
-            VALUES (?, ?, ?, ?, ?, ?)
-            ON CONFLICT(codrca) DO UPDATE SET
-                nome_rca       = excluded.nome_rca,
-                chave_pix      = excluded.chave_pix,
-                tipo_chave     = excluded.tipo_chave,
-                dt_atualizacao = excluded.dt_atualizacao,
-                usuario        = excluded.usuario
-        """, (
+    db.execute(
+        """
+        INSERT INTO rca_pix
+          (codrca, nome_rca, chave_pix, tipo_chave, usuario)
+        VALUES
+          (%s, %s, %s, %s, %s)
+        ON DUPLICATE KEY UPDATE
+            nome_rca   = VALUES(nome_rca),
+            chave_pix  = VALUES(chave_pix),
+            tipo_chave = VALUES(tipo_chave),
+            usuario    = VALUES(usuario)
+        """,
+        (
             int(reg.codrca),
             reg.nome_rca.strip(),
             reg.chave_pix.strip(),
             reg.tipo_chave.strip().upper(),
-            agora,
             usuario or reg.usuario,
-        ))
+        ),
+    )
 
 
-def upsert_lote(registros: Iterable[RegistroPix], usuario: str | None = None) -> tuple[int, list[str]]:
+def upsert_lote(
+    registros: Iterable[RegistroPix],
+    usuario: Optional[str] = None,
+) -> tuple[int, list[str]]:
     """Retorna (qtd_gravada, lista_de_erros)."""
-    init_db()
     ok, erros = 0, []
     for r in registros:
         try:
@@ -174,14 +114,47 @@ def upsert_lote(registros: Iterable[RegistroPix], usuario: str | None = None) ->
 
 
 def remover(codrca: int) -> None:
-    init_db()
-    with _conn() as con:
-        con.execute("DELETE FROM rca_pix WHERE codrca = ?", (int(codrca),))
+    db.execute("DELETE FROM rca_pix WHERE codrca = %s", (int(codrca),))
 
 
-# ─────────────────────────────────────────────
-# Validação
-# ─────────────────────────────────────────────
+# =============================================================================
+# Lista de ignorados
+# =============================================================================
+def listar_ignorados() -> pd.DataFrame:
+    rows = db.fetch_all(
+        """
+        SELECT codrca, motivo,
+               DATE_FORMAT(dt_inclusao, '%Y-%m-%d %H:%i:%S') AS dt_inclusao
+          FROM rca_ignorar
+         ORDER BY codrca
+        """
+    )
+    return pd.DataFrame(rows or [])
+
+
+def codigos_ignorados() -> set[int]:
+    rows = db.fetch_all("SELECT codrca FROM rca_ignorar")
+    return {int(r["codrca"]) for r in (rows or [])}
+
+
+def adicionar_ignorado(codrca: int, motivo: str = "") -> None:
+    db.execute(
+        """
+        INSERT INTO rca_ignorar (codrca, motivo)
+        VALUES (%s, %s)
+        ON DUPLICATE KEY UPDATE motivo = VALUES(motivo)
+        """,
+        (int(codrca), (motivo or "").strip()),
+    )
+
+
+def remover_ignorado(codrca: int) -> None:
+    db.execute("DELETE FROM rca_ignorar WHERE codrca = %s", (int(codrca),))
+
+
+# =============================================================================
+# Validação (idêntica ao backend SQLite — regras de negócio não mudaram)
+# =============================================================================
 _RE_DIGITS  = re.compile(r"\D+")
 _RE_EMAIL   = re.compile(r"^[^@\s]+@[^@\s]+\.[^@\s]+$")
 _RE_ALEAT   = re.compile(r"^[0-9a-fA-F-]{32,36}$")
@@ -191,7 +164,7 @@ def _so_digitos(v: str) -> str:
     return _RE_DIGITS.sub("", v or "")
 
 
-def validar(reg: RegistroPix) -> str | None:
+def validar(reg: RegistroPix) -> Optional[str]:
     """Retorna mensagem de erro ou None se válido."""
     if not reg.codrca or int(reg.codrca) <= 0:
         return "CODRCA inválido"
@@ -199,11 +172,9 @@ def validar(reg: RegistroPix) -> str | None:
         return "Nome do RCA obrigatório"
     if not (reg.chave_pix or "").strip():
         return "Chave PIX obrigatória"
-
     tipo = (reg.tipo_chave or "").strip().upper()
     if tipo not in TIPOS_VALIDOS:
         return f"Tipo de chave inválido (use: {', '.join(TIPOS_VALIDOS)})"
-
     chave = reg.chave_pix.strip()
     if tipo == "CPF" and len(_so_digitos(chave)) != 11:
         return "CPF deve ter 11 dígitos"
@@ -220,9 +191,9 @@ def validar(reg: RegistroPix) -> str | None:
     return None
 
 
-# ─────────────────────────────────────────────
-# Importação de planilha
-# ─────────────────────────────────────────────
+# =============================================================================
+# Importação de planilha (DataFrame → list[RegistroPix])
+# =============================================================================
 _COLS_ALIAS = {
     "codrca":     {"codrca", "cod_rca", "codigo", "cod", "id_rca"},
     "nome_rca":   {"rca", "nome", "nome_rca", "representante"},
@@ -243,7 +214,7 @@ def _mapear_colunas(df: pd.DataFrame) -> dict[str, str]:
 
 
 def df_para_registros(df: pd.DataFrame) -> tuple[list[RegistroPix], list[str]]:
-    """Converte DataFrame da planilha em lista de RegistroPix + lista de avisos."""
+    """Converte DataFrame da planilha em lista de RegistroPix + avisos."""
     avisos: list[str] = []
     cols = _mapear_colunas(df)
     faltando = [k for k in ("codrca", "nome_rca", "chave_pix", "tipo_chave") if k not in cols]
