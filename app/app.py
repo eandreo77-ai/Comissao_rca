@@ -626,6 +626,7 @@ with st.container():
                     "codfilial": c.codfilial or _filial_ativo,
                     "codconta":  c.codconta  or _conta_ativa,
                     "dtvenc":    c.dtvenc,
+                    "dtemissao": st.session_state.get("dt_parcela_1"),  # DTEMISSAO_PATCH
                     "historico": hist or "COMISSAO RCA",
                     "bloqueio":  bloqueio,
                     "alerta":    alerta,

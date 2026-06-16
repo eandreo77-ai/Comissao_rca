@@ -212,7 +212,7 @@ class GravadorPCLANC:
                 AGENDAMENTO, LACREDIGCONECSOCIAL, OPCAOPAGAMENTOIPVA
             ) VALUES (
                 :RECNUM, :RECNUMPRINC,
-                TRUNC(SYSDATE), TRUNC(SYSDATE), TRUNC(SYSDATE),
+                TRUNC(SYSDATE), :DTEMISSAO, TRUNC(SYSDATE),
                 :CODFILIAL, :TIPOLANC, :INDICE, :MOEDA,
                 :CODCONTA, :HISTORICO, :HISTORICO2, :TIPOPARCEIRO,
                 :CODFORNEC, :DTVENC, :VALOR,
@@ -236,6 +236,7 @@ class GravadorPCLANC:
             "TIPOPARCEIRO":             cfg["TIPOPARCEIRO"],
             "CODFORNEC":                lanc["codusur"],
             "DTVENC":                   lanc["dtvenc"],
+            "DTEMISSAO":                lanc["dtemissao"],  # DTEMISSAO_PATCH
             "VALOR":                    lanc["valor"],
             "NFSERVICO":                cfg["NFSERVICO"],
             "CODROTINACAD":             cfg["CODROTINACAD"],
